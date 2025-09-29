@@ -1,0 +1,67 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: Connor Yako
+author: "Connor Yako"
+email: clyej3@gmail.com
+description: I'm currently a mechanical engineering PhD student research non-anthropomorphic means of robotic in-hand manipulation. I also have a passion for teaching and was once an aspiring Lego designer.
+# twitter_username: username
+# github_username: usernames
+minimal_mistakes_skin: contrast
+search: true
+baseurl: "" # Add your repository name here
+url: "https://clyako.github.io" # Your GitHub Pages URL
+
+# Build settings
+markdown: kramdown
+remote_theme: mmistakes/minimal-mistakes
+# Outputting
+permalink: /
+
+# Plugins (previously gems:)
+plugins:
+  # - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
+  - jekyll-include-cache
+
+collections:
+  pages:
+      output: true
+      permalink: /:title/
+  # docs:
+  #   output: true
+  #   permalink: /docs/:path/
+
+include:
+  - _layouts
+
+defaults:
+  - scope:
+      path: "_pages"
+      type: pages
+    values:
+      layout: default
+  # _docs
+  - scope:
+      path: ""
+      type: docs
+    values:
+      sidebar:
+        nav: "docs"
+        
+    
