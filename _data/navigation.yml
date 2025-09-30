@@ -1,8 +1,8 @@
 main:
   - title: "Projects"
     url: /
-  - title: "Teaching"
-    url: /teaching/
+  - title: "Publications"
+    url: /
   - title: "Lego Design"
     url: /lego-design/
 
