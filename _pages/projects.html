@@ -1,16 +1,16 @@
 ---
 layout: default
 title: "Projects"
-permalink: /pages/projects/
+permalink: /projects/
 ---
 
 <!-- Container for the Lego Designs Overview -->
 <div class="wrapper">
     <div class="project-container">
         {% for design in site.data.projects %}
-        <a href="{{ design.url }}">
+        <a href="{{ site.baseurl }}{{ design.url }}">
             <div class="project-item">
-                <img src="{{ design.main_image }}" alt="{{ design.name }}">
+                <img src="{{ site.baseurl }}{{ design.main_image }}" alt="{{ design.name }}">
                 <div class="project-overlay">
                     <div class="overlay-content">
                         <h2>{{ design.name }}</h2>

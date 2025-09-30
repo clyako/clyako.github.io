@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Lego Designs"
-permalink: /pages/lego-design/
+permalink: /lego-design/
 ---
 
 <!-- Container for the Lego Designs Overview -->
@@ -9,7 +9,7 @@ permalink: /pages/lego-design/
     <div class="lego-container">
         {% for design in site.data.lego_designs %}
         <div class="lego-item" onclick="openGallery('{{ design.id }}', 0)">
-            <img src="{{ design.main_image }}" alt="{{ design.name }}">
+            <img src="{{ site.baseurl }}{{ design.main_image }}" alt="{{ design.name }}">
             <div class="lego-overlay">
                 <div class="overlay-content">
                     <h2>{{ design.name }}</h2>
@@ -301,7 +301,7 @@ permalink: /pages/lego-design/
             return;
         }
 
-        galleryImage.src = currentImage.image;
+        galleryImage.src = "{{ site.baseurl }}" + currentImage.image;
         galleryCaption.textContent = currentImage.caption || ''; // Show caption or empty if none
     }
 </script>
