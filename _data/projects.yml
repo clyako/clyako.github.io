@@ -24,12 +24,12 @@
 - id: "truss-project"
   name: "Truss Project"
   main_image: "/assets/images/projects/truss-project-cover-photo.jpg"
-  url: "/projects/truss-project/"
+  url: "/"
 
 - id: "masters-design-projects"
   name: "Othe Mechanical Designs"
   main_image: "/assets/images/projects/braked-wrist-cover-photo.jpg"
-  url: "/projects/masters-design-projects/"
+  url: "/"
 
 - id: "vibrations-through-transmission"
   name: "Vibrations Through A Rotary Joint"
