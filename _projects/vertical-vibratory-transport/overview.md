@@ -25,17 +25,17 @@ sidebar:
           <label for="ac-toc">Toggle Menu</label>
           <ul class="nav__items">
             <li>
-              <a href="/projects/vertical-vibratory-transport/"><span
+              <a href="{{ site.baseurl }}/projects/vertical-vibratory-transport/"><span
                   class="nav__sub-title">Overview</span></a>
             </li>
             <li>
-              <a href="/projects/vertical-vibratory-transport/paper/"><span class="nav__sub-title">Paper</span></a>
+              <a href="{{ site.baseurl }}/projects/vertical-vibratory-transport/paper/"><span class="nav__sub-title">Paper</span></a>
             </li>
             <li>
-              <a href="/projects/vertical-vibratory-transport/theory/"><span class="nav__sub-title">Theory</span></a>
+              <a href="{{ site.baseurl }}/projects/vertical-vibratory-transport/theory/"><span class="nav__sub-title">Theory</span></a>
             </li>
             <li>
-              <a href="/projects/vertical-vibratory-transport/implementation/"><span
+              <a href="{{ site.baseurl }}/projects/vertical-vibratory-transport/implementation/"><span
                   class="nav__sub-title">Implementation</span></a>
             </li>
           </ul>
