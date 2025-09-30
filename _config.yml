@@ -22,7 +22,8 @@ description: I'm currently a mechanical engineering PhD student research non-ant
 minimal_mistakes_skin: contrast
 search: true
 baseurl: "" # Add your repository name here
-url: "https://clyako.github.io" # Your GitHub Pages URL
+# url: "https://clyako.github.io" # Your GitHub Pages URL
+url: "http://connoryako.com" # Your GitHub Pages URL
 
 # Build settings
 markdown: kramdown
