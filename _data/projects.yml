@@ -1,0 +1,39 @@
+- id: "vibrating-parallel-gripper"
+  name: "Vibrating Parallel Gripper"
+  main_image: "/assets/images/projects/parallel-gripper-cover-photo.jpeg"
+  url: "/projects/vibrating-parallel-gripper/"
+
+- id: "impact-based-vibrations"
+  name: "Vibrational Transport Using Impacts"
+  main_image: "/assets/images/projects/impact-gripper-cover-photo.jpg"
+  url: "/projects/vertical-vibratory-transport/"
+
+- id: "curling-gripper"
+  name: "Curling Gripper Bin Picking Strategies"
+  main_image: "/assets/images/projects/curling-gripper-cover-photo.jpeg"
+  url: "/projects/curling-gripper-bin-picking/"
+
+- id: "vibrating-spatula"
+  name: "Vibrating Spatula"
+  main_image: "/assets/images/projects/spatula-cover-photo.png"
+  url: "/projects/vibrating-spatula/"
+
+- id: "truss-project"
+  name: "Truss Project"
+  main_image: "/assets/images/projects/truss-project-cover-photo.jpg"
+  url: "/projects/truss-project/"
+
+- id: "masters-design-projects"
+  name: "Othe Mechanical Designs"
+  main_image: "/assets/images/projects/braked-wrist-cover-photo.jpg"
+  url: "/projects/masters-design-projects/"
+
+- id: "vibrations-through-transmission"
+  name: "Vibrations Through A Rotary Joint"
+  main_image: "/assets/images/projects/transmission-cover-photo.png"
+  url: "/projects/vibrations-through-transmission/"
+
+- id: "leg-design"
+  name: "Lego Design"
+  main_image: "/assets/images/lego-design/cover-photos/acclamator-cover-photo.jpg"
+  url: "/lego-design/"

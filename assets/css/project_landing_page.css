@@ -1,0 +1,8 @@
+.sidebar.sticky-sidebar {
+    flex: 0 0 220px;
+    /* fixed sidebar width */
+    position: sticky;
+    top: 0rem;
+    /* same offset as other pages */
+    align-self: flex-start;
+}
