@@ -3,8 +3,6 @@ main:
     url: /
   - title: "Publications"
     url: /
-  - title: "Lego Design"
-    url: /lego-design/
 
 vvt-nav:
   - title: "Overview"
