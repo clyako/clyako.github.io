@@ -41,11 +41,22 @@ plugins:
 
 collections:
   pages:
-      output: true
-      permalink: /:title/
-  # docs:
-  #   output: true
-  #   permalink: /docs/:path/
+    output: true
+    permalink: /:title/
+  projects:
+    output: true
+    permalink: /projects/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: single
+      author_profile: false
+      sidebar:
+        nav: "project-nav"
+
 
 include:
   - _layouts
@@ -63,5 +74,7 @@ defaults:
     values:
       sidebar:
         nav: "docs"
+
+
         
     

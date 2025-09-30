@@ -1,8 +1,18 @@
 main:
-  - title: "Research"
-    url: /research
-  - title: "Master's Projects"
-    url: /masters-projects/
+  - title: "Projects"
+    url: /projects/
+  - title: "Teaching"
+    url: /teaching/
   - title: "Lego Design"
-    url: /lego-gallery/
+    url: /lego-design/
+
+vvt-nav:
+  - title: "Overview"
+    url: /projects/vertical-vibratory-transport/
+  - title: "Paper"
+    url: /projects/vertical-vibratory-transport/paper/
+  - title: "Theory"
+    url: /projects/vertical-vibratory-transport/theory/
+  - title: "Implementation"
+    url: /projects/vertical-vibratory-transport/implementation/
   
