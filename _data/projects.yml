@@ -1,7 +1,8 @@
 - id: "vibrating-parallel-gripper"
   name: "Vibrating Parallel Gripper"
   main_image: "/assets/images/projects/parallel-gripper-cover-photo.jpeg"
-  url: "/projects/vibrating-parallel-gripper/"
+  # url: "/projects/vibrating-parallel-gripper/"
+  url: "https://youtu.be/AR2IOkkVNM0"
 
 - id: "impact-based-vibrations"
   name: "Vibrational Transport Using Impacts"
@@ -11,12 +12,14 @@
 - id: "curling-gripper"
   name: "Curling Gripper Bin Picking Strategies"
   main_image: "/assets/images/projects/curling-gripper-cover-photo.jpeg"
-  url: "/projects/curling-gripper-bin-picking/"
+  # url: "/projects/curling-gripper-bin-picking/"
+  url: "https://youtu.be/NNyCrbBnNTg"
 
 - id: "vibrating-spatula"
   name: "Vibrating Spatula"
   main_image: "/assets/images/projects/spatula-cover-photo.png"
-  url: "/projects/vibrating-spatula/"
+  # url: "/projects/vibrating-spatula/"
+  url: "https://youtu.be/SQo7Bp9DY9I"
 
 - id: "truss-project"
   name: "Truss Project"
@@ -31,7 +34,8 @@
 - id: "vibrations-through-transmission"
   name: "Vibrations Through A Rotary Joint"
   main_image: "/assets/images/projects/transmission-cover-photo.png"
-  url: "/projects/vibrations-through-transmission/"
+  # url: "/projects/vibrations-through-transmission/"
+  url: "https://youtu.be/5M_XjLXLxx4"
 
 - id: "leg-design"
   name: "Lego Design"
