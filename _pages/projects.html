@@ -8,19 +8,27 @@ permalink: /projects/
 <div class="wrapper">
     <div class="project-container">
         {% for design in site.data.projects %}
-        <a href="{{ site.baseurl }}{{ design.url }}">
-            <div class="project-item">
-                <img src="{{ site.baseurl }}{{ design.main_image }}" alt="{{ design.name }}">
-                <div class="project-overlay">
-                    <div class="overlay-content">
-                        <h2>{{ design.name }}</h2>
+        {% assign link = design.url %}
+        {% if link contains "http" %}
+        <!-- External link, keep as-is -->
+        <a href="{{ link }}" target="_blank">{{ project.name }}
+            {% else %}
+            <!-- Internal link, prepend site.baseurl -->
+            <a href="{{ site.baseurl }}{{ link }}">{{ project.name }}
+                {% endif %}
+                <div class="project-item">
+                    <img src="{{ site.baseurl }}{{ design.main_image }}" alt="{{ design.name }}">
+                    <div class="project-overlay">
+                        <div class="overlay-content">
+                            <h2>{{ design.name }}</h2>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </a>
-        {% endfor %}
+            </a>
+            {% endfor %}
     </div>
 </div>
+
 
 <!-- Styles for Project Gallery and Fullscreen Viewer -->
 <style>
