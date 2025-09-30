@@ -1,4 +1,122 @@
 ---
-layout: home
-pagination: true
+layout: default
+title: "Projects"
+permalink: /
 ---
+
+<!-- Container for the Lego Designs Overview -->
+<div class="wrapper">
+    <div class="project-container">
+        {% for design in site.data.projects %}
+        {% assign link = design.url %}
+        {% if link contains "http" %}
+        <!-- External link, keep as-is -->
+        <a href="{{ link }}" target="_blank">{{ project.name }}
+            {% else %}
+            <!-- Internal link, prepend site.baseurl -->
+            <a href="{{ site.baseurl }}{{ link }}">{{ project.name }}
+                {% endif %}
+                <div class="project-item">
+                    <img src="{{ site.baseurl }}{{ design.main_image }}" alt="{{ design.name }}">
+                    <div class="project-overlay">
+                        <div class="overlay-content">
+                            <h2>{{ design.name }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+    </div>
+</div>
+
+
+<!-- Styles for Project Gallery and Fullscreen Viewer -->
+<style>
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+        padding-top: 3rem;
+    }
+
+    .project-container {
+        column-count: 3;
+        /* number of columns, adjust as needed */
+        column-gap: 0.35rem;
+        /* spacing between columns */
+        width: 100%;
+        max-width: 1200px;
+        /* keeps it from stretching too wide */
+        margin: 0 auto;
+        /* centers the gallery */
+    }
+
+    .project-item {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 0 0 0.5rem;
+        break-inside: avoid;
+        /* prevents splitting between columns */
+        position: relative;
+        /* <-- makes overlay position relative to each item */
+        border-radius: 8px;
+        overflow: hidden;
+        /* ensures overlay corners match image */
+    }
+
+    .project-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        display: block;
+    }
+
+    .project-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        font-size: 1.2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* center overlay content vertically */
+        align-items: center;
+        /* center overlay content horizontally */
+        text-align: center;
+        opacity: 0;
+        padding: 20px;
+        transition: opacity 0.3s ease;
+        border-radius: 8px;
+    }
+
+    .project-item:hover .project-overlay {
+        opacity: 1;
+    }
+
+    .project-overlay .overlay-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* vertical centering */
+        align-items: center;
+        /* horizontal centering */
+        height: 100%;
+        text-align: center;
+    }
+
+    .project-overlay h2 {
+        margin: 0;
+        /* remove default h2 margins */
+    }
+
+    .project-description {
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+        /* optional small spacing */
+        line-height: 1.4;
+    }
+</style>
