@@ -5,12 +5,12 @@
   url: "https://youtu.be/AR2IOkkVNM0"
 
 - id: "impact-based-vibrations"
-  name: "Vibrational Transport Using Impacts"
+  name: "Impact-Based Manipulation"
   main_image: "/assets/images/projects/impact-gripper-cover-photo.jpg"
   url: "/projects/vertical-vibratory-transport/"
 
 - id: "curling-gripper"
-  name: "Curling Gripper Bin Picking Strategies"
+  name: "Bin Picking Strategies"
   main_image: "/assets/images/projects/curling-gripper-cover-photo.jpeg"
   # url: "/projects/curling-gripper-bin-picking/"
   url: "https://youtu.be/NNyCrbBnNTg"
@@ -27,7 +27,7 @@
   url: "/"
 
 - id: "masters-design-projects"
-  name: "Othe Mechanical Designs"
+  name: "Other Mechanical Designs"
   main_image: "/assets/images/projects/braked-wrist-cover-photo.jpg"
   url: "/"
 

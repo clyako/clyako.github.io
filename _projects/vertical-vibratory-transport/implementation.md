@@ -13,7 +13,7 @@ This section discusses both the implementation of the physical gripper seen on t
 
 ## Mechanical
 
-The full CAD (`.step` file) can be downloaded by clicking [here]({{ site.baseurl }}/assets/files/gripper.step). The design was created in OnShape, and if the `.step` file is imported to OnShape a part studio and assembly should automatically be created. An interactive visualization of the CAD is provided in Fig. 3.
+The full CAD (`.step` file) can be downloaded by clicking [here]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/gripper.step). The design was created in OnShape, and if the `.step` file is imported to OnShape a part studio and assembly should automatically be created. An interactive visualization of the CAD is provided in Fig. 3.
 
 <model-viewer 
   src="{{ site.baseurl }}/assets/models/vertical-vibratory-transport/Gripper.gltf" 
@@ -49,7 +49,7 @@ A full bill of materials is provided below.
 | Motor holder                                         |    2     | PLA                 | 3D-printing (0.2 mm layer height)        |
 
 
-Click the following links to get the `.dxf` and `.step` files for manufacturing: [[laser cutting]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/laser-cutting.zip)][[3D printing]({{ site.baseurl }}/assets/files/3D-printing.zip)]
+Click the following links to get the `.dxf` and `.step` files for manufacturing: [[laser cutting]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/laser-cutting.zip)][[3D printing]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/3D-printing.zip)]
 
 
 | Hardware Component                                       | Quantity | Description                                                       |
@@ -71,7 +71,7 @@ Click the following links to get the `.dxf` and `.step` files for manufacturing:
 
 ## Electrical
 
-The moving surfaces are driven by [Carlton Haptic Actuators]({{ site.baseurl }}/assets/files/Carlton-Datasheet.pdf), a type of voice coil actuator. Since the generated force is proportional to the current through the coil, it is preferable to control the motor’s current rather than the voltage across its terminals. To do this, we used the current-drive circuit described by McMahan and Kuchenbecker[^1], and shown on the left side of Fig. 4.
+The moving surfaces are driven by [Carlton Haptic Actuators]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/Carlton-Datasheet.pdf), a type of voice coil actuator. Since the generated force is proportional to the current through the coil, it is preferable to control the motor’s current rather than the voltage across its terminals. To do this, we used the current-drive circuit described by McMahan and Kuchenbecker[^1], and shown on the left side of Fig. 4.
 
 ![image-center]({{ site.baseurl }}/assets/images/vertical-vibratory-transport/kuchenbecker-current-voltage-drive.png){: .align-center}
 
@@ -82,7 +82,7 @@ The moving surfaces are driven by [Carlton Haptic Actuators]({{ site.baseurl }}/
 
 ### Schematic
 
-The full circuit schematic is shown in Fig. 5 and available as a PDF [here]({{ site.baseurl }}/assets/files/circuit-schematic.pdf).
+The full circuit schematic is shown in Fig. 5 and available as a PDF [here]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/circuit-schematic.pdf).
 
 ![image-center]({{ site.baseurl }}/assets/images/vertical-vibratory-transport/schematic.png){: .align-center}
 
