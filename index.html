@@ -4,119 +4,112 @@ title: "Projects"
 permalink: /
 ---
 
-<!-- Container for the Lego Designs Overview -->
-<div class="wrapper">
-    <div class="project-container">
-        {% for design in site.data.projects %}
-        {% assign link = design.url %}
-        {% if link contains "http" %}
-        <!-- External link, keep as-is -->
-        <a href="{{ link }}" target="_blank">{{ project.name }}
-            {% else %}
-            <!-- Internal link, prepend site.baseurl -->
-            <a href="{{ site.baseurl }}{{ link }}">{{ project.name }}
-                {% endif %}
-                <div class="project-item">
-                    <img src="{{ site.baseurl }}{{ design.main_image }}" alt="{{ design.name }}">
-                    <div class="project-overlay">
-                        <div class="overlay-content">
-                            <h2>{{ design.name }}</h2>
-                        </div>
-                    </div>
+<div class="project-container">
+    {% for design in site.data.projects %}
+    {% assign link = design.url %}
+    
+    <a href="{% if link contains 'http' %}{{ link }}{% else %}{{ site.baseurl }}{{ link }}{% endif %}" 
+       {% if link contains 'http' %}target="_blank"{% endif %}
+       class="project-card">
+
+        <div class="project-item">
+            <img src="{{ site.baseurl }}{{ design.main_image }}" alt="{{ design.name }}">
+            <div class="project-overlay">
+                <div class="overlay-content">
+                    <h2>{{ design.name }}</h2>
                 </div>
-            </a>
-            {% endfor %}
-    </div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
 </div>
 
-
-<!-- Styles for Project Gallery and Fullscreen Viewer -->
 <style>
+    /* 1. Spacing from the Masthead */
     .wrapper {
         display: flex;
         justify-content: center;
         min-height: 100vh;
-        padding-top: 3rem;
+        /* Increased from 3rem to 5rem to give the masthead more room */
+        padding-top: 100rem; 
     }
 
     .project-container {
-        column-count: 3;
-        /* number of columns, adjust as needed */
-        column-gap: 0.35rem;
-        /* spacing between columns */
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 0.5rem;
         width: 100%;
         max-width: 1200px;
-        /* keeps it from stretching too wide */
-        margin: 0 auto;
-        /* centers the gallery */
+        margin: 0.5rem auto;
     }
 
-    .project-item {
-        display: inline-block;
-        width: 100%;
-        margin-bottom: 0 0 0.5rem;
-        break-inside: avoid;
-        /* prevents splitting between columns */
-        position: relative;
-        /* <-- makes overlay position relative to each item */
-        border-radius: 8px;
-        overflow: hidden;
-        /* ensures overlay corners match image */
-    }
-
-    .project-item img {
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
+    .project-card {
+        text-decoration: none;
         display: block;
     }
 
+    .project-item {
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden; /* This acts as a "frame" for the zoom effect */
+        aspect-ratio: 1 / 1;
+        width: 100%;
+        background-color: #f0f0f0; /* Fallback color while images load */
+    }
+
+    /* 2. The Image & Zoom Effect */
+    .project-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        /* Transition handles the speed of the zoom */
+        transition: transform 0.5s ease; 
+    }
+
+    /* Zoom the image when the parent item is hovered */
+    .project-item:hover img {
+        transform: scale(1.08); /* 1.08 = 8% zoom */
+    }
+
+    /* 3. The Overlay (Centered Text) */
     .project-overlay {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-        color: white;
-        font-size: 1.2rem;
+        background-color: rgba(0, 0, 0, 0.5); /* Slightly lighter for better visibility */
         display: flex;
-        flex-direction: column;
         justify-content: center;
-        /* center overlay content vertically */
         align-items: center;
-        /* center overlay content horizontally */
-        text-align: center;
         opacity: 0;
-        padding: 20px;
         transition: opacity 0.3s ease;
-        border-radius: 8px;
+        padding: 1rem;
+        box-sizing: border-box;
+        z-index: 1; /* Keeps text above the zoomed image */
     }
 
     .project-item:hover .project-overlay {
         opacity: 1;
     }
 
-    .project-overlay .overlay-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        /* vertical centering */
-        align-items: center;
-        /* horizontal centering */
-        height: 100%;
-        text-align: center;
-    }
-
     .project-overlay h2 {
+        color: white;
         margin: 0;
-        /* remove default h2 margins */
+        font-weight: 350;
+        font-size: 1.2rem;
+        text-align: center;
+        line-height: 1.2;
     }
 
-    .project-description {
-        font-size: 0.85rem;
-        margin-top: 0.5rem;
-        /* optional small spacing */
-        line-height: 1.4;
+    /* Mobile view adjustments */
+    @media (max-width: 768px) {
+        .wrapper {
+            padding-top: 3rem; /* Less space needed on mobile */
+        }
+        .project-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 </style>

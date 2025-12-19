@@ -3,7 +3,7 @@ title: "Paper"
 layout: single
 permalink: /projects/vertical-vibratory-transport/paper/
 sidebar:
-  nav: vvt-nav
+  nav: vertical-vibratory-transport-nav
 ---
 
 Links to the paper can be found on [IEEE](https://ieeexplore.ieee.org/document/10610769) and [Arxiv](https://arxiv.org/pdf/2502.05693). A video presentation of the paper can be viewed below.

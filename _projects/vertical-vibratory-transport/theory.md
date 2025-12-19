@@ -3,7 +3,7 @@ title: "Theory"
 layout: single
 permalink: /projects/vertical-vibratory-transport/theory/
 sidebar:
-  nav: vvt-nav
+  nav: vertical-vibratory-transport-nav
 ---
 
 Here we discuss the high-level strategy, define that strategy using dynamics and an assumed friction model, and how that model was validated.

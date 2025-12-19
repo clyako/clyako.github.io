@@ -10,40 +10,44 @@ permalink: /projects/vibrating-spatula/
 <!-- Full-page video -->
 <div class="background-video-wrapper">
   <video class="background-video" muted autoplay loop playsinline controls preload="auto">
-    <source src="{{ site.baseurl }}/assets/videos/gripper-demo-small.mp4" type="video/mp4">
-    <source src="{{ site.baseurl }}/assets/videos/gripper-demo-small.webm" type="video/webm">
+    <source src="{{ site.baseurl }}/assets/videos/vibrating-spatula-demo.mp4" type="video/mp4">
+    <source src="{{ site.baseurl }}/assets/videos/vibrating-spatula-demo.webm" type="video/webm">
   </video>
 </div>
 
 <div class="initial-content">
     <div id="main" role="main">
+      <div class="sidebar sticky">
+        <nav class="nav__list">
+          <input id="ac-toc" name="accordion-toc" type="checkbox">
+          <label for="ac-toc">Toggle Menu</label>
+          <ul class="nav__items">
+            <li>
+              <a href="{{ site.baseurl }}/projects/vibrating-spatula/"><span
+                  class="nav__sub-title">Vibrating Spatula</span></a>
+            </li>
+            <li>
+              <a href="{{ site.baseurl }}/projects/vibrating-spatula/implementation/"><span
+                  class="nav__sub-title">Implementation</span></a>
+            </li>
+          </ul>
+        </nav>
+      </div>
       <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
         <meta itemprop="headline" content="Overview">
         <meta itemprop="description" content="">
         <div class="page__inner-wrap">
           <header>
             <h1 id="page-title" class="page__title" itemprop="headline">
-              <a href="http://localhost:4000/projects/vertical-vibratory-transport/Overview/"
-                itemprop="url">Overview
+              <a href="http://localhost:4000/projects/vibrating-spatula/"
+                itemprop="url">Vibrating Spatula
               </a>
             </h1>
           </header>
           <section class="page__content" itemprop="text">
-            <p>This work was presented at ICRA 2024, and is aimed towards creating a non-anthropomorphic
-                    vibration-based method for robotic in-hand manipulation. Vibrational transport of objects is not
-                    a new concept. In fact, many of the papers cited in our work go back decades. However, most of
-                    this transport occurred in the plane or at a slight angle to the plane (think <a
-                        href="https://www.youtube.com/watch?v=E0WLpJ0FyaU">vibratory part
-                        feeders</a>). Our work focused on:
-                </p>
-                <ol>
-                    <li>Defining the dynamics for vertical transport, and showing why it is more difficult than its horizontal counterpart</li>
-                    <li>Experimentally verifying our dynamical model</li>
-                    <li>Building a device that can demonstrate vertical vibratory transport</li>
-                </ol>
-                <p>
-                    Details on the theory and implementation can be found on this website.
-                </p>
+            <p>
+              This vibrating spatula leverages position-controlled 1D asymmetric vibrations of a thin steel blade in order to draw parts out from tightly packed configurations. For 1D motion like this, a traditional conveyor system could also be used. However, the conveyor system will be at least several times thicker (mainly limited by the pulley diameter), and much more mechanically complex compared to the vibrating spatula. 
+            </p>
           </section>
           <footer class="page__meta">
           </footer>
@@ -51,4 +55,3 @@ permalink: /projects/vibrating-spatula/
       </article>
     </div>
   </div>
-

@@ -4,8 +4,8 @@ main:
   - title: "Publications"
     url: /
 
-vvt-nav:
-  - title: "Overview"
+vertical-vibratory-transport-nav:
+  - title: "Impact-Based Vibrational Manipulation"
     url: /projects/vertical-vibratory-transport/
   - title: "Paper"
     url: /projects/vertical-vibratory-transport/paper/
@@ -13,4 +13,10 @@ vvt-nav:
     url: /projects/vertical-vibratory-transport/theory/
   - title: "Implementation"
     url: /projects/vertical-vibratory-transport/implementation/
+
+spatula-nav:
+  - title: "Vibrating Spatula"
+    url: /projects/vibrating-spatula/
+  - title: "Implementation"
+    url: /projects/vibrating-spatula/implementation/
   

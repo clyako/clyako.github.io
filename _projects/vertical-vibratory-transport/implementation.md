@@ -3,13 +3,13 @@ title: "Implementation"
 layout: single
 permalink: /projects/vertical-vibratory-transport/implementation/
 sidebar:
-  nav: vvt-nav
+  nav: vertical-vibratory-transport-nav
 ---
 
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 
-This section discusses both the implementation of the physical gripper seen on the homepage, but also the MATLAB code used to simulate part motion in response to optimal surface motion and to compare observed part motion with simulated part motion.
+This section discusses both the implementation of the physical gripper seen on the overview page, but also the MATLAB code used to simulate part motion in response to optimal surface motion and to compare observed part motion with simulated part motion.
 
 ## Mechanical
 
@@ -35,6 +35,10 @@ All custom parts were either laser cut out of 3/16" birch plywood or 3D-printed 
 
 A full bill of materials is provided below.
 
+<details class="project-details">
+  <summary>Manufactured Components</summary>
+  <div class="small-table" markdown="1">
+
 | Manufactured Component                               | Quantity | Material            | Process                                  |
 |------------------------------------------------------|----------|----------------------------------------------------------------|
 | Non-geared link                                      |    8     | 3/16" birch plywood | Laser cutting                            |
@@ -48,26 +52,35 @@ A full bill of materials is provided below.
 | Rigid platform                                       |    2     | PLA                 | 3D-printing (0.2 mm layer height)        |
 | Motor holder                                         |    2     | PLA                 | 3D-printing (0.2 mm layer height)        |
 
+  </div>
+</details>
 
-Click the following links to get the `.dxf` and `.step` files for manufacturing: [[laser cutting]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/laser-cutting.zip)][[3D printing]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/3D-printing.zip)]
+<!-- Click the following links to get the `.dxf` and `.step` files for manufacturing: [[laser cutting]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/laser-cutting.zip)][[3D printing]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/3D-printing.zip)] -->
 
+Most of the below hardware components were either found around the lab or can be ordered from McMaster-Carr.
+
+<details class="project-details">
+  <summary>Hardware Components</summary>
+  <div class="small-table" markdown="1">
 
 | Hardware Component                                       | Quantity | Description                                                       |
 |----------------------------------------------------------|----|-------------------------------------------------------------------------|
 | Carlton haptic actuator                                  | 2  | (Nanoport Technology) generates large, impact induced accelerations     |
 | 40A neoprene sheet, 12" x 12", with crisscross texture   | 1  | (McMaster-Carr) Adhesive back, used as the high-friction surface        |
-| M6 washer (1.8 mm thick)                                 | 16 | Act as low-cost thrust bearings                                         |
-| 2 mm x 8 mm dowel pin                                    | 48 | Align doubled-up plywood parts                                          |
+| M2 x 6 mm socket head screw                              | 8  | Secure motor and motor holder to moving surface                         |
+| M2 x 4 mm socket head screw                              | 8  | Connect flexures to moving surface                                      |
+| M2.5 x 8 mm socket head screw                            | 8  | Connect flexures to their 3D-printed base                               |
+| M2.5 hex nut                                             | 8  | Connect flexures to their 3D-printed base                               |
 | M3 x 8 mm socket head screw                              | 28 | Hold doubled-up plywood parts together                                  |
 | M3 x 25 mm socket head screw                             | 4  | Connect 3D-printed input knob to parallelogram mechanism input          |
 | M5 x 25 mm shoulder bolt (shoulder diameter is 6 mm)     | 8  | Act as joints in the parallelogram mechanism                            |
 | M6 x 12 mm shoulder bolt (shoulder diameter is 6 mm)     | 6  | Connect parallelogram mechanism to 3D-printed flexure base              |
+| M6 washer (1.8 mm thick)                                 | 16 | Act as low-cost thrust bearings                                         |
 | M6 hex nut                                               | 6  | Connect parallelogram mechanism to 3D-printed flexure base              |
-| M2.5 x 8 mm socket head screw                            | 8  | Connect flexures to their 3D-printed base                               |
-| M2.5 hex nut                                             | 8  | Connect flexures to their 3D-printed base                               |
-| M2 x 6 mm socket head screw                              | 8  | Secure motor and motor holder to moving surface                         |
-| M2 x 4 mm socket head screw                              | 8  | Connect flexures to moving surface                                      |
+| 2 mm x 8 mm long dowel pin                               | 48 | Align doubled-up plywood parts                                          |
 
+  </div>
+</details>
 
 ## Electrical
 

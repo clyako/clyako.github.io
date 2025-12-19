@@ -2,7 +2,7 @@
 layout: default
 permalink: /projects/vertical-vibratory-transport/
 sidebar:
-  nav: vvt-nav
+  nav: vertical-vibratory-transport-nav
 ---
 
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/project_landing_page.css">
@@ -26,7 +26,7 @@ sidebar:
           <ul class="nav__items">
             <li>
               <a href="{{ site.baseurl }}/projects/vertical-vibratory-transport/"><span
-                  class="nav__sub-title">Overview</span></a>
+                  class="nav__sub-title">Impact-Based Vibrational Manipulation</span></a>
             </li>
             <li>
               <a href="{{ site.baseurl }}/projects/vertical-vibratory-transport/paper/"><span class="nav__sub-title">Paper</span></a>
@@ -47,8 +47,8 @@ sidebar:
         <div class="page__inner-wrap">
           <header>
             <h1 id="page-title" class="page__title" itemprop="headline">
-              <a href="http://localhost:4000/projects/vertical-vibratory-transport/Overview/"
-                itemprop="url">Overview
+              <a href="http://localhost:4000/projects/vertical-vibratory-transport/"
+                itemprop="url">Impact-Based Vibrational Manipulation
               </a>
             </h1>
           </header>

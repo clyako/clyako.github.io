@@ -1,0 +1,205 @@
+---
+---
+
+/* 1. Import Inter (Variable Font) from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+/* 2. Define Variable Overrides */
+/* Inter works best with specific system fallbacks */
+$sans-serif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+/* 3. Assign to Theme Elements */
+$global-font-family: $sans-serif;
+$header-font-family: $sans-serif;
+$caption-font-family: $sans-serif;
+
+/* 4. Import the Skin and Theme */
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; 
+@import "minimal-mistakes";
+
+/* 5. Optional: Inter specific smoothing */
+body {
+  font-weight: 400; 
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em; /* Inter looks great with slightly tighter tracking */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;             /* Extra bold for headers to stand out */
+  letter-spacing: -0.01em; /* Optional: looks better with thinner Inter */
+  text-transform: none;    /* Optional: ensures it's not forced to Uppercase */
+}
+
+// /* Optional: Make the sidebar and navigation thicker too */
+// .sidebar, .masthead__menu-item {
+//   font-weight: 400;
+// }
+
+/* Custom Masthead Colors */
+.masthead {
+  // Target the Site Title and Navigation Links
+  .site-title, 
+  .masthead__menu-item a {
+    color: #4a4a4a;          /* Dark gray */
+    transition: color 0.2s ease-in-out;
+    font-weight: 500;        /* Making it slightly thicker as requested earlier */
+  }
+
+  // Hover state for both
+  .site-title:hover,
+  .masthead__menu-item a:hover {
+    color: #777777;          /* Lighter gray on hover */
+    text-decoration: none;
+  }
+}
+
+.greedy-nav .visible-links a:before {
+  background-color: #f6f6f6;
+}
+
+
+
+
+
+
+
+
+
+/* Styling for the collapsible section and the small table */
+.project-details {
+  margin-bottom: 1.5rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+/* 1. Hide the default browser arrow */
+.project-details summary {
+  list-style: none; /* Standard */
+  display: flex;    /* Allows us to align our custom arrow */
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 300;
+  cursor: pointer;
+  color: #333;
+  padding: 0.5rem 0;
+  outline: none;
+}
+
+.project-details summary::-webkit-details-marker {
+  display: none; /* Hide for Chrome/Safari */
+}
+
+/* 2. Add our custom arrow */
+.project-details summary::before {
+  content: '▶'; /* You can also use '→' or an SVG icon */
+  display: inline-block;
+  font-size: 0.7rem;
+  margin-right: 10px;
+  transition: transform 0.2s ease; /* This handles the rotation speed */
+  color: #888;
+}
+
+/* 3. Rotate the arrow when the details are [open] */
+.project-details[open] summary::before {
+  transform: rotate(90deg);
+  color: #333;
+}
+
+/* Optional: Slight background change when open to "highlight" the content */
+.project-details[open] {
+  background-color: #fafafa;
+}
+
+/* 1. Define the "Dissolve and Slide" animation */
+@keyframes fadeInSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px); /* Starts slightly higher */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);     /* Slides into place */
+  }
+}
+
+/* 2. Apply the animation when the details tag is [open] */
+.project-details[open] .small-table {
+  animation: fadeInSlideDown 1s ease-out forwards;
+}
+
+/* 3. Optional: Make the transition even smoother by adding a slight delay */
+.project-details .small-table {
+  overflow: hidden; /* Ensures no scrollbars pop up during animation */
+}
+
+.project-details summary:hover {
+  color: #777;
+}
+
+/* Targeting the table inside the wrapper */
+.small-table {
+  width: 100%;
+  overflow-x: auto; /* Adds a horizontal scrollbar on mobile if the table is too wide */
+  -webkit-overflow-scrolling: touch;
+}
+
+.small-table table {
+  font-size: 0.55rem !important;
+  line-height: 1.3 !important;
+  margin-top: 1rem;
+}
+
+.small-table td, .small-table th {
+  padding: 0.4rem !important;
+}
+
+
+
+
+
+
+
+
+
+/* Custom "Contrast" Overrides for C++ Preprocessor */
+.highlight {
+  background-color: #000000;
+  color: #D7D7D7; /* Base text color (Light Gray) */
+  padding: 1em;
+  border-radius: 4px;
+  font-size: 0.65rem;
+}
+
+/* 1. #if, #elif, #define, #endif */
+.highlight .cp {
+  color: #BE8ABF !important; /* Purplish */
+  font-weight: normal;
+}
+
+/* 2. The 'defined' operator */
+.highlight .k, .highlight .kn {
+  color: #E2E2B4 !important; /* Pale Yellow/Green */
+}
+
+/* 3. Identifiers (FREQ_30_HZ, quaid_frequency, etc.) */
+.highlight .n, .highlight .nx {
+  color: #D7D7D7 !important; /* Light Gray */
+}
+
+/* 4. Keep your types (float) distinct if desired */
+.highlight .kt {
+  color: #679AD1; /* Keeping the yellow from Contrast for types */
+}
+
+/* 5. Keep your numbers distinct */
+.highlight .m, .highlight .mf , .highlight .mi{
+  color: #BCCFAD; /* Gold/Orange */
+}
+
+/* 6. Keep comments readable */
+.highlight .c1 {
+  color: #759A5E;
+}

@@ -33,12 +33,17 @@ permalink: /
 
 # Plugins (previously gems:)
 plugins:
-  # - jekyll-paginate
+  - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
   - jemoji
   - jekyll-include-cache
+
+sass:
+  sass_dir: _sass
+  style: compressed # Optional: Compresses the output CSS
+
 
 collections:
   pages:
