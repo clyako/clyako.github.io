@@ -13,7 +13,7 @@ This section discusses the key mechanical and electrical components of the build
 
 ## Mechanical
 
-The full CAD (`.step` file) can be downloaded by clicking [here]({{ site.baseurl }}/assets/models/vibrating-spatula/vibrating_spatula.step). The design was created in OnShape, and if the `.step` file is imported to OnShape a part studio and assembly should automatically be created. An interactive visualization of the CAD is provided in Fig. 1.
+The full CAD (zipped `.step` file) can be downloaded by clicking [here]({{ site.baseurl }}/assets/models/vibrating-spatula/vibrating_spatula.zip). The design was created in OnShape, and if the `.step` file is imported to OnShape a part studio and assembly should automatically be created. An interactive visualization of the CAD is provided in Fig. 1.
 
 <model-viewer 
   src="{{ site.baseurl }}/assets/models/vibrating-spatula/Vibrating_Spatula.glb" 
