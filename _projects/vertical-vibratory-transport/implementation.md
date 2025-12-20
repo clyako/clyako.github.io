@@ -16,7 +16,7 @@ This section discusses both the implementation of the physical gripper seen on t
 The full CAD (`.step` file) can be downloaded by clicking [here]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/gripper.step). The design was created in OnShape, and if the `.step` file is imported to OnShape a part studio and assembly should automatically be created. An interactive visualization of the CAD is provided in Fig. 3.
 
 <model-viewer 
-  src="{{ site.baseurl }}/assets/models/vertical-vibratory-transport/Gripper.gltf" 
+  src="{{ site.baseurl }}/assets/models/vertical-vibratory-transport/Gripper.glb" 
   alt="3D CAD model" 
   camera-controls 
   environment-image="{{ site.baseurl }}/assets/textures/vertical-vibratory-transport/qwantani_night_4k.hdr"

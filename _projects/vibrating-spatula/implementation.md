@@ -16,7 +16,7 @@ This section discusses the key mechanical and electrical components of the build
 The full CAD (`.step` file) can be downloaded by clicking [here]({{ site.baseurl }}/assets/models/vibrating-spatula/vibrating_spatula.step). The design was created in OnShape, and if the `.step` file is imported to OnShape a part studio and assembly should automatically be created. An interactive visualization of the CAD is provided in Fig. 1.
 
 <model-viewer 
-  src="{{ site.baseurl }}/assets/models/vibrating-spatula/Vibrating_Spatula.gltf" 
+  src="{{ site.baseurl }}/assets/models/vibrating-spatula/Vibrating_Spatula.glb" 
   alt="3D CAD model" 
   camera-controls 
   environment-image="{{ site.baseurl }}/assets/textures/vertical-vibratory-transport/qwantani_night_4k.hdr"
