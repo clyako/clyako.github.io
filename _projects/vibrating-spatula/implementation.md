@@ -13,7 +13,7 @@ This section discusses the key mechanical and electrical components of the build
 
 ## Mechanical
 
-The full CAD (zipped `.step` file) can be downloaded by clicking [here]({{ site.baseurl }}/assets/models/vibrating-spatula/vibrating_spatula.zip). The design was created in OnShape, and if the `.step` file is imported to OnShape a part studio and assembly should automatically be created. An interactive visualization of the CAD is provided in Fig. 1.
+The full CAD (zipped `.step` file) can be downloaded by clicking [here]({{ site.baseurl }}/assets/models/vibrating-spatula/vibrating_spatula.zip). The design was created in OnShape, and if the `.step` file is imported to OnShape a part studio should automatically be created. An interactive visualization of the CAD is provided in Fig. 1.
 
 <model-viewer 
   src="{{ site.baseurl }}/assets/models/vibrating-spatula/Vibrating_Spatula.glb" 
@@ -99,7 +99,9 @@ Also, note that the coil and magnet can get very hot, to the point where the PLA
 
 ## Electrical
 
-The spatula is driven by the [LA18-18-000A]({{ site.baseurl }}/assets/files/vibrating-spatula/LA18-18-000A.pdf) VCA from BEI Kimco. To power the motor we use the [H2 motor driver]({{ site.baseurl }}/assets/files/vibrating-spatula/pololu-h2-motor-driver.pdf) from Pololu. The motor driver was supplied with 30 V from a variable benchtop power supply (Mastech HY3005F-3), and can deliver 11 A of continuous current. The driver can support up to 60 V (with a recommended maximum of 48 V)---these higher supply voltages can help deal with the inductive spikes caused by the quickly changing desired accelerations required by the Quaid waveform, and are recommended if you have a powerful enough supply. The spatula position is controlled by a simple PD controller running at 40 kHz, with position feedback provided by a [high resolution encoder]({{ site.baseurl }}/assets/files/vibrating-spatula/ID1102L-linear-encoder-with-holder-A.pdf) from Posic. The encoder outputs A/B pulses at 1 MHz with a resolution of 5 µm, though different resolutions can be programmed depending on the expected maximum velocity.
+The spatula is driven by the [LA18-18-000A]({{ site.baseurl }}/assets/files/vibrating-spatula/LA18-18-000A.pdf) VCA from BEI Kimco. To power the motor we use the [H2 motor driver]({{ site.baseurl }}/assets/files/vibrating-spatula/pololu-h2-motor-driver.pdf) from Pololu. The motor driver was supplied with 30 V from a variable benchtop power supply (Mastech HY3005F-3), and can deliver 11 A of continuous current. The driver can support up to 60 V (with a recommended maximum of 48 V)---these higher supply voltages can help deal with the inductive spikes caused by the quickly changing desired accelerations required by the Quaid waveform[^1], and are recommended if you have a powerful enough supply. The spatula position is controlled by a simple PD controller running at 40 kHz, with position feedback provided by a [high resolution encoder]({{ site.baseurl }}/assets/files/vibrating-spatula/ID1102L-linear-encoder-with-holder-A.pdf) from Posic. The encoder outputs A/B pulses at 1 MHz with a resolution of 5 µm, though different resolutions can be programmed depending on the expected maximum velocity.
+
+[^1]: Quaid, A. E. (1999, May). A miniature mobile parts feeder: Operating principles and simulation results. In Proceedings 1999 IEEE International Conference on Robotics and Automation (Cat. No. 99CH36288C) (Vol. 3, pp. 2221-2226). IEEE.
 
 There are also two rocker switches and four potentiometers in the design. Initially, the potentiometers were used to play around with various waveform parameters and PD gains, however, the analog reads were a bottleneck in the high-speed control loop and impacted the position tracking. Therefore, they were not used in the final build. The rocker switches were used to control the transport direction (toward / away from the user) and the power state (on / off).
 

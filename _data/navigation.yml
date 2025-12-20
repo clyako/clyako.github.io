@@ -2,7 +2,7 @@ main:
   - title: "Projects"
     url: /
   - title: "Publications"
-    url: /
+    url: /publications/
 
 vertical-vibratory-transport-nav:
   - title: "Impact-Based Vibrational Manipulation"
