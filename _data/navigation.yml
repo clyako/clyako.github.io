@@ -19,4 +19,12 @@ spatula-nav:
     url: /projects/vibrating-spatula/
   - title: "Implementation"
     url: /projects/vibrating-spatula/implementation/
+
+transmission-nav:
+  - title: "Vibrations Through A Rotary Joint"
+    url: /projects/vibrations-through-a-rotary-joint/
+  - title: "Mechanism Description"
+    url: /projects/vibrations-through-a-rotary-joint/mechanism-description/
+  - title: "Implementation"
+    url: /projects/vibrations-through-a-rotary-joint/implementation/
   

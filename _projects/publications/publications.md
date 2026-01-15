@@ -11,7 +11,7 @@ permalink: /publications/
     float: none !important;        /* Removes the left-alignment float */
     margin-left: auto !important;  /* Centers the block */
     margin-right: auto !important; /* Centers the block */
-    padding-top: 10px !important;
+    padding-top: 20px !important;
     padding-left: 10px !important;
     padding-right: 10px !important;
   }
@@ -38,7 +38,7 @@ permalink: /publications/
     margin-bottom: 40px;   /* Increased: creates a clear gap before the next paper */
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;            /* Horizontal space between the symbols */
+    gap: 10px;            /* Horizontal space between the symbols */
   }
 
   /* 2. The Icon-Link Style (No Box) */

@@ -9,11 +9,11 @@ sidebar:
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 
-This section discusses the key mechanical and electrical components of the build, as well as the software used to drive the VCA.
+This section discusses the key mechanical and electrical components of the build, as well as the software used to drive the VCA. Note that the same electronics and software used to control the [vibrational transmission]({{ site.baseurl }}/projects/vibrating-through-a-rotary-joint/implementation) is used to control the vibrating surface in the vibrating spatula design here.
 
 ## Mechanical
 
-The full CAD (zipped `.step` file) can be downloaded by clicking [here]({{ site.baseurl }}/assets/models/vibrating-spatula/vibrating_spatula.zip). The design was created in OnShape, and if the `.step` file is imported to OnShape a part studio should automatically be created. An interactive visualization of the CAD is provided in Fig. 1.
+The full CAD (zipped `.step` file) can be downloaded by clicking [here]({{ site.baseurl }}/assets/models/vibrating-spatula/vibrating-spatula.zip). The design was created in OnShape, and if the `.step` file is imported to OnShape a part studio should automatically be created. An interactive visualization of the CAD is provided in Fig. 1.
 
 <model-viewer 
   src="{{ site.baseurl }}/assets/models/vibrating-spatula/Vibrating_Spatula.glb" 
@@ -58,7 +58,7 @@ A full bill of materials is provided below.
 
 **Note:** the clamp bottom and top pieces are printed with a 0.08 mm layer height. The clamp bottom contains features that form the partial negative of the bearing block, which is necessary to square up these parts since the bearing block does not contain any press-fit holes for dowel pins; these features are best printed in high resolution.. The clamp top contains a small cutout for the scale portion of the linear encoder, and must be printed with high resolution as well.
 
-Also, note that the coil and magnet can get very hot, to the point where the PLA can deform from the heat. It's best to print these parts in a higher temp material (White V5 on the Form 4 worked in later iterations of this design).
+Also, note that the coil and magnet can get very hot, to the point where the PLA can deform from the heat. It's best to print these parts in a higher temp material (White V5 on the Form 4 worked in later devices that used this same actuator).
 {: .notice--info}
 
 <details class="project-details">
@@ -70,6 +70,7 @@ Also, note that the coil and magnet can get very hot, to the point where the PLA
 | Voice coil actuator (LA18-18-000A)     | 1  | [BEI Kimco] Peak accelerations up to 100 gs                                           |
 | Bearing block (MGN07CZ0H)              | 1  | [Hiwin] Very-low preload for minimal friction, attached to moving coil                |
 | Linear rail (MGNR07R)                  | 1  | [Hiwin] Linear rail on which the bearing block slides                                 |
+| 1/64" thick neoprene                   | 1  | High-friction surface on the output surface                                           |
 | 10/32 x 5/8" UNF socket head screw     | 2  | Secures magnet assembly to its mounting bracket                                       |
 | 10/32 split lockwasher                 | 2  | Prevents unscrewing of magnet assembly screws                                         |
 | 10/32 washer                           | 2  | Distributes load from lockwasher                                                      |
@@ -103,7 +104,7 @@ The spatula is driven by the [LA18-18-000A]({{ site.baseurl }}/assets/files/vibr
 
 [^1]: Quaid, A. E. (1999, May). A miniature mobile parts feeder: Operating principles and simulation results. In Proceedings 1999 IEEE International Conference on Robotics and Automation (Cat. No. 99CH36288C) (Vol. 3, pp. 2221-2226). IEEE.
 
-There are also two rocker switches and four potentiometers in the design. Initially, the potentiometers were used to play around with various waveform parameters and PD gains, however, the analog reads were a bottleneck in the high-speed control loop and impacted the position tracking. Therefore, they were not used in the final build. The rocker switches were used to control the transport direction (toward / away from the user) and the power state (on / off).
+There are also two rocker switches and four potentiometers in the design. Initially, the potentiometers were used to play around with various waveform parameters and PD gains, however, the analog reads were a bottleneck in the high-speed control loop and impacted the position tracking. Therefore, they were not used in the final build. The rocker switches were used to control the power state (on / off) and the transport direction (toward / away from the user) and the power state (on / off).
 
 A Teensy 4.1 was used as the microcontroller. The A / B channels of the encoder were connected to pins 36 and 37 on the Teensy, as these are hardware quadrature encoder channels. The two PWM pins for controlling the motor driver were connected to pins 28 and 29 on the Teensy (which use FlexPWM timers).
 

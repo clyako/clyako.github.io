@@ -61,8 +61,8 @@
 - id: "vibrations-through-transmission"
   name: "Vibrations Through A Rotary Joint"
   main_image: "/assets/images/projects/transmission-cover-photo.jpeg"
-  # url: "/projects/vibrations-through-transmission/"
-  url: "https://youtu.be/5M_XjLXLxx4"
+  url: "/projects/vibrations-through-a-rotary-joint/"
+  # url: "https://youtu.be/5M_XjLXLxx4"
 
 - id: "curling-gripper"
   name: "Bin Picking Strategies"

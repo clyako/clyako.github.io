@@ -84,13 +84,13 @@ Most of the below hardware components were either found around the lab or can be
 
 ## Electrical
 
-The moving surfaces are driven by [Carlton Haptic Actuators]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/Carlton-Datasheet.pdf), a type of voice coil actuator. Since the generated force is proportional to the current through the coil, it is preferable to control the motor’s current rather than the voltage across its terminals. To do this, we used the current-drive circuit described by McMahan and Kuchenbecker[^1], and shown on the left side of Fig. 4.
+The moving surfaces are driven by [Carlton Haptic Actuators]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/Carlton-Datasheet.pdf), a type of voice coil actuator. Since the generated force is proportional to the current through the coil, it is preferable to control the motor’s current rather than the voltage across its terminals. To do this, we used the current-drive circuit described by McMahan and Kuchenbecker[^2], and shown on the left side of Fig. 4.
 
 ![image-center]({{ site.baseurl }}/assets/images/vertical-vibratory-transport/kuchenbecker-current-voltage-drive.png){: .align-center}
 
 <span class="figure-caption"><strong>Fig. 4</strong>: (Left) Current-drive circuit. (Right) Voltage-drive circuit.</span>
 
-[^1]: McMahan, W., & Kuchenbecker, K. J. (2014). Dynamic modeling and control of voice-coil actuators for high-fidelity display of haptic vibrations. *2014 IEEE Haptics Symposium (HAPTICS)*, 115-122. IEEE. [doi:10.1109/HAPTICS.2014.6775439](https://doi.org/10.1109/HAPTICS.2014.6775439)
+[^2]: McMahan, W., & Kuchenbecker, K. J. (2014). Dynamic modeling and control of voice-coil actuators for high-fidelity display of haptic vibrations. *2014 IEEE Haptics Symposium (HAPTICS)*, 115-122. IEEE. [doi:10.1109/HAPTICS.2014.6775439](https://doi.org/10.1109/HAPTICS.2014.6775439)
 
 
 ### Schematic
