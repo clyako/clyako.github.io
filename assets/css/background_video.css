@@ -42,6 +42,7 @@
         width: 100%;
         top: 0;
         left: 0;
+        display: block;
         object-fit: cover; /* Fills the screen on desktop */
     }
 
