@@ -57,14 +57,23 @@
 /* Mobile Adjustments */
 @media (max-width: 768px) {
     .background-video-wrapper {
-        /* On mobile, let the height match the video aspect ratio */
-        height: auto; 
-        aspect-ratio: 16 / 9; 
+        /* 1. Remove the full-screen height constraint */
+        height: auto !important; 
+        min-height: 0;
+        
+        /* 2. Set the container to the exact shape of the video */
+        aspect-ratio: 16 / 9;
+        
+        /* 3. Ensure no overflow "ghost" space */
+        overflow: hidden;
     }
 
     .background-video-wrapper video {
-        /* Switches from 'cover' to 'contain' to show the full width */
-        object-fit: contain; 
-        position: relative; /* Allows the wrapper to grow with the video */
+        /* 4. Use relative positioning so it stays inside the auto-height div */
+        position: relative;
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
     }
 }
