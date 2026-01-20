@@ -127,7 +127,6 @@ A Teensy 4.1 was used as the microcontroller. The A / B channels of the encoder 
 The full circuit schematic is shown in Fig. 2 and available as a PDF [here]({{ site.baseurl }}/assets/files/vibrating-spatula/circuit-schematic.pdf).
 
 ![image-center]({{ site.baseurl }}/assets/images/vibrating-spatula/schematic.png){: .align-center}
-
 <span class="figure-caption"><strong>Fig. 2</strong>: Circuit schematic.</span>
 
 A table of the components used is below.

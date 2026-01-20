@@ -26,7 +26,7 @@ The full CAD (zipped `.step` file) can be downloaded by clicking [here]({{ site.
   tone-mapping="neutral"
   style="width: 100%; height: 500px;">
 </model-viewer>
-<span class="figure-caption"><strong>Fig. 1</strong>: Interactive CAD visualization of the vibrating spatula. This CAD is for the deisgn with a 2 mm thick spatula blade.</span>
+<span class="figure-caption"><strong>Fig. 1</strong>: Interactive CAD visualization of the vibrating spatula. This CAD is for the design with a 2 mm thick spatula blade.</span>
 
 The single actuator is a LA18-18-000A voice coil actuator (VCA) that consists of a fixed permanent magnet assembly and a moving coil. The moving coil is attached---using 3D-printed parts---to a low-friction (i.e., very-light preload) Hiwin bearing block that slides on a linear rail. Most custom parts were 3D-printed in either PLA Basic on a Bambu Lab X1E or Prusament PLA on a Prusa MK3S+, and the clear base plate on which these parts are mounted is laser cut from 1/4" acrylic. Two different steel spatula blades were used: a 1 mm thick version and an approximately 2 mm thick version (discussed below). The 1 mm thick blade was taken from an icing spatula purchased off of Amazon. The 2 mm thick blade was laser cut in the same profile by SendCutSend in A36 mild steel. A 1/64" thick sheet of neoprene with a sticky backing was fixed to one side of the spatula blade. Hardware includes a mix of M2, M3, and M6 screws, hex nuts, heat set inserts, washers, and split lockwashers, as well as 2 mm, 3 mm, and 1/8" diameter dowel pins for alignment. The magnet assembly is secured using two 10/32 UNF screws.
 
