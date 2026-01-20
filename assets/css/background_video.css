@@ -59,7 +59,6 @@
     .background-video-wrapper {
         /* On mobile, let the height match the video aspect ratio */
         height: auto; 
-        min-height: 100dvh;
         aspect-ratio: 16 / 9; 
     }
 
