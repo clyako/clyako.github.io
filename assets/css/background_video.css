@@ -65,10 +65,7 @@
 
     .background-video-wrapper video {
         /* Switches from 'cover' to 'contain' to show the full width */
-        /* object-fit: contain;  */
-        /* position: relative; Allows the wrapper to grow with the video */
-        object-fit: cover; /* Change back to cover even on mobile */
-        height: 100%;
-        width: 100%;
+        object-fit: contain; 
+        position: relative; /* Allows the wrapper to grow with the video */
     }
 }
