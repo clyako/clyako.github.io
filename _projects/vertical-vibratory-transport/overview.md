@@ -11,7 +11,7 @@ sidebar:
 
 <!-- Full-page video -->
 <div class="background-video-wrapper">
-  <video class="background-video" muted autoplay loop playsinline controls preload="auto">
+  <video class="background-video" muted autoplay loop playsinline preload="auto">
     <source src="{{ site.baseurl }}/assets/videos/gripper-demo-small.mp4" type="video/mp4">
     <source src="{{ site.baseurl }}/assets/videos/gripper-demo-small.webm" type="video/webm">
   </video>

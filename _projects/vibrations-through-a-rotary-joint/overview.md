@@ -9,7 +9,7 @@ permalink: /projects/vibrations-through-a-rotary-joint/
 
 <!-- Full-page video -->
 <div class="background-video-wrapper">
-  <video class="background-video" muted autoplay loop playsinline controls preload="auto">
+  <video class="background-video" muted autoplay loop playsinline preload="auto">
     <source src="{{ site.baseurl }}/assets/videos/vibratory-transmission.mp4" type="video/mp4">
     <source src="{{ site.baseurl }}/assets/videos/vibratory-transmission.webm" type="video/webm">
   </video>

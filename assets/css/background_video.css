@@ -1,4 +1,4 @@
-.background-video-wrapper {
+/* .background-video-wrapper {
     color: #fff;
     background: #000;
     text-align: center;
@@ -22,5 +22,48 @@
         z-index: 1;
         display: inline-block;
         margin: 0 auto;
+    }
+} */
+
+.background-video-wrapper {
+    color: #fff;
+    background: #000;
+    text-align: center;
+    position: relative;
+    width: 100vw;
+    /* Desktop default: Full viewport height */
+    height: 100vh; 
+
+    video {
+        opacity: 1;
+        background: #000; /* Changed to black to match wrapper */
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        object-fit: cover; /* Fills the screen on desktop */
+    }
+
+    .copy {
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+        margin: 0 auto;
+    }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .background-video-wrapper {
+        /* On mobile, let the height match the video aspect ratio */
+        height: auto; 
+        aspect-ratio: 16 / 9; 
+    }
+
+    .background-video-wrapper video {
+        /* Switches from 'cover' to 'contain' to show the full width */
+        object-fit: contain; 
+        position: relative; /* Allows the wrapper to grow with the video */
     }
 }
