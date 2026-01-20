@@ -32,7 +32,7 @@
     position: relative;
     width: 100vw;
     /* Desktop default: Full viewport height */
-    height: 100vh; 
+    height: 100dvh; 
 
     video {
         opacity: 1;
@@ -59,12 +59,16 @@
     .background-video-wrapper {
         /* On mobile, let the height match the video aspect ratio */
         height: auto; 
+        min-height: 100dvh;
         aspect-ratio: 16 / 9; 
     }
 
     .background-video-wrapper video {
         /* Switches from 'cover' to 'contain' to show the full width */
-        object-fit: contain; 
-        position: relative; /* Allows the wrapper to grow with the video */
+        /* object-fit: contain;  */
+        /* position: relative; Allows the wrapper to grow with the video */
+        object-fit: cover; /* Change back to cover even on mobile */
+        height: 100%;
+        width: 100%;
     }
 }
