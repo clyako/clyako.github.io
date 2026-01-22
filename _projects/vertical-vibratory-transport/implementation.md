@@ -13,7 +13,7 @@ This section discusses both the implementation of the physical gripper seen on t
 
 ## Mechanical
 
-The full CAD (zipped `.step` file) can be downloaded by clicking [here]({{ site.baseurl }}/assets/models/vertical-vibratory-transport/gripper.zip). The design was created in OnShape, and if the `.step` file is imported to OnShape a part studio should automatically be created. An interactive visualization of the CAD is provided in Fig. 3.
+The full CAD (zipped `.step` file) can be downloaded by clicking [here]({{ site.baseurl }}/assets/models/vertical-vibratory-transport/gripper.zip). The design was created in OnShape, and if the `.step` file is imported to OnShape a part studio should automatically be created. An interactive visualization of the CAD is provided below.
 
 <model-viewer 
   src="{{ site.baseurl }}/assets/models/vertical-vibratory-transport/Gripper.glb" 
@@ -26,7 +26,7 @@ The full CAD (zipped `.step` file) can be downloaded by clicking [here]({{ site.
   tone-mapping="neutral"
   style="width: 100%; height: 500px;">
 </model-viewer>
-<span class="figure-caption"><strong>Fig. 3</strong>: Interactive CAD visualization of the gripper.</span>
+<!-- <span class="figure-caption"><strong>Fig. 3</strong>: Interactive CAD visualization of the gripper.</span> -->
 
 All custom parts were either laser cut out of 3/16" birch plywood or 3D-printed on a Prusa MK3S+ with Prusament PLA in Galaxy Black. The laser cut parts were aligned with 2 mm dowel pins and secured with M3 socket head screws that threaded into undersized holes. The pin joints of the parallelogram mechanism were created with 6 mm shoulder bolts with M5 threads that also screwed into undersized holes in the plywood. M6 washers were used as low-cost thrust bearings between the moving links of the mechanism. The 3D-printed parts are secured with a mix of undersized holes and washers. 
 
@@ -84,22 +84,20 @@ Most of the below hardware components were either found around the lab or can be
 
 ## Electrical
 
-The moving surfaces are driven by [Carlton Haptic Actuators]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/Carlton-Datasheet.pdf), a type of voice coil actuator. Since the generated force is proportional to the current through the coil, it is preferable to control the motor’s current rather than the voltage across its terminals. To do this, we used the current-drive circuit described by McMahan and Kuchenbecker[^2], and shown on the left side of Fig. 4.
+The moving surfaces are driven by [Carlton Haptic Actuators]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/Carlton-Datasheet.pdf), a type of voice coil actuator. Since the generated force is proportional to the current through the coil, it is preferable to control the motor’s current rather than the voltage across its terminals. To do this, we used the current-drive circuit described by McMahan and Kuchenbecker {% include cite.html id="mcmahan2014dynamic" %}, and shown on the left side below.
 
 ![image-center]({{ site.baseurl }}/assets/images/vertical-vibratory-transport/kuchenbecker-current-voltage-drive.png){: .align-center}
+<!-- <span class="figure-caption"><strong>Fig. 4</strong>: (Left) Current-drive circuit. (Right) Voltage-drive circuit.</span> -->
 
-<span class="figure-caption"><strong>Fig. 4</strong>: (Left) Current-drive circuit. (Right) Voltage-drive circuit.</span>
-
-[^2]: McMahan, W., & Kuchenbecker, K. J. (2014). Dynamic modeling and control of voice-coil actuators for high-fidelity display of haptic vibrations. *2014 IEEE Haptics Symposium (HAPTICS)*, 115-122. IEEE. [doi:10.1109/HAPTICS.2014.6775439](https://doi.org/10.1109/HAPTICS.2014.6775439)
+<!-- [^2]: McMahan, W., & Kuchenbecker, K. J. (2014). Dynamic modeling and control of voice-coil actuators for high-fidelity display of haptic vibrations. *2014 IEEE Haptics Symposium (HAPTICS)*, 115-122. IEEE. [doi:10.1109/HAPTICS.2014.6775439](https://doi.org/10.1109/HAPTICS.2014.6775439) -->
 
 
 ### Schematic
 
-The full circuit schematic is shown in Fig. 5 and available as a PDF [here]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/circuit-schematic.pdf).
+The full circuit schematic is shown below and available as a PDF [here]({{ site.baseurl }}/assets/files/vertical-vibratory-transport/circuit-schematic.pdf).
 
 ![image-center]({{ site.baseurl }}/assets/images/vertical-vibratory-transport/schematic.png){: .align-center}
-
-<span class="figure-caption"><strong>Fig. 5</strong>: Circuit schematic.</span>
+<!-- <span class="figure-caption"><strong>Fig. 5</strong>: Circuit schematic.</span> -->
 
 **:warning:** The above circuit schematic assumes equal motor parameters to ensure the same current flows through both motors. Since this is likely not the case, separate OPA548 power amps and power resistors should be used with each motor.
 {: .notice--warning}
@@ -142,4 +140,4 @@ As noted above, the Teensy code has been cleaned up without retesting on the gri
 **:bangbang:** WEAR HEARING PROTECTION!
 {: .notice--danger}
 
-The device is incredibly loud. If you need any help at all getting things up and running please reach out to clyej3@gmail.com and I am more than happy to work with you.
+The device is incredibly loud. If you need any help at all getting things up and running please reach out to **clyej3@gmail.com** and I am more than happy to work with you.

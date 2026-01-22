@@ -1,0 +1,23 @@
+quaid1999miniature:
+  title: "A miniature mobile parts feeder: operating principles and simulation results"
+  authors: "Quaid, A. E."
+  booktitle: "Proceedings 1999 IEEE International Conference on Robotics and Automation"
+  year: "1999"
+  doi: "10.1109/ROBOT.1999.770436"
+  url: "https://doi.org/10.1109/ROBOT.1999.770436"
+
+mcmahan2014dynamic:
+  title: "Dynamic modeling and control of voice-coil actuators for high-fidelity display of haptic vibrations"
+  authors: "McMahan, William and Kuchenbecker, Katherine J."
+  booktitle: "2014 IEEE Haptics Symposium (HAPTICS)"
+  year: "2014"
+  doi: "10.1109/HAPTICS.2014.6775442"
+  url: "https://doi.org/10.1109/HAPTICS.2014.6775442"
+
+salisbury1993compact:
+  title: "Compact cable transmission with cable differential"
+  authors: "Salisbury Jr., J. Kenneth and Townsend, William T."
+  year: "1993"
+  note: "US Patent 5,207,114"
+  publisher: "Google Patents"
+  url: "https://patents.google.com/patent/US5207114A/en"

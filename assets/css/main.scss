@@ -36,6 +36,12 @@ h1, h2, h3, h4, h5, h6 {
 //   font-weight: 400;
 // }
 
+
+
+
+
+/* MASTHEAD COLORS */
+
 /* Custom Masthead Colors */
 .masthead {
   // Target the Site Title and Navigation Links
@@ -62,9 +68,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-
-
-
+/* COLLAPSIBLE TABLES */
 
 /* Styling for the collapsible section and the small table */
 .project-details {
@@ -72,13 +76,13 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid #eee;
   border-radius: 8px;
   padding: 0.5rem 1rem;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
 }
 
-/* 1. Hide the default browser arrow */
+/* Hide the default browser arrow */
 .project-details summary {
-  list-style: none; /* Standard */
-  display: flex;    /* Allows us to align our custom arrow */
+  list-style: none;
+  display: flex;
   align-items: center;
   font-size: 0.9rem;
   font-weight: 300;
@@ -89,63 +93,53 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .project-details summary::-webkit-details-marker {
-  display: none; /* Hide for Chrome/Safari */
+  display: none;
 }
 
-/* 2. Add our custom arrow */
+/* Custom arrow */
 .project-details summary::before {
-  content: '▶'; /* You can also use '→' or an SVG icon */
+  content: '▶';
   display: inline-block;
   font-size: 0.7rem;
   margin-right: 10px;
-  transition: transform 0.2s ease; /* This handles the rotation speed */
+  transition: transform 0.4s ease;
   color: #888;
 }
 
-/* 3. Rotate the arrow when the details are [open] */
-.project-details[open] summary::before {
+/* Rotate arrow based on the same class the table uses */
+.project-details .is-open-arrow::before {
   transform: rotate(90deg);
   color: #333;
 }
 
-/* Optional: Slight background change when open to "highlight" the content */
 .project-details[open] {
   background-color: #fafafa;
-}
-
-/* 1. Define the "Dissolve and Slide" animation */
-@keyframes fadeInSlideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px); /* Starts slightly higher */
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0px);     /* Slides into place */
-  }
-}
-
-/* 2. Apply the animation when the details tag is [open] */
-.project-details[open] .small-table {
-  animation: fadeInSlideDown 1s ease-out forwards;
-}
-
-/* 3. Optional: Make the transition even smoother by adding a slight delay */
-.project-details .small-table {
-  overflow: hidden; /* Ensures no scrollbars pop up during animation */
 }
 
 .project-details summary:hover {
   color: #777;
 }
 
-/* Targeting the table inside the wrapper */
+/* Core Animation Styling */
 .small-table {
   width: 100%;
-  overflow-x: auto; /* Adds a horizontal scrollbar on mobile if the table is too wide */
+  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  /* Start hidden for JS transition */
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.4s ease, max-height 0.4s ease, transform 0.4s ease;
 }
 
+/* The class our JavaScript will toggle */
+.is-open {
+  opacity: 1;
+  max-height: 2000px; /* High enough to fit your table content */
+  transform: translateY(0);
+}
+
+/* Table internal styling */
 .small-table table {
   font-size: 0.55rem !important;
   line-height: 1.3 !important;
@@ -156,6 +150,35 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0.4rem !important;
 }
 
+/* 1. Alternating Row Colors */
+/* This targets every second row (even) and gives it a light gray background */
+.small-table tr:nth-child(even) {
+  background-color: #ededed; 
+}
+
+/* 2. Dotted Horizontal Lines */
+.small-table td {
+  /* Remove any existing border first */
+  border: none !important;
+}
+
+/* 3. Remove the border from the very last row for a cleaner look */
+.small-table tr:last-child td {
+  border-bottom: 2px solid #333 !important;
+}
+
+/* 4. Header styling to keep it distinct */
+.small-table th {
+  border-top: 2px solid #333 !important;
+  border-bottom: 2px solid #333 !important; /* Keep header line solid/bold */
+  background-color: #d3d3d3;
+}
+
+/* 5. Change text color on hover instead of background */
+.small-table tbody tr:hover td {
+  color: #777 !important; /* A nice blue, or use #000 for bold black */
+  transition: color 0.2s ease;
+}
 
 
 
@@ -163,6 +186,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
+/* FOR THE CODE BLOCKS */
 
 /* Custom "Contrast" Overrides for C++ Preprocessor */
 .highlight {
@@ -202,4 +226,73 @@ h1, h2, h3, h4, h5, h6 {
 /* 6. Keep comments readable */
 .highlight .c1 {
   color: #759A5E;
+}
+
+
+
+
+
+
+/* FOR CHANGING THE EQUATION FONT SIZE IN-LINE AND DISPLAY */
+
+/* 1. Set the base size for ALL math (this catches inline math) */
+.mjx-chtml {
+  font-size: 1.1em !important;
+}
+
+/* 2. Target centered math using the specific display class */
+/* We reset this to the standard size you wanted */
+.MJXc-display .mjx-chtml, 
+.mjx-chtml.MJXc-display {
+  font-size: 0.9em !important;
+}
+
+
+
+
+
+
+
+/* NAVIGATION BAR STYLING */
+
+/* 1. Make sidebar solid by default (Removes the global fade effect) */
+.sidebar {
+  opacity: 1 !important;
+}
+
+/* 2. Base style for the navigation links */
+.sidebar .nav__list .nav__items .nav__sub-title {
+  font-size: 0.95em !important;
+  color: #4a4a4a !important;      /* Your desired base color */
+  text-transform: none !important; /* Removes default All-Caps */
+  border-bottom: none !important;  /* Removes the line under links */
+  transition: color 0.4s ease;
+}
+
+/* 3. Hover state for individual links */
+/* This ensures only the text you touch changes color */
+.sidebar .nav__list .nav__items a:hover .nav__sub-title {
+  color: #777777 !important;
+}
+
+/* 4. Active state workaround */
+/* Since we don't have the 'active' class yet, we can target the 
+   link that points to the current URL manually via CSS if needed, 
+   but for now, let's just fix the visuals. */
+.sidebar .nav__list .nav__items .active .nav__sub-title {
+  color: #777777 !important;
+  font-weight: bold !important;
+}
+
+/* Remove the shifting/jumping behavior for active items */
+.sidebar .nav__list .nav__items .active {
+  margin-inline-start: 0 !important;
+  padding-inline: 0 !important;
+}
+
+/* Ensure the sub-title span inside the active link stays put */
+.sidebar .nav__list .nav__items a.active .nav__sub-title {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  display: block; /* Ensures it respects the alignment of other spans */
 }

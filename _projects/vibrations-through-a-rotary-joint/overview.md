@@ -1,6 +1,8 @@
 ---
 layout: default
 permalink: /projects/vibrations-through-a-rotary-joint/
+sidebar:
+  nav: transmission-nav
 ---
 
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/project_landing_page.css">
@@ -17,22 +19,7 @@ permalink: /projects/vibrations-through-a-rotary-joint/
 
 <div class="initial-content">
     <div id="main" role="main">
-      <div class="sidebar sticky">
-        <nav class="nav__list">
-          <input id="ac-toc" name="accordion-toc" type="checkbox">
-          <label for="ac-toc">Toggle Menu</label>
-          <ul class="nav__items">
-            <li>
-              <a href="{{ site.baseurl }}/projects/vibrations-through-a-rotary-joint/"><span
-                  class="nav__sub-title">Vibrations Through a Rotary Joint</span></a>
-            </li>
-            <li>
-              <a href="{{ site.baseurl }}/projects/vibrations-through-a-rotary-joint/implementation/"><span
-                  class="nav__sub-title">Implementation</span></a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      {% include sidebar.html %}
       <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
         <meta itemprop="headline" content="Overview">
         <meta itemprop="description" content="">
@@ -46,7 +33,7 @@ permalink: /projects/vibrations-through-a-rotary-joint/
           </header>
           <section class="page__content" itemprop="text">
             <p>
-              This vibrating spatula leverages position-controlled 1D asymmetric vibrations of a thin steel blade in order to draw parts out from tightly packed configurations. For 1D motion like this, a traditional conveyor system could also be used. However, the conveyor system will be at least several times thicker (mainly limited by the pulley diameter), and much more mechanically complex compared to the vibrating spatula. 
+              The pursuit of this design originated with the idea to embed vibrating surfaces in the phalanges of a multi-fingered robot hand. Such a hand would have the benefit of being able to perform finger-gaiting when necessary, while also leveraging the simplicity of vibrating surfaces. This is akin to quadrupeds with wheels for feet. However, a hand with voice coil actuators (VCAs) on each phalanx would be incredibly bulky and heavy. Instead, with a proper transmission each VCA could be embedded in a roomier palm and its vibrations transmitted distally through each rotary joint. 
             </p>
           </section>
           <footer class="page__meta">

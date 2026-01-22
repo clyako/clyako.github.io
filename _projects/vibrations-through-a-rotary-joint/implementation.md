@@ -14,7 +14,7 @@ This section discusses the key mechanical and electrical components of the build
 
 ## Mechanical
 
-The full CAD (zipped `.step` file) can be downloaded by clicking [here]({{ site.baseurl }}/assets/models/vibrations-through-a-rotary-joint/vibrational-transmission.zip). The design was created in OnShape, and if the `.step` file is imported to OnShape a part studio should automatically be created. An interactive visualization of the CAD is provided in Fig. 1.
+The full CAD (zipped `.step` file) can be downloaded by clicking [here]({{ site.baseurl }}/assets/models/vibrations-through-a-rotary-joint/vibrational-transmission.zip). The design was created in OnShape, and if the `.step` file is imported to OnShape a part studio should automatically be created. An interactive visualization of the CAD is provided below.
 
 <model-viewer 
   src="{{ site.baseurl }}/assets/models/vibrations-through-a-rotary-joint/vibrational-transmission.glb" 
@@ -27,7 +27,7 @@ The full CAD (zipped `.step` file) can be downloaded by clicking [here]({{ site.
   tone-mapping="neutral"
   style="width: 100%; height: 500px;">
 </model-viewer>
-<span class="figure-caption"><strong>Fig. 1</strong>: Interactive CAD visualization of the 1-DoF finger used to test the vibrational transmission design.</span>
+<!-- <span class="figure-caption"><strong>Fig. 1</strong>: Interactive CAD visualization of the 1-DoF finger used to test the vibrational transmission design.</span> -->
 
 The single actuator is a LA18-18-000A voice coil actuator (VCA) that consists of a fixed permanent magnet assembly and a moving coil. The moving coil is attached---using 3D-printed parts---to a low-friction (i.e., very-light preload) Hiwin bearing block that slides on a linear rail. All custom parts were 3D-printed in PLA Basic on a Bambu Lab X1E. To ensure the best quality of the gear teeth, these parts were printed slow, with a 0.08 mm layer height, and at 5°C cooler than the recommended PLA temperature to minimize stringing. The "Arachne", or variable thickness, wall generator setting in Bambu Studio was used to add more material into the small teeth to stiffen up the transmission. Hardware includes a mix of M2, M3, and M4 screws, hex nuts, heat set inserts, washers, and split lockwashers, as well as 2 mm, 3 mm, and 1/8" diameter dowel pins for alignment. Long 3 mm dowel pins are used to add rigidity to the transmission. The magnet assembly is secured using two 10/32 UNF screws. The gears had press fit MR128ZZ ball bearings, and the input and output arms of the mechanism used MR63ZZ ball bearings.
 
@@ -124,10 +124,10 @@ A Teensy 4.1 was used as the microcontroller. The A / B channels of the encoder 
 
 ### Schematic
 
-The full circuit schematic is shown in Fig. 2 and available as a PDF [here]({{ site.baseurl }}/assets/files/vibrating-spatula/circuit-schematic.pdf).
+The full circuit schematic is shown below and available as a PDF [here]({{ site.baseurl }}/assets/files/vibrating-spatula/circuit-schematic.pdf).
 
 ![image-center]({{ site.baseurl }}/assets/images/vibrating-spatula/schematic.png){: .align-center}
-<span class="figure-caption"><strong>Fig. 2</strong>: Circuit schematic.</span>
+<!-- <span class="figure-caption"><strong>Fig. 2</strong>: Circuit schematic.</span> -->
 
 A table of the components used is below.
 
@@ -177,7 +177,7 @@ float max_acceleration_gs = 50.0;  // gs
 Select the desired vibration waveform frequency by uncommenting the corresponding `#define` at the top of the file, which in the above example is 30 Hz. The rest of the waveform is defined by the two acceleration variables, `min_acceleration_gs` and `max_acceleration_gs`. These values can be a bit abstract, so there is a Python helper function, `quaid_waveform_visualizer.py`, that allows you to visualize the waveform based on the parameters you select. This can help ensure that the tracked waveform amplitude is less than the actuator stroke, as shown below, where the maximum stroke is set to 6 mm.
 
 ![image-center]({{ site.url }}{{ site.baseurl }}/assets/images/vibrating-spatula/quaid-waveform-visualizer.gif){: .align-center}
-<span class="figure-caption"><strong>Fig. 3</strong>: Tuning the vibration waveform.</span>
+<!-- <span class="figure-caption"><strong>Fig. 3</strong>: Tuning the vibration waveform.</span> -->
 
 Once the desired vibration waveform has been selected, the next thing to do is ensure that the moving coil is actually tracking this position waveform. The PD controller gains can be changed by using the `controller.set_gains()` in `void setup()` of `main.cpp` as shown below. 
 
@@ -200,4 +200,4 @@ Always try lower gains, lower frequencies, and smaller waveform amplitudes when 
 **:bangbang:** WEAR HEARING PROTECTION!
 {: .notice--danger}
 
-The device can be loud, especially with more aggressive waveforms (higher max accelerations and larger amplitudes) because of the resonating parts. If you need any help at all getting things up and running please reach out to clyej3@gmail.com and I am more than happy to work with you.
+The device can be loud, especially with more aggressive waveforms (higher max accelerations and larger amplitudes) because of the resonating parts. If you need any help at all getting things up and running please reach out to **clyej3@gmail.com** and I am more than happy to work with you.

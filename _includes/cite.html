@@ -1,0 +1,10 @@
+{%- assign ref = site.data.citations[include.id] -%}
+{%- if ref -%}
+  {%- assign author_list = ref.authors | split: "," -%}
+  {%- assign first_author = author_list[0] | strip -%}
+  <a href="{{ ref.url | default: '#' }}" title="{{ ref.title }}" target="_blank" style="text-decoration: none;">
+    <span class="citation-bracket">({{ first_author }} {{ ref.year }})</span>
+  </a>
+{%- else -%}
+  <span style="color: red;">[Ref "{{ include.id }}" not found]</span>
+{%- endif -%}

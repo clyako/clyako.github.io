@@ -1,6 +1,8 @@
 ---
 layout: default
 permalink: /projects/vibrating-spatula/
+sidebar:
+  nav: spatula-nav
 ---
 
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/project_landing_page.css">
@@ -17,22 +19,7 @@ permalink: /projects/vibrating-spatula/
 
 <div class="initial-content">
     <div id="main" role="main">
-      <div class="sidebar sticky">
-        <nav class="nav__list">
-          <input id="ac-toc" name="accordion-toc" type="checkbox">
-          <label for="ac-toc">Toggle Menu</label>
-          <ul class="nav__items">
-            <li>
-              <a href="{{ site.baseurl }}/projects/vibrating-spatula/"><span
-                  class="nav__sub-title">Vibrating Spatula</span></a>
-            </li>
-            <li>
-              <a href="{{ site.baseurl }}/projects/vibrating-spatula/implementation/"><span
-                  class="nav__sub-title">Implementation</span></a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      {% include sidebar.html %}
       <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
         <meta itemprop="headline" content="Overview">
         <meta itemprop="description" content="">

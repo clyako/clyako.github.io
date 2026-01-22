@@ -44,6 +44,8 @@ sass:
   sass_dir: _sass
   style: compressed # Optional: Compresses the output CSS
 
+footer_scripts:
+  - /assets/js/custom.js
 
 collections:
   pages:

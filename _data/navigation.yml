@@ -5,7 +5,7 @@ main:
     url: /publications/
 
 vertical-vibratory-transport-nav:
-  - title: "Impact-Based Vibrational Manipulation"
+  - title: "Overview"
     url: /projects/vertical-vibratory-transport/
   - title: "Paper"
     url: /projects/vertical-vibratory-transport/paper/
@@ -15,16 +15,22 @@ vertical-vibratory-transport-nav:
     url: /projects/vertical-vibratory-transport/implementation/
 
 spatula-nav:
-  - title: "Vibrating Spatula"
+  - title: "Overview"
     url: /projects/vibrating-spatula/
+  - title: "Paper"
+    url: /projects/vibrating-spatula/paper/
+  - title: "Vibrational Transport Stategy"
+    url: /projects/vibrating-spatula/vibrational-transport-strategy/
   - title: "Implementation"
     url: /projects/vibrating-spatula/implementation/
 
 transmission-nav:
-  - title: "Vibrations Through A Rotary Joint"
+  - title: "Overview"
     url: /projects/vibrations-through-a-rotary-joint/
-  - title: "Mechanism Description"
-    url: /projects/vibrations-through-a-rotary-joint/mechanism-description/
+  - title: "Paper"
+    url: /projects/vibrations-through-a-rotary-joint/paper/
+  - title: "Theory"
+    url: /projects/vibrations-through-a-rotary-joint/theory/
   - title: "Implementation"
     url: /projects/vibrations-through-a-rotary-joint/implementation/
   
