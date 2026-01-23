@@ -25,7 +25,7 @@ body {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
-  flex-direction: column;
+          flex-direction: column;
 }
 
 .initial-content,
@@ -67,15 +67,13 @@ body {
 .page__title {
   margin-top: 0;
   line-height: 1;
-  padding-bottom: 0.325em;
-  border-bottom: 3px solid $border-color;
 
   a {
     color: $text-color;
     text-decoration: none;
   }
 
-  &+.page__meta {
+  & + .page__meta {
     margin-top: -0.5em;
   }
 }
@@ -86,86 +84,32 @@ body {
 }
 
 .page__content {
-  h1 {
-    font-size: $type-size-3;
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-  }
-
   h2 {
-    font-size: $type-size-4;
-    margin-top: 2em;
-    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
     border-bottom: 1px solid $border-color;
   }
 
-  h3 {
-    font-size: $type-size-5;
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-  }
+	h1, h2, h3, h4, h5, h6 {
+		.header-link {
+			position: relative;
+			inset-inline-start: 0.5em;
+			opacity: 0;
+			font-size: 0.8em;
+			-webkit-transition: opacity 0.2s ease-in-out 0.1s;
+			-moz-transition: opacity 0.2s ease-in-out 0.1s;
+			-o-transition: opacity 0.2s ease-in-out 0.1s;
+			transition: opacity 0.2s ease-in-out 0.1s;
+		}
 
-  h4 {
-    font-size: $type-size-6;
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-  }
-
-  h5 {
-    font-size: $type-size-7;
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-  }
-
-  h6 {
-    font-size: $type-size-8;
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-  }
-
-  // h2 {
-  //   margin-top: 0;
-  //   padding-bottom: 0.5em;
-  //   border-bottom: 1px solid $border-color;
-  // }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    .header-link {
-      position: relative;
-      inset-inline-start: 0.5em;
-      opacity: 0;
-      font-size: 0.8em;
-      -webkit-transition: opacity 0.2s ease-in-out 0.1s;
-      -moz-transition: opacity 0.2s ease-in-out 0.1s;
-      -o-transition: opacity 0.2s ease-in-out 0.1s;
-      transition: opacity 0.2s ease-in-out 0.1s;
-    }
-
-    &:hover .header-link {
-      opacity: 1;
-    }
-  }
+		&:hover .header-link {
+			opacity: 1;
+		}
+	}
 
   p,
   li,
   dl {
-    font-size: 0.75em; // chapage__titlenged this to make text smaller
-  }
-
-  .equal-contrib {
-    font-size: 0.75em;
-    vertical-align: super;
-  }
-
-  .equal-contrib-note {
-    font-size: 0.6em;
-    color: gray;
-    margin-top: 1em;
+    font-size: 1em;
   }
 
   /* paragraph indents */
@@ -173,8 +117,8 @@ body {
     margin: 0 0 $indent-var;
 
     /* sibling indentation*/
-    @if $paragraph-indent ==true {
-      &+p {
+    @if $paragraph-indent == true {
+      & + p {
         text-indent: $indent-var;
         margin-top: -($indent-var);
       }
@@ -191,7 +135,7 @@ body {
     }
   }
 
-  :not(pre)>code {
+  :not(pre) > code {
     padding-top: 0.1rem;
     padding-bottom: 0.1rem;
     font-size: 0.8em;
@@ -201,8 +145,7 @@ body {
     &::before,
     &::after {
       letter-spacing: -0.2em;
-      content: "\00a0";
-      /* non-breaking space*/
+      content: "\00a0"; /* non-breaking space*/
     }
   }
 
@@ -223,7 +166,7 @@ body {
   }
 
   /* blockquote citations */
-  blockquote+.small {
+  blockquote + .small {
     margin-top: -1.5em;
     padding-inline-start: 1.25rem;
   }
@@ -421,7 +364,7 @@ body {
     border: 0;
   }
 
-  +.taxonomy__section {
+  + .taxonomy__section {
     margin-top: 2em;
   }
 }
@@ -497,7 +440,6 @@ body {
   transition: $global-transition;
 
   &.disabled {
-
     input,
     button,
     textarea,
@@ -607,9 +549,7 @@ body {
    ========================================================================== */
 
 .wide {
-
-  .page,
-  .page__related {
+  .page, .page__related {
     @include breakpoint($large) {
       padding-inline-end: 0;
     }
@@ -617,18 +557,5 @@ body {
     @include breakpoint($x-large) {
       padding-inline-end: 0;
     }
-  }
-}
-
-.figure-caption {
-  font-size: 0.95em;
-  color: gray;
-  text-align: center;
-  font-style: italic;
-
-  strong {
-    font-style: normal;
-    font-weight: bold;
-    color: gray;
   }
 }

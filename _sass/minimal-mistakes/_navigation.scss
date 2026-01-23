@@ -154,10 +154,10 @@
   }
 }
 
-.page__content+.pagination,
-.page__meta+.pagination,
-.page__share+.pagination,
-.page__comments+.pagination {
+.page__content + .pagination,
+.page__meta + .pagination,
+.page__share + .pagination,
+.page__comments + .pagination {
   margin-top: 2em;
   padding-top: 2em;
   border-top: 1px solid $border-color;
@@ -176,11 +176,11 @@
   -ms-flex-align: center;
   align-items: center;
   min-height: $nav-height;
+  background: $background-color;
 
   a {
     display: block;
     margin: 0 1rem;
-    font-size: 0.95rem;
     color: $masthead-link-color;
     text-decoration: none;
     -webkit-transition: none;
@@ -196,7 +196,6 @@
     }
 
     &.site-title {
-      font-size: 1.25rem;
       margin-inline-start: 0;
     }
   }
@@ -394,7 +393,7 @@
     }
 
     /* selected*/
-    input:checked+label {
+    input:checked + label {
       color: white;
       background-color: mix(white, #000, 20%);
 
@@ -411,7 +410,7 @@
       transform: rotate(90deg);
     }
 
-    input:checked+label:hover:after {
+    input:checked + label:hover:after {
       -webkit-transform: rotate(0);
       -ms-transform: rotate(0);
       transform: rotate(0);
@@ -466,11 +465,10 @@
 }
 
 @include breakpoint(max-width $large - 1px) {
-  .nav__list input:checked~.nav__items {
+  .nav__list input:checked ~ .nav__items {
     -webkit-transition: 0.5s ease-in-out;
     transition: 0.5s ease-in-out;
-    max-height: 9999px;
-    /* exaggerate max-height to accommodate tall lists*/
+    max-height: 9999px; /* exaggerate max-height to accommodate tall lists*/
     overflow: visible;
     opacity: 1;
     margin-top: 1em;
@@ -483,7 +481,7 @@
 .nav__title {
   margin: 0;
   padding: 0.5rem 0.75rem;
-  font-family: $sans-serif; //$sans-serif-narrow;
+  font-family: $sans-serif-narrow;
   font-size: $type-size-5;
   font-weight: bold;
 }
@@ -492,7 +490,7 @@
   display: block;
   margin: 0.5rem 0;
   padding: 0.25rem 0;
-  font-family: $sans-serif; //$sans-serif-narrow;
+  font-family: $sans-serif-narrow;
   font-size: $type-size-6;
   font-weight: bold;
   text-transform: uppercase;
@@ -504,7 +502,7 @@
      ========================================================================== */
 
 .toc {
-  font-family: $sans-serif; //$sans-serif-narrow;
+  font-family: $sans-serif-narrow;
   color: $gray;
   background-color: $background-color;
   border: 1px solid $border-color;
@@ -550,24 +548,24 @@
     }
   }
 
-  li ul>li a {
+  li ul > li a {
     padding-inline-start: 1.25rem;
     font-weight: normal;
   }
 
-  li ul li ul>li a {
+  li ul li ul > li a {
     padding-inline-start: 1.75rem;
   }
 
-  li ul li ul li ul>li a {
+  li ul li ul li ul > li a {
     padding-inline-start: 2.25rem;
   }
 
-  li ul li ul li ul li ul>li a {
+  li ul li ul li ul li ul > li a {
     padding-inline-start: 2.75rem;
   }
 
-  li ul li ul li ul li ul li ul>li a {
+  li ul li ul li ul li ul li ul > li a {
     padding-inline-start: 3.25rem;
   }
 }

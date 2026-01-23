@@ -1,17 +1,20 @@
 ---
 ---
 
-/* 1. Import Inter (Variable Font) from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+/* Custom Theme Variables */
+/* Use Inter for the main UI and JetBrains for Code/Headings */
+$global-font-family: 'Inter', sans-serif;
+$header-font-family: 'Outfit', sans-serif;
+$sans-serif: 'Outfit', sans-serif;
+$x-large: 1360px;
 
-/* 2. Define Variable Overrides */
-/* Inter works best with specific system fallbacks */
-$sans-serif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-
-/* 3. Assign to Theme Elements */
-$global-font-family: $sans-serif;
-$header-font-family: $sans-serif;
-$caption-font-family: $sans-serif;
+/* Your Custom Compressed Scale */
+$type-size-1: 1.563em;
+$type-size-2: 1.25em;
+$type-size-3: 1.125em;
+$type-size-4: 1.0625em;
+$h-size-1: 1.125em;
+$h-size-2: 1.125em;
 
 /* 4. Import the Skin and Theme */
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; 
@@ -35,10 +38,6 @@ h1, h2, h3, h4, h5, h6 {
 // .sidebar, .masthead__menu-item {
 //   font-weight: 400;
 // }
-
-
-
-
 
 /* MASTHEAD COLORS */
 
@@ -68,7 +67,110 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
+
+
+/* MASTHEAD STUFF */
+
+/* --- MASTHEAD CUSTOMIZATION --- */
+.masthead {
+  background: #f6f6f6 !important; /* Your new background color */
+  border-bottom: 0px !important;    /* Removing the bottom border */
+}
+
+.masthead__inner-wrap {
+  padding: 0.5em !important;      /* Reduced padding from 1em */
+}
+
+
+
+
+
+/* FONT STYLING */
+
+/* 1. Page Title Underline */
+.page__title {
+  padding-bottom: 0.325em !important;
+  border-bottom: 3px solid $border-color !important; /* Theme border-color */
+}
+
+/* 2. Global Text Size (p, li, dl) */
+.page__content p,
+.page__content li,
+.page__content dl {
+  font-size: 0.75em !important; /* Your challenged smaller text size */
+  line-height: 1.6; /* Optional: adds a bit of breathability to small text */
+}
+
+/* 3. Header Hierarchy (H1 - H6) */
+.page__content h1 { font-size: $type-size-3 !important; margin-top: 1em; margin-bottom: 0.5em; } /* type-size-3 */
+.page__content h2 { 
+  font-size: $type-size-4 !important;  /* type-size-4 */
+  margin-top: 2em; 
+  margin-bottom: 0.5em; 
+  border-bottom: 1px solid $border-color !important;
+}
+.page__content h3 { font-size: $type-size-5 !important; margin-top: 1em; margin-bottom: 0.5em; }      /* type-size-5 */
+.page__content h4 { font-size: $type-size-6 !important; margin-top: 1em; margin-bottom: 0.5em; }    /* type-size-6 */
+.page__content h5 { font-size: $type-size-7 !important; margin-top: 1em; margin-bottom: 0.5em; }   /* type-size-7 */
+.page__content h6 { font-size: $type-size-8 !important; margin-top: 1em; margin-bottom: 0.5em; }  /* type-size-8 */
+
+/* 4. Academic Custom Classes */
+.equal-contrib {
+  font-size: 0.75em !important;
+  vertical-align: super !important;
+}
+
+.equal-contrib-note {
+  font-size: 0.6em !important;
+  color: gray !important;
+  margin-top: 1em !important;
+  display: block;
+}
+
+
+
+
+
+
+/* NAVIGATION & SIDEBAR STYLING */
+
+/* 2. Greedy Nav (Top Header Menu) Fixes */
+.greedy-nav {
+  background: #f6f6f6 !important; /* Matching your masthead background */
+}
+
+.greedy-nav a {
+  font-size: 0.95rem !important; /* Your specific font size adjustment */
+}
+
+.greedy-nav .site-title {
+  font-size: 1.25rem !important; /* Ensuring site title remains prominent */
+}
+
+/* 3. Navigation List & Sidebar Active States */
+.nav__list .nav__items .active {
+  margin-inline-start: 0 !important; /* Prevents the "jump" you noticed earlier */
+  padding-inline: 0 !important;
+  font-weight: normal !important;
+}
+
+/* 4. Sub-title Formatting */
+.nav__sub-title {
+  text-transform: uppercase !important;
+  border-bottom: 1px solid #f2f3f3 !important; /* Your theme's border color */
+}
+
+
+
+
+
+
 /* COLLAPSIBLE TABLES */
+
+table {
+  display: table;
+  font-size: $type-size-8;
+}
 
 /* Styling for the collapsible section and the small table */
 .project-details {
@@ -295,4 +397,53 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 0 !important;
   padding-left: 0 !important;
   display: block; /* Ensures it respects the alignment of other spans */
+}
+
+
+
+
+
+
+
+
+
+
+
+/* --- FINAL FONT OVERRIDES --- */
+
+/* 1. THE FRAME (Outfit) */
+h1, h2, h3, h4, h5, h6,
+.site-title, 
+.masthead__menu-item,
+.author__name,
+.nav__title, 
+.nav__sub-title, 
+.nav__items,
+.nav__list,
+.toc {
+  font-family: 'Outfit', sans-serif !important;
+  letter-spacing: -0.01em;
+}
+
+/* Fix Sidebar Boldness: Force normal weight even on active items */
+.sidebar .nav__list .nav__items .active .nav__sub-title,
+.sidebar .nav__list .nav__items .active,
+.sidebar .nav__list .nav__items a.active .nav__sub-title {
+  font-weight: normal !important; 
+}
+
+/* 2. THE CONTENT (Lexend Deca) */
+body,
+.page__content, 
+.page__content p,
+.page__content li,
+.author__bio {
+  font-family: 'Lexend Deca', sans-serif !important;
+  font-weight: 300 !important; /* Use 300 for Light or 400 for Regular */
+  line-height: 1.5;            /* 1.25 is very tight for Lexend; 1.5 is better for academic reading */
+}
+
+/* 3. THE CODE */
+code, pre, .highlight {
+  font-family: 'JetBrains Mono', monospace !important;
 }
