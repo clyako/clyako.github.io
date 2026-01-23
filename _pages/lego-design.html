@@ -287,17 +287,28 @@ permalink: /lego-design/
     }
 
     function updateGalleryImage() {
-        const galleryImage = document.getElementById('gallery-image');
-        const galleryCaption = document.getElementById('gallery-caption');
+    const galleryImage = document.getElementById('gallery-image');
+    const galleryCaption = document.getElementById('gallery-caption');
+    const currentImage = currentImages[currentIndex];
 
-        const currentImage = currentImages[currentIndex];
-
-        if (!currentImage || !currentImage.image) {
-            console.error('Invalid image data:', currentImage);
-            return;
-        }
-
-        galleryImage.src = "{{ site.baseurl }}" + currentImage.image;
-        galleryCaption.textContent = currentImage.caption || ''; // Show caption or empty if none
+    if (!currentImage || !currentImage.image) {
+        console.error('Invalid image data:', currentImage);
+        return;
     }
+
+    // Ensure site.baseurl and image path don't create a double slash or a missing slash
+    let baseUrl = "{{ site.baseurl }}";
+    let imgPath = currentImage.image;
+
+    // If imgPath doesn't start with / and baseUrl doesn't end with /
+    if (!imgPath.startsWith('/') && !baseUrl.endsWith('/')) {
+        imgPath = '/' + imgPath;
+    }
+
+    const finalUrl = baseUrl + imgPath;
+    
+    console.log("Loading image from:", finalUrl); // This helps you debug in the browser console
+    galleryImage.src = finalUrl;
+    galleryCaption.textContent = currentImage.caption || '';
+}
 </script>
