@@ -263,18 +263,37 @@ permalink: /lego-design/
 
     function openGallery(id, startIndex) {
         const design = legoDesigns.find(d => d.id === id);
-        if (!design) {
-            console.error(`Design with ID '${id}' not found.`);
-            return;
-        }
+        if (!design) return;
 
         currentImages = design.gallery_images;
         currentIndex = startIndex;
-
         updateGalleryImage();
 
         const galleryOverlay = document.getElementById('fullscreen-gallery');
         galleryOverlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Stop background scrolling
+
+        // SWIPE LOGIC
+        galleryOverlay.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: false});
+
+        galleryOverlay.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: false});
+        
+        // Prevent the image from being "dragged" like a ghost image
+        document.getElementById('gallery-image').addEventListener('dragstart', (e) => e.preventDefault());
+    }
+
+    function handleSwipe() {
+        const threshold = 40; // Reduced threshold for better responsiveness
+        if (touchEndX < touchStartX - threshold) {
+            changeImage(1); // Swipe Left -> Next
+        } else if (touchEndX > touchStartX + threshold) {
+            changeImage(-1); // Swipe Right -> Prev
+        }
     }
 
     function closeGallery() {

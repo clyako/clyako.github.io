@@ -458,3 +458,11 @@ code, pre, .highlight {
 .pagination--pager {
   display: none !important;
 }
+
+
+
+
+
+#gallery-image {
+    pointer-events: none; /* Allows the swipe to "pass through" to the overlay */
+}
