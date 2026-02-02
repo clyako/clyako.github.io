@@ -65,7 +65,7 @@ permalink: /publications/
   }
 </style>
 
-**Yako, C. L.**, Yuan, S., & Salisbury, K. (2026). Two Degree-of-Freedom Vibratory Transport in a Grasp, *under review for publication* in IEEE/RSJ International Conference on Robotics and Automation (ICRA).
+**Yako, C. L.**, Yuan, S., & Salisbury, K. (2026). Two Degree-of-Freedom Vibratory Transport in a Grasp, *accepted for publication* in IEEE/RSJ International Conference on Robotics and Automation (ICRA).
 
 <div class="pub-buttons">
   <a href="#" class="pub-link"><i class="fa-regular fa-file-lines"></i> </a>
