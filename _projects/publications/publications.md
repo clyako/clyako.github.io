@@ -34,9 +34,9 @@ permalink: /publications/
     border-radius: 4px;
     width: 24px;  /* Strict width */
     height: 24px; /* Strict height */
-    transition: transform 0.1s ease;
-    box-sizing: border-box;
-    overflow: hidden; /* Prevents icon overflow */
+    transition: transform 0.15s ease-out, filter 0.15s ease-out;
+    /* box-sizing: border-box; */
+    /* overflow: hidden;  */
   }
 
   /* Standardizing the icon sizes inside the boxes */
@@ -81,7 +81,33 @@ permalink: /publications/
     vertical-align: middle;
   }
 
-  .bib-btn:hover { background: #eee; }
+  .pub-link:hover, .bib-btn:hover { 
+    transform: scale(1.1); /* Scales the whole button up by 10% */
+    filter: brightness(1.1); /* Optional: makes it slightly more vibrant on hover */
+    z-index: 10; /* Ensures the scaling button stays on top of neighbors */
+  }
+
+  .link-paper:hover { 
+    background-color: #d4d4d4 !important; 
+  }
+
+  /* Video: Stays Red */
+  .link-video:hover { 
+    background-color: #FF0000 !important; 
+    filter: brightness(1.1); 
+  }
+
+  /* Web: Stays Blue */
+  .link-web:hover { 
+    background-color: #007bff !important; 
+    filter: brightness(1.1); 
+  }
+
+  /* GitHub: Transparent (since the icon is the color) */
+  .link-github:hover {
+    background-color: transparent !important;
+    filter: brightness(1.5); /* Makes the black icon look slightly glossy/grey on hover */
+  }
 
   /* 5. Full-Width Popup & Copy Button */
   .cite-menu {
