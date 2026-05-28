@@ -3,6 +3,8 @@ main:
     url: /
   - title: "Publications"
     url: /publications/
+  - title: "About"
+    url: /about/
 
 vertical-vibratory-transport-nav:
   - title: "Overview"

@@ -46,6 +46,86 @@ $$
 
 The above equations detail the challenges which upward vertical vibratory transport presents compared to horizontal transport. In most practical cases, we have $\mu_s < 1$, so \eqref{eq:minimum_normal} means that the part $P$ must be squeezed with a force $F_n$ exceeding its own weight. Equation $\eqref{eq:sticking}$ shows that gravity reduces the maximum upward part acceleration during sticking, and that overcoming this limitation requires squeezing the part harder still. However, from \eqref{eq:a_max_lower_bound}, squeezing with higher normal forces requires more powerful actuators to reach higher surface accelerations, which already need to exceed $2g$ (compared to $a_{max} > \mu_s g$ for the horizontal case). Finally, \eqref{eq:slipping} shows that during slipping, the part accelerates faster down than up.
 
+### Try It: Explore the Squeeze Force Requirement
+
+Use the sliders below to see how the friction coefficient and part mass determine the minimum squeeze force and required actuator acceleration.
+
+<div class="physics-widget">
+  <h4>Vertical Vibratory Transport — Dynamics Explorer</h4>
+
+  <div class="slider-row">
+    <label>Static friction coefficient <em>μ<sub>s</sub></em></label>
+    <input type="range" id="mu-slider" min="0.15" max="1.5" step="0.05" value="0.5">
+    <span class="slider-value" id="mu-val">0.50</span>
+  </div>
+
+  <div class="slider-row">
+    <label>Part mass <em>m<sub>p</sub></em> (grams)</label>
+    <input type="range" id="mass-slider" min="1" max="200" step="1" value="50">
+    <span class="slider-value" id="mass-val">50 g</span>
+  </div>
+
+  <div class="results">
+    <div class="result-box">
+      <span class="result-label">Min. squeeze force F<sub>n</sub></span>
+      <span class="result-value" id="fn-val">—</span>
+      <span class="result-unit">N</span>
+    </div>
+    <div class="result-box">
+      <span class="result-label">Squeeze ratio F<sub>n</sub> / (m<sub>p</sub>·g)</span>
+      <span class="result-value" id="ratio-val">—</span>
+      <span class="result-unit">× weight</span>
+    </div>
+    <div class="result-box">
+      <span class="result-label">Min. peak acceleration</span>
+      <span class="result-value" id="accel-val">>&nbsp;2g</span>
+      <span class="result-unit">always, regardless of μ<sub>s</sub></span>
+    </div>
+  </div>
+
+  <div class="insight" id="physics-insight"></div>
+</div>
+
+<script>
+(function () {
+  const muSlider   = document.getElementById('mu-slider');
+  const massSlider = document.getElementById('mass-slider');
+  const muVal      = document.getElementById('mu-val');
+  const massVal    = document.getElementById('mass-val');
+  const fnVal      = document.getElementById('fn-val');
+  const ratioVal   = document.getElementById('ratio-val');
+  const insight    = document.getElementById('physics-insight');
+  const g          = 9.81;
+
+  function update() {
+    const mu   = parseFloat(muSlider.value);
+    const mp   = parseFloat(massSlider.value) / 1000; // kg
+    const Fn   = (mp * g) / mu;
+    const ratio = 1 / mu;
+
+    muVal.textContent   = mu.toFixed(2);
+    massVal.textContent = massSlider.value + ' g';
+    fnVal.textContent   = Fn.toFixed(3);
+    ratioVal.textContent = ratio.toFixed(2);
+
+    let note = '';
+    if (mu < 0.5) {
+      note = `Low friction (μ = ${mu.toFixed(2)}) means the gripper must squeeze ${ratio.toFixed(1)}× the part's weight just to hold it — before any transport motion begins.`;
+    } else if (mu < 1.0) {
+      note = `With μ = ${mu.toFixed(2)}, the gripper still needs to squeeze ${ratio.toFixed(1)}× the part's weight. Increasing to μ > 1 would bring that below the weight itself.`;
+    } else {
+      note = `With μ = ${mu.toFixed(2)} > 1, the required squeeze force (${ratio.toFixed(2)}× weight) is less than the part's weight — still substantial, but achievable with softer contact materials.`;
+    }
+    note += ` Regardless of μ or mass, the surface actuator must exceed <strong>2g peak acceleration</strong> — a fundamental challenge unique to vertical transport.`;
+    insight.innerHTML = note;
+  }
+
+  muSlider.addEventListener('input', update);
+  massSlider.addEventListener('input', update);
+  update();
+})();
+</script>
+
 ## Experimental Validation
 
 To validate our dynamics model described by $\eqref{eq:sticking}$ and $\eqref{eq:slipping}$ we recorded the interaction of a moving surface and a transported part. The recording was then processed by the free software [Tracker](https://opensourcephysics.github.io/tracker-website/) in order to extract surface and part motion. The surface motion was then used as input to a Simulink model to predict the resulting part motion, which was compared with the experimentally observed part motion. A sample trial (Trial #5) is shown below (there were 10 total trials).

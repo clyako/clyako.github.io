@@ -1,0 +1,125 @@
+# Timeline entries — oldest first (chronological).
+# side: "left" | "right" — overrides the auto-computed side (even=left, odd=right).
+# top: <px> — pins the entry to an exact pixel distance from the top of the timeline (overrides date-based placement).
+# type: project | career | education | teaching | publication
+# Non-projects: title, subtitle (opt), date_label, url (opt), logo (opt), logo_class (opt).
+# Projects: subtitle (opt) — shown below the project name in the compact label.
+
+- year: 2011
+  month: 6
+  type: project
+  date_label: "2011–present"
+  project_id: "lego-design"
+
+- year: 2018
+  month: 4
+  type: education
+  date_label: "Apr 2018"
+  title: "B.S.E., University of Michigan"
+  subtitle: "Mechanical Engineering"
+
+- year: 2019
+  month: 5
+  type: project
+  date_label: "Jan–Sep 2019"
+  project_id: "masters-design-projects"
+
+- year: 2020
+  month: 6
+  type: education
+  date_label: "Jun 2020"
+  title: "M.S., Stanford University"
+  subtitle: "Mechanical Engineering"
+
+- year: 2021
+  month: 5
+  type: teaching
+  date_label: "May 2021"
+  side: "left"
+  title: "Centennial Teaching Award"
+  subtitle: "For work in ME 80: Mechanics of Materials"
+
+- year: 2021
+  month: 5
+  type: project
+  date_label: "May 2021"
+  side: "right"
+  project_id: "curling-gripper"
+
+- year: 2022
+  month: 7
+  type: career
+  date_label: "Summer 2022"
+  title: "Amazon Robotics"
+  subtitle: "Applied Scientist Intern"
+  logo: "/assets/images/logos/amazon-robotics.png"
+  logo_class: "logo-sm"
+
+- year: 2022
+  month: 10
+  type: publication
+  date_label: "Oct 2022"
+  title: "Designing Underactuated Grippers with Dynamically Variable Geometry Using Potential Energy Map Based Analysis"
+  subtitle: "IROS 2022"
+  url: "https://arxiv.org/pdf/2203.07456"
+
+- year: 2024
+  month: 5
+  type: project
+  date_label: "May 2024"
+  side: "left"
+  project_id: "impact-based-vibrations"
+  subtitle: "ICRA 2024"
+
+- year: 2024
+  month: 5
+  type: teaching
+  date_label: "May 2024"
+  side: "right"
+  title: "Centennial Teaching Award"
+  subtitle: "For work in ENGR 14: Introduction to Solid Mechanics & ME 327: Design and Control of Haptic Systems"
+
+- year: 2024
+  month: 12
+  type: project
+  date_label: "Dec 2024"
+  project_id: "truss-project"
+
+- year: 2025
+  month: 2
+  type: project
+  date_label: "Feb 2025"
+  project_id: "vibrating-spatula"
+  subtitle: "In Chapter 5 of dissertation"
+
+- year: 2025
+  month: 3
+  type: project
+  date_label: "Mar 2025"
+  project_id: "vibrations-through-transmission"
+  subtitle: "In Chapter 5 of dissertation"
+
+- year: 2025
+  month: 12
+  type: education
+  date_label: "Dec 2025"
+  title: "Ph.D. in Mechanical Engineering, Stanford University"
+  subtitle: "Good Vibrations: Torward Vibration-Based In-Hand Manipulation"
+  url: "https://searchworks.stanford.edu/view/in00000868324"
+
+- year: 2026
+  month: 6
+  type: project
+  date_label: "Jun 2026"
+  subtitle: "ICRA 2026"
+  project_id: "vibrating-parallel-gripper"
+
+# month: 7 so JS sorts NVIDIA as newest (after the Jun 2026 project); date_label reflects actual start date.
+- year: 2026
+  month: 7
+  type: career
+  date_label: "Apr 2026 - Present"
+  title: "NVIDIA GEAR"
+  subtitle: "Research Engineer"
+  logo: "/assets/images/logos/nvidia.png"
+  logo_class: "logo-sm"

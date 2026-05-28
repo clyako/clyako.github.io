@@ -1,14 +1,16 @@
 ---
 ---
 
-/* Custom Theme Variables */
-/* Use Inter for the main UI and JetBrains for Code/Headings */
-$global-font-family: 'Inter', sans-serif;
-$header-font-family: 'Outfit', sans-serif;
-$sans-serif: 'Outfit', sans-serif;
+/* ============================================
+   FONT & SCALE VARIABLES
+   ============================================ */
+
+$global-font-family: 'IBM Plex Mono', monospace;
+$header-font-family: 'Space Grotesk', sans-serif;
+$sans-serif:         'Space Grotesk', sans-serif;
+$monospace:          'JetBrains Mono', monospace;
 $x-large: 1360px;
 
-/* Your Custom Compressed Scale */
 $type-size-1: 1.563em;
 $type-size-2: 1.25em;
 $type-size-3: 1.125em;
@@ -16,105 +18,198 @@ $type-size-4: 1.0625em;
 $h-size-1: 1.125em;
 $h-size-2: 1.125em;
 
-/* 4. Import the Skin and Theme */
-@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; 
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
 
-/* 5. Optional: Inter specific smoothing */
-body {
-  font-weight: 400; 
-  -webkit-font-smoothing: auto;
+/* ============================================
+   GLOBAL BODY & BASE TYPOGRAPHY
+   ============================================ */
+
+body,
+.page__content,
+.author__bio {
+  font-family: 'IBM Plex Mono', monospace !important;
+  font-weight: 300 !important;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.01em; /* Inter looks great with slightly tighter tracking */
+  letter-spacing: -0.01em;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 300;             /* Extra bold for headers to stand out */
-  letter-spacing: -0.01em; /* Optional: looks better with thinner Inter */
-  text-transform: none;    /* Optional: ensures it's not forced to Uppercase */
+h1, h2, h3, h4, h5, h6,
+.site-title,
+.masthead__menu-item,
+.author__name,
+.nav__title,
+.nav__sub-title,
+.nav__items,
+.nav__list,
+.toc {
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #2E2A26;
 }
 
-// /* Optional: Make the sidebar and navigation thicker too */
-// .sidebar, .masthead__menu-item {
-//   font-weight: 400;
-// }
+code, pre, .highlight {
+  font-family: 'JetBrains Mono', monospace !important;
+}
 
-/* MASTHEAD COLORS */
+/* ============================================
+   MASTHEAD
+   ============================================ */
 
-/* Custom Masthead Colors */
 .masthead {
-  // Target the Site Title and Navigation Links
-  .site-title, 
-  .masthead__menu-item a {
-    color: #4a4a4a;          /* Dark gray */
-    transition: color 0.2s ease-in-out;
-    font-weight: 500;        /* Making it slightly thicker as requested earlier */
-  }
-
-  // Hover state for both
-  .site-title:hover,
-  .masthead__menu-item a:hover {
-    color: #777777;          /* Lighter gray on hover */
-    text-decoration: none;
-  }
-}
-
-.greedy-nav .visible-links a:before {
-  background-color: #f6f6f6;
-}
-
-
-
-
-
-
-
-/* MASTHEAD STUFF */
-
-/* --- MASTHEAD CUSTOMIZATION --- */
-.masthead {
-  background: #f6f6f6 !important; /* Your new background color */
-  border-bottom: 0px !important;    /* Removing the bottom border */
+  background: #E4DDD4 !important;
+  border-bottom: 1px solid #C9C2BA !important;
 }
 
 .masthead__inner-wrap {
-  padding: 0.5em !important;      /* Reduced padding from 1em */
+  padding: 0.5em !important;
 }
 
-
-
-
-
-/* FONT STYLING */
-
-/* 1. Page Title Underline */
-.page__title {
-  padding-bottom: 0.325em !important;
-  border-bottom: 3px solid $border-color !important; /* Theme border-color */
+.masthead .site-title,
+.masthead .masthead__menu-item a {
+  color: #38332E;
+  transition: color 0.2s ease;
+  font-weight: 500;
 }
 
-/* 2. Global Text Size (p, li, dl) */
+.masthead .site-title:hover,
+.masthead .masthead__menu-item a:hover {
+  color: #8C8078;
+  text-decoration: none;
+}
+
+.greedy-nav {
+  background: #E4DDD4 !important;
+}
+
+.greedy-nav a {
+  font-size: 0.95rem !important;
+}
+
+.greedy-nav .site-title {
+  font-size: 1.25rem !important;
+}
+
+.greedy-nav .visible-links a:before {
+  background-color: #C9C2BA;
+}
+
+/* ============================================
+   PAGE CONTENT TEXT
+   ============================================ */
+
 .page__content p,
 .page__content li,
 .page__content dl {
-  font-size: 0.75em !important; /* Your challenged smaller text size */
-  line-height: 1.6; /* Optional: adds a bit of breathability to small text */
+  font-family: 'IBM Plex Mono', monospace !important;
+  font-size: 0.8em !important;
+  font-weight: 300 !important;
+  line-height: 1.75;
+  color: #38332E;
 }
 
-/* 3. Header Hierarchy (H1 - H6) */
-.page__content h1 { font-size: $type-size-3 !important; margin-top: 1em; margin-bottom: 0.5em; } /* type-size-3 */
-.page__content h2 { 
-  font-size: $type-size-4 !important;  /* type-size-4 */
-  margin-top: 2em; 
-  margin-bottom: 0.5em; 
-  border-bottom: 1px solid $border-color !important;
-}
-.page__content h3 { font-size: $type-size-5 !important; margin-top: 1em; margin-bottom: 0.5em; }      /* type-size-5 */
-.page__content h4 { font-size: $type-size-6 !important; margin-top: 1em; margin-bottom: 0.5em; }    /* type-size-6 */
-.page__content h5 { font-size: $type-size-7 !important; margin-top: 1em; margin-bottom: 0.5em; }   /* type-size-7 */
-.page__content h6 { font-size: $type-size-8 !important; margin-top: 1em; margin-bottom: 0.5em; }  /* type-size-8 */
+/* ============================================
+   CONTENT HEADERS
+   ============================================ */
 
-/* 4. Academic Custom Classes */
+.page__title {
+  font-family: 'Space Grotesk', sans-serif !important;
+  padding-bottom: 0.325em !important;
+  border-bottom: 2px solid #C9C2BA !important;
+  color: #2E2A26;
+}
+
+.page__content h1 { font-size: $type-size-3 !important; margin-top: 1em; margin-bottom: 0.5em; }
+.page__content h2 {
+  font-size: $type-size-4 !important;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid #C9C2BA !important;
+}
+.page__content h3 { font-size: $type-size-5 !important; margin-top: 1em; margin-bottom: 0.5em; }
+.page__content h4 { font-size: $type-size-6 !important; margin-top: 1em; margin-bottom: 0.5em; }
+.page__content h5 { font-size: $type-size-7 !important; margin-top: 1em; margin-bottom: 0.5em; }
+.page__content h6 { font-size: $type-size-8 !important; margin-top: 1em; margin-bottom: 0.5em; }
+
+/* ============================================
+   NAVIGATION & SIDEBAR
+   ============================================ */
+
+.nav__list .nav__items .active {
+  margin-inline-start: 0 !important;
+  padding-inline: 0 !important;
+  font-weight: normal !important;
+}
+
+.nav__sub-title {
+  text-transform: uppercase !important;
+  border-bottom: 1px solid #C9C2BA !important;
+}
+
+.sidebar {
+  opacity: 1 !important;
+}
+
+.sidebar .nav__list .nav__items .nav__sub-title {
+  font-size: 0.95em !important;
+  color: #38332E !important;
+  text-transform: none !important;
+  border-bottom: none !important;
+  transition: color 0.4s ease;
+}
+
+.sidebar .nav__list .nav__items a:hover .nav__sub-title {
+  color: #8C8078 !important;
+}
+
+.sidebar .nav__list .nav__items .active .nav__sub-title {
+  color: #8C8078 !important;
+}
+
+.sidebar .nav__list .nav__items .active,
+.sidebar .nav__list .nav__items a.active .nav__sub-title {
+  margin-inline-start: 0 !important;
+  padding-inline: 0 !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  display: block;
+  font-weight: normal !important;
+}
+
+.sidebar.sticky-sidebar {
+  flex: 0 0 220px;
+  position: sticky;
+  top: 0rem;
+  align-self: flex-start;
+}
+
+/* ============================================
+   CODE BLOCKS
+   ============================================ */
+
+.highlight {
+  background-color: #1A1714;
+  color: #D7D7D7;
+  padding: 1em;
+  border-radius: 4px;
+  font-size: 0.65rem;
+}
+
+.highlight .cp                    { color: #BE8ABF !important; font-weight: normal; }
+.highlight .k, .highlight .kn     { color: #E2E2B4 !important; }
+.highlight .n, .highlight .nx     { color: #D7D7D7 !important; }
+.highlight .kt                    { color: #679AD1; }
+.highlight .m, .highlight .mf,
+.highlight .mi                    { color: #BCCFAD; }
+.highlight .c1                    { color: #759A5E; }
+
+/* ============================================
+   ACADEMIC HELPERS
+   ============================================ */
+
 .equal-contrib {
   font-size: 0.75em !important;
   vertical-align: super !important;
@@ -122,66 +217,28 @@ h1, h2, h3, h4, h5, h6 {
 
 .equal-contrib-note {
   font-size: 0.6em !important;
-  color: gray !important;
+  color: #8C8078 !important;
   margin-top: 1em !important;
   display: block;
 }
 
-
-
-
-
-
-/* NAVIGATION & SIDEBAR STYLING */
-
-/* 2. Greedy Nav (Top Header Menu) Fixes */
-.greedy-nav {
-  background: #f6f6f6 !important; /* Matching your masthead background */
-}
-
-.greedy-nav a {
-  font-size: 0.95rem !important; /* Your specific font size adjustment */
-}
-
-.greedy-nav .site-title {
-  font-size: 1.25rem !important; /* Ensuring site title remains prominent */
-}
-
-/* 3. Navigation List & Sidebar Active States */
-.nav__list .nav__items .active {
-  margin-inline-start: 0 !important; /* Prevents the "jump" you noticed earlier */
-  padding-inline: 0 !important;
-  font-weight: normal !important;
-}
-
-/* 4. Sub-title Formatting */
-.nav__sub-title {
-  text-transform: uppercase !important;
-  border-bottom: 1px solid #f2f3f3 !important; /* Your theme's border color */
-}
-
-
-
-
-
-
-/* COLLAPSIBLE TABLES */
+/* ============================================
+   COLLAPSIBLE TABLES
+   ============================================ */
 
 table {
   display: table;
   font-size: $type-size-8;
 }
 
-/* Styling for the collapsible section and the small table */
 .project-details {
   margin-bottom: 1.5rem;
-  border: 1px solid #eee;
+  border: 1px solid #C9C2BA;
   border-radius: 8px;
   padding: 0.5rem 1rem;
   transition: all 0.4s ease;
 }
 
-/* Hide the default browser arrow */
 .project-details summary {
   list-style: none;
   display: flex;
@@ -189,280 +246,871 @@ table {
   font-size: 0.9rem;
   font-weight: 300;
   cursor: pointer;
-  color: #333;
+  color: #38332E;
   padding: 0.5rem 0;
   outline: none;
 }
 
-.project-details summary::-webkit-details-marker {
-  display: none;
-}
+.project-details summary::-webkit-details-marker { display: none; }
 
-/* Custom arrow */
 .project-details summary::before {
   content: '▶';
   display: inline-block;
   font-size: 0.7rem;
   margin-right: 10px;
   transition: transform 0.4s ease;
-  color: #888;
+  color: #8C8078;
 }
 
-/* Rotate arrow based on the same class the table uses */
 .project-details .is-open-arrow::before {
   transform: rotate(90deg);
-  color: #333;
+  color: #38332E;
 }
 
-.project-details[open] {
-  background-color: #fafafa;
-}
+.project-details[open] { background-color: #E8E4DD; }
+.project-details summary:hover { color: #8C8078; }
 
-.project-details summary:hover {
-  color: #777;
-}
-
-/* Core Animation Styling */
 .small-table {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  /* Start hidden for JS transition */
   opacity: 0;
   max-height: 0;
   transform: translateY(-10px);
   transition: opacity 0.4s ease, max-height 0.4s ease, transform 0.4s ease;
 }
 
-/* The class our JavaScript will toggle */
 .is-open {
   opacity: 1;
-  max-height: 2000px; /* High enough to fit your table content */
+  max-height: 2000px;
   transform: translateY(0);
 }
 
-/* Table internal styling */
 .small-table table {
   font-size: 0.55rem !important;
   line-height: 1.3 !important;
   margin-top: 1rem;
 }
 
-.small-table td, .small-table th {
-  padding: 0.4rem !important;
-}
-
-/* 1. Alternating Row Colors */
-/* This targets every second row (even) and gives it a light gray background */
-.small-table tr:nth-child(even) {
-  background-color: #ededed; 
-}
-
-/* 2. Dotted Horizontal Lines */
-.small-table td {
-  /* Remove any existing border first */
-  border: none !important;
-}
-
-/* 3. Remove the border from the very last row for a cleaner look */
-.small-table tr:last-child td {
-  border-bottom: 2px solid #333 !important;
-}
-
-/* 4. Header styling to keep it distinct */
+.small-table td, .small-table th { padding: 0.4rem !important; }
+.small-table tr:nth-child(even)   { background-color: #E2DDD6; }
+.small-table td                   { border: none !important; }
+.small-table tr:last-child td     { border-bottom: 2px solid #38332E !important; }
 .small-table th {
-  border-top: 2px solid #333 !important;
-  border-bottom: 2px solid #333 !important; /* Keep header line solid/bold */
-  background-color: #d3d3d3;
+  border-top: 2px solid #38332E !important;
+  border-bottom: 2px solid #38332E !important;
+  background-color: #CEC9C0;
 }
-
-/* 5. Change text color on hover instead of background */
 .small-table tbody tr:hover td {
-  color: #777 !important; /* A nice blue, or use #000 for bold black */
+  color: #8C8078 !important;
   transition: color 0.2s ease;
 }
 
+/* ============================================
+   EQUATIONS (MathJax)
+   ============================================ */
 
+.mjx-chtml { font-size: 1.1em !important; }
+.MJXc-display .mjx-chtml,
+.mjx-chtml.MJXc-display           { font-size: 0.9em !important; }
 
+/* ============================================
+   PROJECT VIDEO BACKGROUNDS
+   ============================================ */
 
+.background-video-wrapper {
+  color: #F2EFE9;
+  background: #1A1714;
+  text-align: center;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 
+  video {
+    opacity: 1;
+    background: #1A1714;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: block;
+    object-fit: cover;
+  }
 
+  .copy {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    margin: 0 auto;
+  }
+}
 
-/* FOR THE CODE BLOCKS */
+@media (max-width: 768px) {
+  .background-video-wrapper {
+    height: auto !important;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
 
-/* Custom "Contrast" Overrides for C++ Preprocessor */
-.highlight {
-  background-color: #000000;
-  color: #D7D7D7; /* Base text color (Light Gray) */
-  padding: 1em;
-  border-radius: 4px;
+  .background-video-wrapper video {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+.content-below-video {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: #F2EFE9;
+  color: #38332E;
+}
+
+.content-below-video h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+.content-below-video p  { font-size: 1.2rem; line-height: 1.6; max-width: 100%; margin: 0 auto; }
+
+/* ============================================
+   SCROLL REVEAL ANIMATIONS
+   ============================================ */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   HOMEPAGE TIMELINE
+   ============================================ */
+
+.timeline-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 1rem 3rem;
+}
+
+.timeline {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0.25rem 0 1rem;
+}
+
+/* Center vertical line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: #C9C2BA;
+  transform: translateX(-50%);
+}
+
+/* Year marker */
+.tl-year {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 0.5rem;
+  z-index: 4;
+}
+
+.tl-year span {
+  background: #F2EFE9;
+  border: 1.5px solid #C9C2BA;
+  padding: 0.12rem 0.7rem;
+  font-family: 'Space Grotesk', sans-serif !important;
   font-size: 0.65rem;
+  font-weight: 600;
+  color: #38332E;
+  letter-spacing: 0.07em;
+  border-radius: 3px;
 }
 
-/* 1. #if, #elif, #define, #endif */
-.highlight .cp {
-  color: #BE8ABF !important; /* Purplish */
-  font-weight: normal;
+/* Entry row: 3-column grid (left half | dot | right half) */
+.tl-entry {
+  display: grid;
+  grid-template-columns: 1fr 28px 1fr;
+  width: 100%;
+  padding-bottom: 1rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-/* 2. The 'defined' operator */
-.highlight .k, .highlight .kn {
-  color: #E2E2B4 !important; /* Pale Yellow/Green */
+.tl-entry--right { transform: translateX(40px); }
+.tl-entry--left  { transform: translateX(-40px); }
+
+.tl-entry.tl-visible {
+  opacity: 1;
+  transform: none;
 }
 
-/* 3. Identifiers (FREQ_30_HZ, quaid_frequency, etc.) */
-.highlight .n, .highlight .nx {
-  color: #D7D7D7 !important; /* Light Gray */
+.tl-entry:hover .tl-dot { transform: scale(1.4); }
+
+/* Re-enable pointer events only on actual content — keeps the empty half from
+   blocking hover on the opposite-side entry when entries overlap vertically */
+.tl-cell--left:not(.tl-cell--empty),
+.tl-cell--right:not(.tl-cell--empty),
+.tl-cell--dot { pointer-events: auto; }
+
+/* Center dot column */
+.tl-cell--dot {
+  display: flex;
+  justify-content: center;
+  align-self: center;
 }
 
-/* 4. Keep your types (float) distinct if desired */
-.highlight .kt {
-  color: #679AD1; /* Keeping the yellow from Contrast for types */
+.tl-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #BEB8B0;
+  border: 2px solid #F2EFE9;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 15;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
-/* 5. Keep your numbers distinct */
-.highlight .m, .highlight .mf , .highlight .mi{
-  color: #BCCFAD; /* Gold/Orange */
+/* Unified dot color */
+.tl-dot { background: #3f5a36; }
+
+/* Left and right content cells — explicit grid-column for reliable mobile override */
+.tl-cell--left {
+  grid-column: 1;
+  padding-right: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+.tl-cell--dot   { grid-column: 2; }
+.tl-cell--right {
+  grid-column: 3;
+  padding-left: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
-/* 6. Keep comments readable */
-.highlight .c1 {
-  color: #759A5E;
+/* ---- Compact text label ---- */
+.tl-compact {
+  display: inline-block;
+  max-width: 100%;
 }
 
+.tl-cell--left  .tl-compact { text-align: right; }
+.tl-cell--right .tl-compact { text-align: left; }
 
-
-
-
-
-/* FOR CHANGING THE EQUATION FONT SIZE IN-LINE AND DISPLAY */
-
-/* 1. Set the base size for ALL math (this catches inline math) */
-.mjx-chtml {
-  font-size: 1.1em !important;
+.tl-compact__date {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.52rem;
+  color: #9A9490;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  display: block;
+  margin-bottom: 0.06rem;
 }
 
-/* 2. Target centered math using the specific display class */
-/* We reset this to the standard size you wanted */
-.MJXc-display .mjx-chtml, 
-.mjx-chtml.MJXc-display {
-  font-size: 0.9em !important;
+.tl-compact__title {
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #2E2A26 !important;
+  margin: 0;
+  text-decoration: none;
+  display: block;
 }
 
+a.tl-compact__title:hover { color: #3f5a36 !important; }
 
-
-
-
-
-
-/* NAVIGATION BAR STYLING */
-
-/* 1. Make sidebar solid by default (Removes the global fade effect) */
-.sidebar {
-  opacity: 1 !important;
+.tl-compact__sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.57rem;
+  color: #7A726A;
+  font-style: italic;
+  margin: 0.04rem 0 0;
 }
 
-/* 2. Base style for the navigation links */
-.sidebar .nav__list .nav__items .nav__sub-title {
-  font-size: 0.95em !important;
-  color: #4a4a4a !important;      /* Your desired base color */
-  text-transform: none !important; /* Removes default All-Caps */
-  border-bottom: none !important;  /* Removes the line under links */
-  transition: color 0.4s ease;
+/* Unified accent bars on text labels */
+.tl-cell--right .tl-compact { border-left: 2px solid #3f5a36; padding-left: 5px; }
+.tl-cell--left  .tl-compact { border-right: 2px solid #3f5a36; padding-right: 5px; }
+
+/* ---- Entries with image/logo: text inner, connector, image outer ---- */
+.tl-entry__inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+.tl-cell--left .tl-entry__inner { flex-direction: row-reverse; }
+
+.tl-entry__inner .tl-compact {
+  flex: 0 0 auto;
+  max-width: 280px;
+  word-break: break-word;
 }
 
-/* 3. Hover state for individual links */
-/* This ensures only the text you touch changes color */
-.sidebar .nav__list .nav__items a:hover .nav__sub-title {
-  color: #777777 !important;
+/* Connector line: draws in from text side toward image on scroll */
+.tl-connector {
+  flex: 1;
+  min-width: 16px;
+  height: 1.5px;
+  align-self: center;
+  margin: 0 8px;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.55s ease 0.25s;
+}
+.tl-cell--left .tl-connector { transform-origin: right; }
+.tl-entry.tl-visible .tl-connector { transform: scaleX(1); }
+
+/* Unified connector color */
+.tl-connector { background: #3f5a36; }
+
+/* Square image thumbnail */
+a.tl-img-box {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  width: 256px;
+  height: 256px;
+  flex-shrink: 0;
+  text-decoration: none;
+  background: transparent;
+  transition: box-shadow 0.25s ease;
 }
 
-/* 4. Active state workaround */
-/* Since we don't have the 'active' class yet, we can target the 
-   link that points to the current URL manually via CSS if needed, 
-   but for now, let's just fix the visuals. */
-.sidebar .nav__list .nav__items .active .nav__sub-title {
-  color: #777777 !important;
-  font-weight: bold !important;
+a.tl-img-box:hover {
+  box-shadow: 0 4px 16px rgba(56, 51, 46, 0.22);
 }
 
-/* Remove the shifting/jumping behavior for active items */
-.sidebar .nav__list .nav__items .active {
-  margin-inline-start: 0 !important;
-  padding-inline: 0 !important;
+a.tl-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
 }
 
-/* Ensure the sub-title span inside the active link stays put */
-.sidebar .nav__list .nav__items a.active .nav__sub-title {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-  display: block; /* Ensures it respects the alignment of other spans */
+a.tl-img-box:hover img { transform: scale(1.05); }
+
+/* Logo box — same width as .tl-img-box so their outer edges share the same vertical line */
+.tl-logo-box {
+  flex-shrink: 0;
+  width: 256px;
+  height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Extend connector flush to logo-box edge on the logo side only (images keep their 8px gap) */
+.tl-cell--right .tl-entry__inner:has(.tl-logo-box) .tl-connector { margin-right: 0; }
+.tl-cell--left  .tl-entry__inner:has(.tl-logo-box) .tl-connector { margin-left: 0; }
+.tl-logo-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.tl-logo-box.logo-sm img {
+  max-width: 62%;
+  max-height: 62%;
 }
 
-
-
-
-
-
-
-
-
-
-
-/* --- FINAL FONT OVERRIDES --- */
-
-/* 1. THE FRAME (Outfit) */
-h1, h2, h3, h4, h5, h6,
-.site-title, 
-.masthead__menu-item,
-.author__name,
-.nav__title, 
-.nav__sub-title, 
-.nav__items,
-.nav__list,
-.toc {
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+/* Text overlay — fades in on hover */
+.tl-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(34, 30, 26, 0.84);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0.75rem 0.85rem;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
 }
 
-/* Fix Sidebar Boldness: Force normal weight even on active items */
-.sidebar .nav__list .nav__items .active .nav__sub-title,
-.sidebar .nav__list .nav__items .active,
-.sidebar .nav__list .nav__items a.active .nav__sub-title {
-  font-weight: normal !important; 
+a.tl-img-box:hover .tl-img-overlay { opacity: 1; }
+
+.tl-overlay__date {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0 0 0.2rem;
 }
 
-/* 2. THE CONTENT (Lexend Deca) */
-body,
-.page__content, 
-.page__content p,
-.page__content li,
-.author__bio {
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 400 !important; /* Use 300 for Light or 400 for Regular */
-  line-height: 1.5;            /* 1.25 is very tight for Lexend; 1.5 is better for academic reading */
+.tl-overlay__title {
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 0.3rem;
 }
 
-/* 3. THE CODE */
-code, pre, .highlight {
-  font-family: 'JetBrains Mono', monospace !important;
+.tl-overlay__desc {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0;
+  line-height: 1.5;
 }
 
+/* ---- Mobile: single column ---- */
+@media (max-width: 700px) {
+  .timeline::before { left: 14px; transform: none; }
+  .tl-year { justify-content: flex-start; padding-left: 36px; }
 
+  .tl-entry { grid-template-columns: 28px 1fr; padding-bottom: 0.75rem; }
 
+  .tl-cell--dot {
+    grid-column: 1;
+    grid-row: 1;
+    justify-content: flex-start;
+    padding-left: 10px;
+  }
 
+  /* Content cell always goes to column 2 */
+  .tl-cell--left,
+  .tl-cell--right {
+    grid-column: 2;
+    grid-row: 1;
+    padding-left: 10px;
+    padding-right: 0;
+    justify-content: flex-start;
+  }
 
+  /* Hide empty placeholder cells */
+  .tl-cell--empty { display: none; }
 
-/* Remove Previous/Next Post Navigation */
-.pagination--pager {
-  display: none !important;
+  a.tl-img-box { width: 96px; height: 96px; }
+  .tl-compact { text-align: left !important; }
+  .tl-entry__inner { width: 100%; }
+  .tl-cell--left .tl-entry__inner { flex-direction: row; }
+  .tl-entry__inner .tl-compact { max-width: 90px; }
+  .tl-connector { min-width: 8px; margin: 0 4px; }
+  .tl-logo-box { width: 96px; height: 60px; }
+
+  /* Restore left-side accent bar in single-column */
+  .tl-cell--left .tl-compact { border-right: none; border-left: 2px solid #3f5a36; padding-right: 0; padding-left: 5px; }
+
+  /* Single-column: all entries slide in from the left */
+  .tl-entry--left, .tl-entry--right { transform: translateX(-24px); }
 }
 
+/* ============================================
+   ABOUT PAGE
+   ============================================ */
 
-
-
-
-#gallery-image {
-    pointer-events: none; /* Allows the swipe to "pass through" to the overlay */
+.about-page .page {
+  max-width: 760px;
+  margin: 0 auto;
 }
+
+/* ============================================
+   LEGO GALLERY PAGE
+   ============================================ */
+
+.lego-page .wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.lego-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 0.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.lego-item {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+  background-color: #DDD9D3;
+}
+
+.lego-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+.lego-item:hover img { transform: scale(1.05); }
+
+@media (min-width: 900px) {
+  .lego-container {
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 0.5rem;
+  }
+
+  .lego-item { aspect-ratio: 1 / 1; grid-row: auto; }
+
+  .lego-item:nth-child(1),
+  .lego-item:nth-child(2),
+  .lego-item:nth-child(3) { grid-column: span 4; grid-row: 1; }
+
+  .lego-item:nth-child(4) { grid-column: 3 / span 4; grid-row: 2; }
+  .lego-item:nth-child(5) { grid-column: 7 / span 4; grid-row: 2; }
+}
+
+.lego-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(30, 24, 18, 0.78);
+  color: #F8F5EF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  padding: 20px;
+  transition: opacity 0.3s ease;
+  border-radius: 8px;
+  z-index: 2;
+}
+
+.lego-item:hover .lego-overlay { opacity: 1; }
+
+.lego-overlay h2 {
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+  color: #F8F5EF !important;
+}
+
+.lego-description {
+  font-family: 'IBM Plex Mono', monospace !important;
+  font-size: 0.75rem;
+  font-weight: 300;
+  margin-top: 10px;
+  color: rgba(248, 245, 239, 0.85);
+  line-height: 1.4;
+}
+
+.fullscreen-gallery {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(26, 23, 20, 0.96);
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  touch-action: none;
+}
+
+.fullscreen-gallery img {
+  max-width: 95vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.gallery-caption {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #D7D0C8;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.9rem;
+  text-align: center;
+  width: 80%;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  color: rgba(248, 245, 239, 0.5);
+  cursor: pointer;
+  padding: 20px;
+  z-index: 10001;
+  transition: color 0.3s;
+}
+
+.nav-btn:hover { color: #F8F5EF; }
+.left  { left: 10px; }
+.right { right: 10px; }
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 35px;
+  color: #F8F5EF;
+  cursor: pointer;
+  z-index: 10002;
+}
+
+@media (max-width: 600px) {
+  .nav-btn { display: none; }
+  .lego-overlay h2 { font-size: 1rem; }
+}
+
+/* ============================================
+   PUBLICATIONS PAGE
+   ============================================ */
+
+.publications-page .page {
+  width: 100% !important;
+  max-width: 900px !important;
+  float: none !important;
+  margin: 20px auto !important;
+  padding: 0 10px !important;
+}
+
+.pub-buttons {
+  margin-top: 10px;
+  margin-bottom: 45px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+  line-height: 1;
+}
+
+.pub-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.15s ease-out, filter 0.15s ease-out;
+}
+
+.pub-link i { font-size: 14px; line-height: 1; display: block; }
+
+.pub-link .fa-github,
+.pub-link .fa-square-github { font-size: 27px !important; color: #2E2A26 !important; }
+
+.link-paper  { background-color: #C9C2BA; color: #2E2A26 !important; }
+.link-video  { background-color: #CC3333; color: #F8F5EF !important; }
+.link-web    { background-color: #7A8C9A; color: #F8F5EF !important; }
+.link-github { background-color: transparent; }
+
+.pub-link:hover, .bib-btn:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+  z-index: 10;
+}
+
+.bib-btn {
+  cursor: pointer;
+  background: #E8E4DD;
+  color: #38332E;
+  padding: 0 10px;
+  border-radius: 4px;
+  font-size: 0.75em;
+  font-weight: 400;
+  border: 1px solid #C9C2BA;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  line-height: 1;
+  vertical-align: middle;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.cite-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: #E8E4DD;
+  border: 1px solid #C9C2BA;
+  box-shadow: 0 4px 15px rgba(43, 40, 32, 0.15);
+  z-index: 999;
+  padding: 15px;
+  margin-top: 8px;
+  border-radius: 4px;
+}
+
+.cite-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.cite-header h4 {
+  margin: 0;
+  font-size: 11px;
+  color: #8C8078;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.copy-btn {
+  font-size: 10px;
+  color: #7A8C9A;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.copy-btn:hover { text-decoration: underline; }
+
+.cite-menu pre {
+  font-size: 11px;
+  background: #F2EFE9;
+  padding: 12px;
+  border: 1px solid #C9C2BA;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin: 0;
+  color: #38332E;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ============================================
+   INTERACTIVE PHYSICS WIDGET
+   ============================================ */
+
+.physics-widget {
+  background: #E8E4DD;
+  border: 1px solid #C9C2BA;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.physics-widget h4 {
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: #2E2A26;
+}
+
+.physics-widget .slider-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.physics-widget label {
+  font-size: 0.68rem;
+  color: #38332E;
+  min-width: 210px;
+}
+
+.physics-widget label em {
+  font-style: normal;
+  color: #7A8C9A;
+}
+
+.physics-widget input[type="range"] {
+  flex: 1;
+  min-width: 120px;
+  accent-color: #7A8C9A;
+}
+
+.physics-widget .slider-value {
+  font-size: 0.7rem;
+  color: #7A8C9A;
+  min-width: 55px;
+  text-align: right;
+  font-weight: 400;
+}
+
+.physics-widget .results {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid #C9C2BA;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+@media (max-width: 600px) {
+  .physics-widget .results { grid-template-columns: 1fr 1fr; }
+}
+
+.physics-widget .result-box {
+  background: #F2EFE9;
+  border-radius: 6px;
+  padding: 0.75rem 0.5rem;
+  text-align: center;
+}
+
+.physics-widget .result-label {
+  font-size: 0.55rem;
+  color: #8C8078;
+  display: block;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.physics-widget .result-value {
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: #2E2A26;
+}
+
+.physics-widget .result-unit {
+  font-size: 0.6rem;
+  color: #8C8078;
+  margin-top: 0.2rem;
+  display: block;
+}
+
+.physics-widget .insight {
+  margin-top: 1rem;
+  padding: 0.6rem 0.85rem;
+  background: #F2EFE9;
+  border-left: 3px solid #7A8C9A;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.65rem;
+  color: #38332E;
+  line-height: 1.55;
+}
+
+/* ============================================
+   MISCELLANEOUS
+   ============================================ */
+
+.pagination--pager { display: none !important; }
+
+#gallery-image { pointer-events: none; }

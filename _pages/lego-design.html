@@ -2,332 +2,116 @@
 layout: default
 title: "Lego Designs"
 permalink: /lego-design/
+classes: lego-page
 ---
 
-<!-- Container for the Lego Designs Overview -->
 <div class="wrapper">
-    <div class="lego-container">
-        {% for design in site.data.lego_designs %}
-        <div class="lego-item" onclick="openGallery('{{ design.id }}', 0)">
-            <img src="{{ site.baseurl }}{{ design.main_image }}" alt="{{ design.name }}">
-            <div class="lego-overlay">
-                <div class="overlay-content">
-                    <h2>{{ design.name }}</h2>
-                    <div class="lego-description">{{ design.description }}</div>
-                </div>
-            </div>
+  <div class="lego-container">
+    {% for design in site.data.lego_designs %}
+    <div class="lego-item" onclick="openGallery('{{ design.id }}', 0)">
+      <img src="{{ site.baseurl }}{{ design.main_image }}" alt="{{ design.name }}" loading="lazy">
+      <div class="lego-overlay">
+        <div class="overlay-content">
+          <h2>{{ design.name }}</h2>
+          <div class="lego-description">{{ design.description }}</div>
         </div>
-        {% endfor %}
+      </div>
     </div>
+    {% endfor %}
+  </div>
 </div>
 
 <!-- Fullscreen Gallery Overlay -->
 <div id="fullscreen-gallery" class="fullscreen-gallery">
-    <span class="close-btn" onclick="closeGallery()">&times;</span>
-    <img id="gallery-image" src="" alt="Gallery Image">
-    <div id="gallery-caption" class="gallery-caption"></div>
-    <div class="nav-btn left" onclick="changeImage(-1)">&#10094;</div>
-    <div class="nav-btn right" onclick="changeImage(1)">&#10095;</div>
+  <span class="close-btn" onclick="closeGallery()">&times;</span>
+  <img id="gallery-image" src="" alt="Gallery Image">
+  <div id="gallery-caption" class="gallery-caption"></div>
+  <div class="nav-btn left" onclick="changeImage(-1)">&#10094;</div>
+  <div class="nav-btn right" onclick="changeImage(1)">&#10095;</div>
 </div>
 
 <div class="initial-content">
-    <div id="main" role="main">
-        <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-            <meta itemprop="headline" content="Lego Design">
-            <meta itemprop="description" content="">
-            <div class="page__inner-wrap">
-                <header>
-                    <h1 id="page-title" class="page__title" itemprop="headline">
-                        <a href="http://localhost:4000/lego-gallery" itemprop="url">Lego Design
-                        </a>
-                    </h1>
-                </header>
-                <section class="page__content" itemprop="text">
-                    <p>I have been designing and building with Lego for as long as I can remember. I started out with
-                        official sets,
-                        but my love for Star Wars and the Lego Company's inability to keep up with every new vehicle or
-                        starship
-                        caused me to develop a strong desire to design my own sets. I quickly found <a
-                            href='https://www.lego.com/en-us/service/help/apps_video_games_device_guides/apps_video_games_device_guides/about-lego-digital-designer-kA009000001dcdmCAA?locale=en-us'
-                            target='_blank'>Lego Digital Designer</a>, a Lego specific CAD software, allowing me to
-                        <i>virtually</i>
-                        realize my ideas (Lego is expensive!). But over time I was able to save up and bring a few of
-                        these designs
-                        to life. The existence of physics outside the CAD software often meant I had to modify the
-                        designs for
-                        strength and stability. Luckily, it is easy to determine what piece combinations will and won't
-                        work
-                        by trying out different designs in the real world.
-                    </p>
-                </section>
-                <footer class="page__meta">
-                </footer>
-            </div>
-        </article>
-    </div>
+  <div id="main" role="main">
+    <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+      <meta itemprop="headline" content="Lego Design">
+      <meta itemprop="description" content="">
+      <div class="page__inner-wrap">
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Lego Design</h1>
+        </header>
+        <section class="page__content" itemprop="text">
+          <p>I have been designing and building with Lego for as long as I can remember. I started out with official sets, but my love for Star Wars and the Lego Company's inability to keep up with every new vehicle or starship caused me to develop a strong desire to design my own sets. I quickly found <a href='https://www.lego.com/en-us/service/help/apps_video_games_device_guides/apps_video_games_device_guides/about-lego-digital-designer-kA009000001dcdmCAA?locale=en-us' target='_blank'>Lego Digital Designer</a>, a Lego-specific CAD software, allowing me to <i>virtually</i> realize my ideas (Lego is expensive!). But over time I was able to save up and bring a few of these designs to life. The existence of physics outside the CAD software often meant I had to modify the designs for strength and stability. Luckily, it is easy to determine what piece combinations will and won't work by trying out different designs in the real world.</p>
+        </section>
+        <footer class="page__meta"></footer>
+      </div>
+    </article>
+  </div>
 </div>
 
-<!-- Styles for Lego Gallery and Fullscreen Viewer -->
-<style>
-  /* --- 1. LAYOUT & WRAPPER --- */
-  .wrapper {
-    display: flex;
-    justify-content: center;
-    min-height: auto;
-    padding: 2rem 0;
-  }
-
-  /* --- 2. GRID SYSTEM (Mobile First) --- */
-  .lego-container {
-    display: grid;
-    /* Default: 2 columns for mobile */
-    grid-template-columns: repeat(2, 1fr); 
-    grid-gap: 0.5rem;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-  }
-
-  .lego-item {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 8px;
-    cursor: pointer;
-    /* Keeps images perfectly square on all devices */
-    aspect-ratio: 1 / 1; 
-    background-color: #f0f0f0;
-  }
-
-  .lego-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: 8px; /* Matching the container */
-}
-
-  .lego-item:hover img {
-    transform: scale(1.05);
-  }
-
- /* --- 3. DESKTOP LAYOUT (3-on-top, 2-below) --- */
-  @media (min-width: 900px) {
-    .lego-container {
-      grid-template-columns: repeat(12, 1fr); 
-      /* We remove grid-auto-rows and use gap + span to maintain the shape */
-      grid-gap: 0.5rem; 
-    }
-
-    .lego-item {
-      /* This ensures the item's height always matches its width in the 12-col grid */
-      aspect-ratio: 1 / 1; 
-      grid-row: auto; 
-    }
-
-    /* Row 1 */
-    .lego-item:nth-child(1),
-    .lego-item:nth-child(2),
-    .lego-item:nth-child(3) {
-      grid-column: span 4;
-      grid-row: 1;
-    }
-
-    /* Row 2 */
-    .lego-item:nth-child(4) {
-      grid-column: 3 / span 4;
-      grid-row: 2;
-    }
-
-    .lego-item:nth-child(5) {
-      grid-column: 7 / span 4;
-      grid-row: 2;
-    }
-  }
-
-  /* --- 4. OVERLAYS (Outfit & Lexend Deca) --- */
-  .lego-overlay {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    opacity: 0;
-    padding: 20px;
-    transition: opacity 0.3s ease;
-    border-radius: 8px;
-    z-index: 2;
-  }
-
-  .lego-item:hover .lego-overlay {
-    opacity: 1;
-  }
-
-  .lego-overlay h2 {
-    font-family: 'Outfit', sans-serif !important;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin: 0;
-    color: white !important;
-  }
-
-  .lego-description {
-    font-family: 'Lexend Deca', sans-serif !important;
-    font-size: 0.75rem;
-    font-weight: 300;
-    margin-top: 10px;
-    color: #eee;
-    line-height: 1.4;
-  }
-
-  /* --- 5. FULLSCREEN GALLERY (Swipe Optimized) --- */
-  .fullscreen-gallery {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.95);
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-    /* Prevents the browser from doing its own pull-to-refresh while swiping */
-    touch-action: none; 
-  }
-
-  .fullscreen-gallery img {
-    max-width: 95vw;
-    max-height: 80vh;
-    object-fit: contain;
-    border-radius: 4px;
-    user-select: none;
-  }
-
-  .gallery-caption {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    font-family: 'Lexend Deca', sans-serif;
-    font-size: 0.9rem;
-    text-align: center;
-    width: 80%;
-  }
-
-  .nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 40px;
-    color: rgba(255, 255, 255, 0.5);
-    cursor: pointer;
-    padding: 20px;
-    z-index: 10001;
-    transition: color 0.3s;
-  }
-
-  .nav-btn:hover { color: white; }
-  .left { left: 10px; }
-  .right { right: 10px; }
-
-  .close-btn {
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    font-size: 35px;
-    color: white;
-    cursor: pointer;
-    z-index: 10002;
-  }
-
-  /* Hide arrows on small touch devices to keep it clean for swiping */
-  @media (max-width: 600px) {
-    .nav-btn {
-      display: none;
-    }
-    .lego-overlay h2 {
-      font-size: 1rem;
-    }
-  }
-</style>
-
-<!-- JavaScript for Gallery Functionality -->
 <script>
-    const legoDesigns = {{ site.data.lego_designs | jsonify }};
-    let currentImages = [];
-    let currentIndex = 0;
+  const legoDesigns = {{ site.data.lego_designs | jsonify }};
+  let currentImages = [];
+  let currentIndex = 0;
+  let touchStartX = 0;
+  let touchEndX = 0;
 
-    function openGallery(id, startIndex) {
-        const design = legoDesigns.find(d => d.id === id);
-        if (!design) return;
+  function openGallery(id, startIndex) {
+    const design = legoDesigns.find(d => d.id === id);
+    if (!design) return;
 
-        currentImages = design.gallery_images;
-        currentIndex = startIndex;
-        updateGalleryImage();
+    currentImages = design.gallery_images;
+    currentIndex = startIndex;
+    updateGalleryImage();
 
-        const galleryOverlay = document.getElementById('fullscreen-gallery');
-        galleryOverlay.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Stop background scrolling
+    const galleryOverlay = document.getElementById('fullscreen-gallery');
+    galleryOverlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
 
-        // SWIPE LOGIC
-        galleryOverlay.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-        }, {passive: false});
+    galleryOverlay.addEventListener('touchstart', function (e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: false });
 
-        galleryOverlay.addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, {passive: false});
-        
-        // Prevent the image from being "dragged" like a ghost image
-        document.getElementById('gallery-image').addEventListener('dragstart', (e) => e.preventDefault());
+    galleryOverlay.addEventListener('touchend', function (e) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: false });
+
+    document.getElementById('gallery-image').addEventListener('dragstart', (e) => e.preventDefault());
+  }
+
+  function handleSwipe() {
+    const threshold = 40;
+    if (touchEndX < touchStartX - threshold) {
+      changeImage(1);
+    } else if (touchEndX > touchStartX + threshold) {
+      changeImage(-1);
     }
+  }
 
-    function handleSwipe() {
-        const threshold = 40; // Reduced threshold for better responsiveness
-        if (touchEndX < touchStartX - threshold) {
-            changeImage(1); // Swipe Left -> Next
-        } else if (touchEndX > touchStartX + threshold) {
-            changeImage(-1); // Swipe Right -> Prev
-        }
-    }
+  function closeGallery() {
+    document.getElementById('fullscreen-gallery').style.display = 'none';
+    document.body.style.overflow = '';
+  }
 
-    function closeGallery() {
-        document.getElementById('fullscreen-gallery').style.display = 'none';
-    }
+  function changeImage(direction) {
+    currentIndex = (currentIndex + direction + currentImages.length) % currentImages.length;
+    updateGalleryImage();
+  }
 
-    function changeImage(direction) {
-        currentIndex = (currentIndex + direction + currentImages.length) % currentImages.length;
-        updateGalleryImage();
-    }
-
-    function updateGalleryImage() {
-    const galleryImage = document.getElementById('gallery-image');
+  function updateGalleryImage() {
+    const galleryImage   = document.getElementById('gallery-image');
     const galleryCaption = document.getElementById('gallery-caption');
-    const currentImage = currentImages[currentIndex];
+    const currentImage   = currentImages[currentIndex];
 
-    if (!currentImage || !currentImage.image) {
-        console.error('Invalid image data:', currentImage);
-        return;
-    }
+    if (!currentImage || !currentImage.image) return;
 
-    // Ensure site.baseurl and image path don't create a double slash or a missing slash
     let baseUrl = "{{ site.baseurl }}";
     let imgPath = currentImage.image;
-
-    // If imgPath doesn't start with / and baseUrl doesn't end with /
     if (!imgPath.startsWith('/') && !baseUrl.endsWith('/')) {
-        imgPath = '/' + imgPath;
+      imgPath = '/' + imgPath;
     }
 
-    const finalUrl = baseUrl + imgPath;
-    
-    console.log("Loading image from:", finalUrl); // This helps you debug in the browser console
-    galleryImage.src = finalUrl;
+    galleryImage.src      = baseUrl + imgPath;
     galleryCaption.textContent = currentImage.caption || '';
-}
+  }
 </script>
