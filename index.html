@@ -9,9 +9,7 @@ permalink: /
 
     {% for entry in site.data.timeline %}
 
-      {% assign n = site.data.timeline | size %}
-      {% assign rank = n | minus: 1 | minus: forloop.index0 %}
-      {% assign idx = rank | modulo: 2 %}
+      {% assign idx = forloop.index0 | modulo: 2 %}
       {% if idx == 0 %}{% assign side = "left" %}{% else %}{% assign side = "right" %}{% endif %}
       {% if entry.side %}{% assign side = entry.side %}{% endif %}
 

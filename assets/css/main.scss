@@ -267,6 +267,9 @@ table {
   color: #38332E;
 }
 
+/* Remove white background from the vibrational-strategy GIF via blend mode */
+img[src*="vibrational-strategy.gif"] { mix-blend-mode: multiply; }
+
 .project-details[open] { background-color: #E8E4DD; }
 .project-details summary:hover { color: #8C8078; }
 

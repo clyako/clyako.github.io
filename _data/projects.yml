@@ -8,7 +8,7 @@
   name: "2-DoF Vibrational Manipulation"
   description: "2-DoF vibratory transport against gravity in a grasp."
   main_image: "/assets/images/projects/parallel-gripper-manipulation.jpeg"
-  url: "https://youtu.be/AR2IOkkVNM0"
+  url: "/projects/vibrating-parallel-gripper/"
 
 - id: "vibrating-spatula"
   name: "Vibrating Spatula"

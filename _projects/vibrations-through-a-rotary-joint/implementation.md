@@ -126,7 +126,7 @@ A Teensy 4.1 was used as the microcontroller. The A / B channels of the encoder 
 
 The full circuit schematic is shown below and available as a PDF [here]({{ site.baseurl }}/assets/files/vibrating-spatula/circuit-schematic.pdf).
 
-![image-center]({{ site.baseurl }}/assets/images/vibrating-spatula/schematic.png){: .align-center}
+![image-center]({{ site.baseurl }}/assets/images/vibrating-spatula/schematic.png){: .align-center style="max-width: 80%;"}
 <!-- <span class="figure-caption"><strong>Fig. 2</strong>: Circuit schematic.</span> -->
 
 A table of the components used is below.
@@ -176,7 +176,7 @@ float max_acceleration_gs = 50.0;  // gs
 
 Select the desired vibration waveform frequency by uncommenting the corresponding `#define` at the top of the file, which in the above example is 30 Hz. The rest of the waveform is defined by the two acceleration variables, `min_acceleration_gs` and `max_acceleration_gs`. These values can be a bit abstract, so there is a Python helper function, `quaid_waveform_visualizer.py`, that allows you to visualize the waveform based on the parameters you select. This can help ensure that the tracked waveform amplitude is less than the actuator stroke, as shown below, where the maximum stroke is set to 6 mm.
 
-![image-center]({{ site.url }}{{ site.baseurl }}/assets/images/vibrating-spatula/quaid-waveform-visualizer.gif){: .align-center}
+![image-center]({{ site.url }}{{ site.baseurl }}/assets/images/vibrating-spatula/quaid-waveform-visualizer.gif){: .align-center style="max-width: 80%;"}
 <!-- <span class="figure-caption"><strong>Fig. 3</strong>: Tuning the vibration waveform.</span> -->
 
 Once the desired vibration waveform has been selected, the next thing to do is ensure that the moving coil is actually tracking this position waveform. The PD controller gains can be changed by using the `controller.set_gains()` in `void setup()` of `main.cpp` as shown below. 

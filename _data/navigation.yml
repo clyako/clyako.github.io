@@ -26,6 +26,16 @@ spatula-nav:
   - title: "Implementation"
     url: /projects/vibrating-spatula/implementation/
 
+parallel-gripper-nav:
+  - title: "Overview"
+    url: /projects/vibrating-parallel-gripper/
+  - title: "Paper"
+    url: /projects/vibrating-parallel-gripper/paper/
+  - title: "Theory"
+    url: /projects/vibrating-parallel-gripper/theory/
+  - title: "Implementation"
+    url: /projects/vibrating-parallel-gripper/implementation/
+
 transmission-nav:
   - title: "Overview"
     url: /projects/vibrations-through-a-rotary-joint/

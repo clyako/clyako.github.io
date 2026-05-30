@@ -11,7 +11,7 @@ Here we discuss the high-level strategy, define that strategy using dynamics and
 ## High-Level Strategy
 Given a controllable moving surface, and a part that is to be transported, the operating principle is relatively simple and similar to that of horizontal transport {% include cite.html id="quaid1999miniature" %}. First, the part is transported upwards against gravity by _sticking_ to the moving surface. The moving surface then quickly accelerates downward in order to _slip_ relative to the part, catching the part at a lower position. This sticking-slipping cycle repeats to have net motion of the part upwards, as shown below.
 
-![image-center]({{ site.url }}{{ site.baseurl }}/assets/images/vertical-vibratory-transport/vibrational-strategy.gif){: .align-center}
+![image-center]({{ site.url }}{{ site.baseurl }}/assets/images/vertical-vibratory-transport/vibrational-strategy.gif){: .align-center style="max-width: 80%;"}
 <!-- <span class="figure-caption"><strong>Fig. 1</strong>: Alternating sticking and slipping phases achieve net part transport against gravity.</span> -->
 
 <!-- [^1]: Quaid, A. E. (1999, May). A miniature mobile parts feeder: Operating principles and simulation results. In Proceedings 1999 IEEE International Conference on Robotics and Automation (Cat. No. 99CH36288C) (Vol. 3, pp. 2221-2226). IEEE. -->
@@ -22,7 +22,7 @@ While many friction models exist, we used the well-known Coulomb friction model.
 $$
 \begin{align}
 \quad \text{sticking:} \quad \dot{z}_P &= \dot{z}_S, \quad -\frac{\mu_s F_n}{m_P} -g \leq \ddot{z}_S \leq \frac{\mu_s F_n}{m_P} - g \label{eq:sticking}\\
-\quad \text{slipping:} \quad  \quad \dot{z}_P &\neq \dot{z}_S, \quad \ddot{z}_P = \frac{\mu_k F_n}{m_P} \text{sgn}(\dot{z}_S - \dot{z}_P) - g \label{eq:slipping}
+\quad \text{slipping:} \quad \dot{z}_P &\neq \dot{z}_S, \quad \ddot{z}_P = \frac{\mu_k F_n}{m_P} \text{sgn}(\dot{z}_S - \dot{z}_P) - g \label{eq:slipping}
 \end{align}
 $$
 
@@ -61,7 +61,7 @@ Use the sliders below to see how the friction coefficient and part mass determin
 
   <div class="slider-row">
     <label>Part mass <em>m<sub>p</sub></em> (grams)</label>
-    <input type="range" id="mass-slider" min="1" max="200" step="1" value="50">
+    <input type="range" id="mass-slider" min="1" max="1000" step="1" value="50">
     <span class="slider-value" id="mass-val">50 g</span>
   </div>
 
@@ -130,5 +130,5 @@ Use the sliders below to see how the friction coefficient and part mass determin
 
 To validate our dynamics model described by $\eqref{eq:sticking}$ and $\eqref{eq:slipping}$ we recorded the interaction of a moving surface and a transported part. The recording was then processed by the free software [Tracker](https://opensourcephysics.github.io/tracker-website/) in order to extract surface and part motion. The surface motion was then used as input to a Simulink model to predict the resulting part motion, which was compared with the experimentally observed part motion. A sample trial (Trial #5) is shown below (there were 10 total trials).
 
-![image-center]({{ site.url }}{{ site.baseurl }}/assets/images/vertical-vibratory-transport/part-position-comparison.png){: .align-center}
+![image-center]({{ site.url }}{{ site.baseurl }}/assets/images/vertical-vibratory-transport/part-position-comparison.png){: .align-center style="max-width: 80%;"}
 <!-- <span class="figure-caption"><strong>Fig. 2</strong>: Simulated (red) and experimental (black) part positions, along with the periodic surface motion (blue).</span> -->
