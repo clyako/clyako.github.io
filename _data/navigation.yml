@@ -1,13 +1,29 @@
 main:
   - title: "Projects"
     url: /
+    children:
+      - title: "2-DoF Vibrational Manipulation"
+        url: /projects/vibrating-parallel-gripper/
+        image: /assets/images/projects/parallel-gripper-manipulation.png
+      - title: "Vibrations Through A Rotary Joint"
+        url: /projects/vibrations-through-a-rotary-joint/
+        image: /assets/images/projects/transmission-cover-photo.jpeg
+      - title: "Vibrating Spatula"
+        url: /projects/vibrating-spatula/
+        image: /assets/images/projects/spatula-cover-photo.jpeg
+      - title: "Impact-Based Vibrational Manipulation"
+        url: /projects/vertical-vibratory-transport/
+        image: /assets/images/projects/impact-gripper-cover-photo.jpg
+      - title: "Lego Design"
+        url: /lego-design/
+        image: /assets/images/lego-design/cover-photos/acclamator-cover-photo.jpg
   - title: "Publications"
     url: /publications/
   - title: "About"
     url: /about/
 
 vertical-vibratory-transport-nav:
-  - title: "Overview"
+  - title: "Impact-Based Vibrational Manipulation"
     url: /projects/vertical-vibratory-transport/
   - title: "Paper"
     url: /projects/vertical-vibratory-transport/paper/
@@ -17,7 +33,7 @@ vertical-vibratory-transport-nav:
     url: /projects/vertical-vibratory-transport/implementation/
 
 spatula-nav:
-  - title: "Overview"
+  - title: "Vibrating Spatula"
     url: /projects/vibrating-spatula/
   - title: "Paper"
     url: /projects/vibrating-spatula/paper/
@@ -27,7 +43,7 @@ spatula-nav:
     url: /projects/vibrating-spatula/implementation/
 
 parallel-gripper-nav:
-  - title: "Overview"
+  - title: "2-DoF Vibrational Manipulation"
     url: /projects/vibrating-parallel-gripper/
   - title: "Paper"
     url: /projects/vibrating-parallel-gripper/paper/
@@ -37,7 +53,7 @@ parallel-gripper-nav:
     url: /projects/vibrating-parallel-gripper/implementation/
 
 transmission-nav:
-  - title: "Overview"
+  - title: "Vibrations Through a Rotary Joint"
     url: /projects/vibrations-through-a-rotary-joint/
   - title: "Paper"
     url: /projects/vibrations-through-a-rotary-joint/paper/

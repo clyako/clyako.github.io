@@ -85,8 +85,92 @@ code, pre, .highlight {
   background: #E4DDD4 !important;
 }
 
+/* Allow dropdown to escape the nav bar */
+.masthead,
+.masthead__inner-wrap,
+.masthead__menu,
+.greedy-nav,
+.visible-links {
+  overflow: visible !important;
+}
+
+/* Projects dropdown */
+.masthead__menu-item--has-dropdown {
+  position: relative;
+}
+
+.masthead__dropdown {
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 200;
+  background: #E4DDD4;
+  border: 1px solid #C9C2BA;
+  border-radius: 6px;
+  min-width: 230px;
+  padding: 0.3rem 0;
+  padding-top: calc(0.3rem + 4px);
+  list-style: none;
+  margin: 0;
+  box-shadow: 0 4px 16px rgba(56, 51, 46, 0.15);
+}
+
+.masthead__menu-item--has-dropdown:hover .masthead__dropdown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.masthead__dropdown-item a {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem 0.85rem 0.35rem 1.6rem; /* extra left padding reserves arrow space */
+  position: relative;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 400 !important;
+  color: #9A9490 !important;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+
+.masthead__dropdown-item a:hover {
+  background: #D8D2CA;
+  color: #595349 !important;
+}
+
+.masthead__dropdown-item a.masthead__dropdown-link--active {
+  color: #2E2A26 !important;
+  font-weight: 700 !important;
+}
+
+.masthead__dropdown-active-arrow {
+  color: #3f5a36;
+  font-size: 0.45rem;
+  position: absolute;
+  left: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.masthead__dropdown-thumb {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: block;
+}
+
 .greedy-nav a {
-  font-size: 0.95rem !important;
+  font-size: 0.95rem;
 }
 
 .greedy-nav .site-title {
@@ -141,7 +225,6 @@ code, pre, .highlight {
 .nav__list .nav__items .active {
   margin-inline-start: 0 !important;
   padding-inline: 0 !important;
-  font-weight: normal !important;
 }
 
 .nav__sub-title {
@@ -153,30 +236,44 @@ code, pre, .highlight {
   opacity: 1 !important;
 }
 
+/* All sidebar nav links: padding-left reserves space for the arrow */
+.sidebar .nav__list .nav__items a {
+  position: relative;
+  display: block;
+  padding-left: 1em !important;
+  margin-left: 0 !important;
+  margin-inline-start: 0 !important;
+}
+
+/* Inactive items: lighter, normal weight */
 .sidebar .nav__list .nav__items .nav__sub-title {
   font-size: 0.95em !important;
-  color: #38332E !important;
+  color: #9A9490 !important;
   text-transform: none !important;
   border-bottom: none !important;
-  transition: color 0.4s ease;
+  transition: color 0.15s ease;
+  font-weight: 400 !important;
 }
 
 .sidebar .nav__list .nav__items a:hover .nav__sub-title {
-  color: #8C8078 !important;
+  color: #595349 !important;
 }
 
-.sidebar .nav__list .nav__items .active .nav__sub-title {
-  color: #8C8078 !important;
-}
-
-.sidebar .nav__list .nav__items .active,
+/* Active item: darker, bolder */
 .sidebar .nav__list .nav__items a.active .nav__sub-title {
-  margin-inline-start: 0 !important;
-  padding-inline: 0 !important;
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-  display: block;
-  font-weight: normal !important;
+  color: #2E2A26 !important;
+  font-weight: 700 !important;
+}
+
+/* Green arrow for active item — lives in the padding-left area, text stays aligned */
+.sidebar .nav__list .nav__items a.active::before {
+  content: '▶';
+  color: #3f5a36;
+  font-size: 0.45em;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .sidebar.sticky-sidebar {
@@ -944,9 +1041,56 @@ a.tl-img-box:hover .tl-img-overlay { opacity: 1; }
   padding: 0 10px !important;
 }
 
+/* Hide the template-generated title */
+.publications-page .page__title { display: none; }
+
+.pub-page-header { margin-bottom: 0.75rem; }
+
+.pub-page-title {
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 1.625em !important;
+  font-weight: 500 !important;
+  color: #2E2A26 !important;
+  letter-spacing: -0.02em !important;
+  border-bottom: 2px solid #C9C2BA;
+  padding-bottom: 0.325em;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  /* margin-left set by JS — no !important so inline style wins */
+}
+
+/* Highlight author name (bold text) in publication citations */
+.publications-page .page__content strong {
+  background-color: #E4DDD4;
+  border-radius: 4px;
+  padding: 0.08em 0.28em;
+  font-weight: 600;
+}
+
+.pub-entry {
+  display: flex;
+  gap: 1.1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.pub-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.pub-content {
+  flex: 1;
+  min-width: 0;
+}
+
 .pub-buttons {
   margin-top: 10px;
-  margin-bottom: 45px;
+  margin-bottom: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;

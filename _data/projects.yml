@@ -7,7 +7,7 @@
 - id: "vibrating-parallel-gripper"
   name: "2-DoF Vibrational Manipulation"
   description: "2-DoF vibratory transport against gravity in a grasp."
-  main_image: "/assets/images/projects/parallel-gripper-manipulation.jpeg"
+  main_image: "/assets/images/projects/parallel-gripper-manipulation.png"
   url: "/projects/vibrating-parallel-gripper/"
 
 - id: "vibrating-spatula"

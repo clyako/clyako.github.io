@@ -111,7 +111,6 @@ A Teensy 4.1 was used as the microcontroller. The A / B channels of the encoder 
 The full circuit schematic is shown below and available as a PDF [here]({{ site.baseurl }}/assets/files/vibrating-spatula/circuit-schematic.pdf).
 
 ![image-center]({{ site.baseurl }}/assets/images/vibrating-spatula/schematic.png){: .align-center style="max-width: 80%;"}
-<!-- <span class="figure-caption"><strong>Fig. 3</strong>: Circuit schematic.</span> -->
 
 A table of the components used is below.
 
@@ -158,10 +157,186 @@ float min_acceleration_gs = 3.0;   // gs
 float max_acceleration_gs = 50.0;  // gs
 ```
 
-Select the desired vibration waveform frequency by uncommenting the corresponding `#define` at the top of the file, which in the above example is 30 Hz. The rest of the waveform is defined by the two acceleration variables, `min_acceleration_gs` and `max_acceleration_gs`. These values can be a bit abstract, so there is a Python helper function, `quaid_waveform_visualizer.py`, that allows you to visualize the waveform based on the parameters you select. This can help ensure that the tracked waveform amplitude is less than the actuator stroke, as shown below, where the maximum stroke is set to 6 mm.
+Select the desired vibration waveform frequency by uncommenting the corresponding `#define` at the top of the file, which in the above example is 30 Hz. The rest of the waveform is defined by the two acceleration variables, `min_acceleration_gs` and `max_acceleration_gs`. These values can be a bit abstract, so there is a Python helper function, `quaid_waveform_visualizer.py`, that allows you to visualize the waveform based on the parameters you select (similar to below). This can help ensure that the tracked waveform amplitude is less than the actuator stroke.
 
-![image-center]({{ site.url }}{{ site.baseurl }}/assets/images/vibrating-spatula/quaid-waveform-visualizer.gif){: .align-center style="max-width: 80%;"}
-<!-- <span class="figure-caption"><strong>Fig. 4</strong>: Tuning the vibration waveform.</span> -->
+<div class="physics-widget">
+  <h4>Quaid Waveform</h4>
+
+  <div id="quaid-plots" style="display:flex; gap:10px; margin-bottom:1rem;">
+    <div style="flex:1; min-width:0;">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:0.60rem; text-transform:uppercase; letter-spacing:0.07em; color:#595349; text-align:center; margin-bottom:3px;">Position</div>
+      <canvas id="qpos" style="display:block; width:100%;"></canvas>
+    </div>
+    <div style="flex:1; min-width:0;">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:0.60rem; text-transform:uppercase; letter-spacing:0.07em; color:#595349; text-align:center; margin-bottom:3px;">Velocity</div>
+      <canvas id="qvel" style="display:block; width:100%;"></canvas>
+    </div>
+    <div style="flex:1; min-width:0;">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:0.60rem; text-transform:uppercase; letter-spacing:0.07em; color:#595349; text-align:center; margin-bottom:3px;">Acceleration</div>
+      <canvas id="qacc" style="display:block; width:100%;"></canvas>
+    </div>
+  </div>
+
+  <div class="slider-row">
+    <label>Sticking acceleration <em>a<sub>s</sub></em></label>
+    <input type="range" id="qas" min="0.4" max="1.0" step="0.01" value="0.7">
+    <span class="slider-value">g</span>
+  </div>
+  <div class="slider-row">
+    <label>Slipping acceleration <em>a<sub>max</sub></em></label>
+    <input type="range" id="qamax" min="5" max="20" step="0.25" value="20">
+    <span class="slider-value">g</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  var G          = 9.81;
+  var N_PTS      = 600;
+  var C_H        = 160;
+  var DPR        = window.devicePixelRatio || 1;
+  var PAD        = { t: 8, r: 8, b: 18, l: 8 };
+  var TIME_SCALE = 0.15 / 8; // simulated seconds per real second
+
+  var AXES = {
+    pos: { lo: 0,    hi: 3.5, ticks: [0, 1, 2, 3] },
+    vel: { lo: -300, hi: 300, ticks: [-300, -150, 0, 150, 300] },
+    acc: { lo: -22,  hi: 2,   ticks: [-20, -10, 0] }
+  };
+
+  var simTime  = 0;
+  var lastRT   = null;
+  var canvases = {};
+
+  var FREQ = 20; // fixed frequency (Hz)
+
+  // Smoothed (rendered) parameters — ease toward slider targets each frame
+  var curAs = 0.7, curAmax = 20;
+  var LERP = 8; // exponential rate per real second (~95% there in ~0.4 s
+
+  function initCanvases() {
+    ['qpos', 'qvel', 'qacc'].forEach(function(id) {
+      var c = document.getElementById(id);
+      canvases[id] = c;
+      var cssW = c.parentElement.clientWidth || 200;
+      c.width  = Math.round(cssW * DPR);
+      c.height = Math.round(C_H * DPR);
+      c.style.height = C_H + 'px';
+    });
+  }
+
+  // Evaluate waveform at a single (possibly negative / wrapped) time t
+  function sample(t, T, t1, t2, as, amax) {
+    var pt = ((t % T) + T) % T;
+    var p, v, a;
+    if (pt <= t1) {
+      a = as;    v = as * pt;          p = 0.5 * as * pt * pt;
+    } else if (pt <= t2) {
+      a = -amax;
+      v = as * t1 - amax * (pt - t1);
+      p = as * t1 * (pt - 0.5 * t1) - 0.5 * amax * (pt - t1) * (pt - t1);
+    } else {
+      a = as;    v = as * (pt - T);    p = 0.5 * as * (pt - T) * (pt - T);
+    }
+    return { p: p * 1000, v: v * 1000, a: a / G };
+  }
+
+  function drawCanvas(canvas, pts, key, color, axis) {
+    var cssW = Math.round(canvas.width / DPR);
+    var ctx  = canvas.getContext('2d');
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    var pw = cssW - PAD.l - PAD.r, ph = C_H - PAD.t - PAD.b;
+    var span = axis.hi - axis.lo;
+    var n = pts.length;
+
+    function fy(v) { return PAD.t + ph * (1 - (v - axis.lo) / span); }
+
+    ctx.clearRect(0, 0, cssW, C_H);
+    ctx.fillStyle = '#F8F5EF';
+    ctx.fillRect(PAD.l, PAD.t, pw, ph);
+
+    // y = 0 reference line
+    if (axis.lo <= 0 && axis.hi >= 0) {
+      ctx.strokeStyle = '#9A9490'; ctx.lineWidth = 0.8;
+      ctx.beginPath();
+      ctx.moveTo(PAD.l, fy(0)); ctx.lineTo(PAD.l + pw, fy(0));
+      ctx.stroke();
+    }
+
+    // data line clipped to plot area
+    ctx.save();
+    ctx.beginPath(); ctx.rect(PAD.l, PAD.t, pw, ph); ctx.clip();
+    ctx.strokeStyle = color; ctx.lineWidth = 1.8;
+    ctx.beginPath();
+    for (var i = 0; i < n; i++) {
+      var x = PAD.l + pw * i / (n - 1);
+      var y = fy(pts[i][key]);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.restore();
+
+    // border
+    ctx.strokeStyle = '#595349'; ctx.lineWidth = 1;
+    ctx.strokeRect(PAD.l, PAD.t, pw, ph);
+
+    // x-axis label
+    ctx.fillStyle = '#595349';
+    ctx.font = '10px IBM Plex Mono, monospace';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+    ctx.fillText('Time', PAD.l + pw / 2, PAD.t + ph + 3);
+  }
+
+  function frame(realTime) {
+    if (lastRT === null) lastRT = realTime;
+    var realDt = Math.min((realTime - lastRT) / 1000, 0.1);
+    lastRT = realTime;
+    simTime += realDt * TIME_SCALE;
+
+    // Exponentially smooth toward slider targets to avoid discontinuous jumps
+    var a = 1 - Math.exp(-LERP * realDt);
+    curAs   += (parseFloat(document.getElementById('qas').value)   - curAs)   * a;
+    curAmax += (parseFloat(document.getElementById('qamax').value) - curAmax) * a;
+
+    var as   = curAs   * G;
+    var amax = curAmax * G;
+    var T    = 1 / FREQ;
+    var t1   = amax / (amax + as) * T / 2;
+    var t2   = T - t1;
+    var win  = 2 * T; // display window = 2 periods
+
+    // Build sample array spanning [simTime - win, simTime]
+    var pts = [];
+    for (var i = 0; i < N_PTS; i++) {
+      var t = simTime - win + win * i / (N_PTS - 1);
+      pts.push(sample(t, T, t1, t2, as, amax));
+    }
+
+    drawCanvas(canvases['qpos'], pts, 'p', '#3f5a36', AXES.pos);
+    drawCanvas(canvases['qvel'], pts, 'v', '#5A7A8C', AXES.vel);
+    drawCanvas(canvases['qacc'], pts, 'a', '#9A7A55', AXES.acc);
+
+    requestAnimationFrame(frame);
+  }
+
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(initCanvases, 120);
+  });
+
+  function start() {
+    initCanvases();
+    requestAnimationFrame(frame);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { requestAnimationFrame(start); });
+  } else {
+    requestAnimationFrame(start);
+  }
+})();
+</script>
 
 Once the desired vibration waveform has been selected, the next thing to do is ensure that the spatula is actually tracking this position waveform. The PD controller gains can be changed by using the `controller.set_gains()` in `void setup()` of `main.cpp` as shown below. 
 

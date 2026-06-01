@@ -1,6 +1,6 @@
 ---
 layout: project-overview
-project_title: "Vibrations Through a Rotary Joint"
+project_title: "Overview"
 video_path: /assets/videos/vibratory-transmission
 permalink: /projects/vibrations-through-a-rotary-joint/
 sidebar:

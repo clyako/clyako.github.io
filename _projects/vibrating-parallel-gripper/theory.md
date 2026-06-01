@@ -79,8 +79,8 @@ where $t_1 = \frac{T \cdot a_{max}}{2(a_s + a_{max})}$ is chosen so the surface 
   var TIME_SCALE = 0.15 / 8; // simulated seconds per real second
 
   var AXES = {
-    pos: { lo: 0,    hi: 6,   ticks: [0, 2, 4, 6] },
-    vel: { lo: -400, hi: 400, ticks: [-400, -200, 0, 200, 400] },
+    pos: { lo: 0,    hi: 3.5, ticks: [0, 1, 2, 3] },
+    vel: { lo: -300, hi: 300, ticks: [-300, -150, 0, 150, 300] },
     acc: { lo: -22,  hi: 2,   ticks: [-20, -10, 0] }
   };
 

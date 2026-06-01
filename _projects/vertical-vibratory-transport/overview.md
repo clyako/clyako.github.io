@@ -1,6 +1,6 @@
 ---
 layout: project-overview
-project_title: "Impact-Based Vibrational Manipulation"
+project_title: "Overview"
 video_path: /assets/videos/gripper-demo-small
 permalink: /projects/vertical-vibratory-transport/
 sidebar:

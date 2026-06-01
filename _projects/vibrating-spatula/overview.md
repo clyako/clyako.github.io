@@ -1,6 +1,6 @@
 ---
 layout: project-overview
-project_title: "Vibrating Spatula"
+project_title: "Overview"
 video_path: /assets/videos/vibrating-spatula-demo
 permalink: /projects/vibrating-spatula/
 sidebar:

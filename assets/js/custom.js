@@ -3,6 +3,37 @@
    ============================================ */
 document.addEventListener("DOMContentLoaded", function () {
 
+  /* ============================================
+     Publications heading: align with text column
+     ============================================ */
+  window.addEventListener('load', function () {
+    var firstContent = document.querySelector('.pub-content');
+    var title = document.querySelector('.pub-page-title');
+    if (firstContent && title) {
+      var offset = firstContent.getBoundingClientRect().left
+                   - title.parentElement.getBoundingClientRect().left;
+      title.style.marginLeft = offset + 'px';
+    }
+  });
+
+  /* ============================================
+     Masthead dropdown: highlight active project
+     ============================================ */
+  const path = window.location.pathname;
+  document.querySelectorAll('.masthead__dropdown-item a').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href !== '/' && path.startsWith(href)) {
+      link.classList.add('masthead__dropdown-link--active');
+      if (!link.querySelector('.masthead__dropdown-active-arrow')) {
+        const arrow = document.createElement('span');
+        arrow.className = 'masthead__dropdown-active-arrow';
+        arrow.textContent = '▶';
+        link.insertBefore(arrow, link.firstChild);
+      }
+    }
+  });
+
+
   document.querySelectorAll('.project-details summary').forEach((summary) => {
     summary.addEventListener('click', (e) => {
       e.preventDefault();

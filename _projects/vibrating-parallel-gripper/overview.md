@@ -1,6 +1,6 @@
 ---
 layout: project-overview
-project_title: "2-DoF Vibrational Manipulation"
+project_title: "Overview"
 video_path: /assets/videos/2-DoF-vibratory-transport
 permalink: /projects/vibrating-parallel-gripper/
 sidebar:
