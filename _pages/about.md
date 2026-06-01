@@ -6,20 +6,22 @@ author_profile: false
 classes: about-page
 ---
 
-I am a mechanical engineer and research scientist at NVIDIA on the GEAR (Generalist Embodied Agent Research) team. I completed my PhD at Stanford University, where I worked on non-anthropomorphic approaches to robotic in-hand manipulation — using controlled vibrations, rather than fingers, to reposition objects within a robot's grasp.
+<div class="about-layout">
 
-## Research
+  <div class="about-collage">
+    <img src="{{ site.baseurl }}/assets/images/about/collage.png" alt="Photo collage" loading="lazy">
+  </div>
 
-My PhD work explored vibratory transport as a manipulation primitive: understanding the dynamics of vibration-driven part motion, building devices that demonstrate those dynamics, and pushing toward more dexterous robotic hands that don't look like human hands. Selected projects are documented on this site with full theory, implementation details, and hardware schematics — feel free to dig in.
+  <div class="about-text" markdown="1">
 
-## Teaching
+# About
 
-I care a lot about teaching. Making difficult concepts accessible — especially in physics and dynamics — is something I find genuinely rewarding. I try to build that same clarity into how I document my research: start with the big idea, then layer in the details so a curious reader can go as deep as they want.
+Thanks for visiting my site! I am a mechanical engineer with a passion for learning and building things, lately with a focus on robotics. I'm currently a member of the GEAR Lab at NVIDIA, working with our software folks on co-developing the hardware needed for various robotics tasks. My PhD work followed a similar mechanical vein, where I developed hardware for robotic in-hand manipulation. Specifically, I had an interest in using controlled vibrations for manipulation, rather than the traditional finger-gaiting techniques, to reposition objects within a robot's grasp ([work 1](/projects/vertical-vibratory-transport/), [work 2](/projects/vibrating-spatula/), [work 3](/projects/vibrations-through-a-rotary-joint/), [work 4](/projects/vibrating-parallel-gripper/)). This site documents selected projects with the theory behind the devices as well as implementation details.
 
-## Beyond Research
+Aside from research, I'm also very passionate about teaching. I spent 14 quarters of grad school working as a Course Assistant and a 15th quarter doing some consulting for a course, and am honored to have received two Centennial Teaching Assistant Awards for my work. Outside of school, I have been designing and building with Lego since childhood, and some of my favorite builds are on the [Lego Design](/lego-design/) page.
 
-I have been designing and building with Lego since I was young, and I still find it one of the best ways to think about mechanical design constraints. A few builds are on the [Lego Design](/lego-design/) page.
+Feel free to reach out at **clyej3@gmail.com** with questions or to collaborate.
 
-## Contact
+  </div>
 
-Feel free to reach out at **clyej3@gmail.com** with questions about any of the work here, or if you want to collaborate.
+</div>

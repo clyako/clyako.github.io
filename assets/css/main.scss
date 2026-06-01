@@ -105,7 +105,7 @@ code, pre, .highlight {
 .page__content li,
 .page__content dl {
   font-family: 'IBM Plex Mono', monospace !important;
-  font-size: 0.8em !important;
+  font-size: 0.64em !important;
   font-weight: 300 !important;
   line-height: 1.75;
   color: #38332E;
@@ -723,9 +723,59 @@ a.tl-img-box:hover .tl-img-overlay { opacity: 1; }
    ABOUT PAGE
    ============================================ */
 
-.about-page .page {
-  max-width: 760px;
+.about-page .page,
+.about-page .page__inner-wrap {
+  max-width: none !important;
+  width: 100% !important;
+  float: none !important;
+  padding-right: 0 !important;
+}
+
+/* Suppress the template-generated title — we render it inside the flex layout */
+.about-page .page__title {
+  display: none;
+}
+
+.about-layout {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  max-width: 1160px;
   margin: 0 auto;
+}
+
+.about-collage {
+  flex: 0 0 450px;
+  flex-shrink: 0;
+}
+
+/* Single composite collage image — blend mode removes the white PNG background */
+.about-collage img {
+  width: 100%;
+  height: auto;
+  display: block;
+  mix-blend-mode: multiply;
+}
+
+/* Title rendered inside the text column, styled to match page__title */
+.about-text h1 {
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 1.25em !important;
+  font-weight: 500 !important;
+  color: #2E2A26 !important;
+  border-bottom: 2px solid #C9C2BA;
+  padding-bottom: 0.325em;
+  margin-top: 0 !important;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 700px) {
+  .about-layout { flex-direction: column; }
+  .about-collage { flex: none; width: 100%; }
 }
 
 /* ============================================
