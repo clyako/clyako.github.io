@@ -211,8 +211,6 @@ document.addEventListener("DOMContentLoaded", function () {
      ============================================ */
   function fitCappedCompacts() {
     document.querySelectorAll('.tl-entry__inner .tl-compact').forEach(function(compact) {
-      // Gap only exists on left-side entries (text-align:right, connector on left edge)
-      if (!compact.closest('.tl-cell--left')) return;
       // Only act when the compact has hit its 280 px ceiling
       if (compact.offsetWidth < 275) return;
 
@@ -232,9 +230,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
 
-      // Only shrink if the widest line is measurably shorter than the cap
-      if (maxLineW > 0 && maxLineW < compact.offsetWidth - 4) {
-        var w = Math.ceil(maxLineW);
+      // Only shrink if the widest line is measurably shorter than the cap.
+      // +4px buffer prevents sub-pixel reflow after resizing.
+      if (maxLineW > 0 && maxLineW < compact.offsetWidth - 8) {
+        var w = Math.ceil(maxLineW) + 4;
         compact.style.width = w + 'px';
         compact.style.flex  = '0 0 ' + w + 'px';
       }
