@@ -184,8 +184,9 @@ document.addEventListener("DOMContentLoaded", function () {
     layoutTimeline();
     observeEntries();
 
-    // Re-layout after all resources load (fixes height measurement with unloaded images/fonts)
+    // After load: fix capped compacts, then lay out with correct widths
     window.addEventListener('load', () => {
+      fitCappedCompacts();
       layoutTimeline();
       observeEntries();
     });
@@ -194,7 +195,49 @@ document.addEventListener("DOMContentLoaded", function () {
     let resizeTimer;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(layoutTimeline, 150);
+      resizeTimer = setTimeout(() => {
+        fitCappedCompacts();
+        layoutTimeline();
+      }, 150);
+    });
+  }
+
+  /* ============================================
+     Fix only compacts that are capped at max-width
+     (width: max-content alone can't help when the
+     title is longer than 280 px and wraps, leaving
+     empty space between the connector and the text).
+     All other entries are handled by CSS alone.
+     ============================================ */
+  function fitCappedCompacts() {
+    document.querySelectorAll('.tl-entry__inner .tl-compact').forEach(function(compact) {
+      // Gap only exists on left-side entries (text-align:right, connector on left edge)
+      if (!compact.closest('.tl-cell--left')) return;
+      // Only act when the compact has hit its 280 px ceiling
+      if (compact.offsetWidth < 275) return;
+
+      // Find the widest rendered text line
+      var maxLineW = 0;
+      var walker = document.createTreeWalker(
+        compact, NodeFilter.SHOW_TEXT, null, false
+      );
+      var node;
+      while ((node = walker.nextNode()) !== null) {
+        if (!node.textContent.trim()) continue;
+        var range = document.createRange();
+        range.selectNode(node);
+        var rects = range.getClientRects();
+        for (var i = 0; i < rects.length; i++) {
+          if (rects[i].width > maxLineW) maxLineW = rects[i].width;
+        }
+      }
+
+      // Only shrink if the widest line is measurably shorter than the cap
+      if (maxLineW > 0 && maxLineW < compact.offsetWidth - 4) {
+        var w = Math.ceil(maxLineW);
+        compact.style.width = w + 'px';
+        compact.style.flex  = '0 0 ' + w + 'px';
+      }
     });
   }
 

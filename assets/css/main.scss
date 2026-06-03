@@ -661,6 +661,7 @@ a.tl-compact__title:hover { color: #3f5a36 !important; }
 
 .tl-entry__inner .tl-compact {
   flex: 0 0 auto;
+  width: max-content;
   max-width: 280px;
   word-break: break-word;
 }
@@ -719,9 +720,9 @@ a.tl-img-box:hover img { transform: scale(1.05); }
   align-items: center;
   justify-content: center;
 }
-/* Extend connector flush to logo-box edge on the logo side only (images keep their 8px gap) */
-.tl-cell--right .tl-entry__inner:has(.tl-logo-box) .tl-connector { margin-right: 0; }
-.tl-cell--left  .tl-entry__inner:has(.tl-logo-box) .tl-connector { margin-left: 0; }
+/* Logo centered within its box */
+.tl-cell--right .tl-logo-box,
+.tl-cell--left  .tl-logo-box { justify-content: center; }
 .tl-logo-box img {
   max-width: 100%;
   max-height: 100%;
@@ -802,6 +803,11 @@ a.tl-img-box:hover .tl-img-overlay { opacity: 1; }
   .tl-cell--empty { display: none; }
 
   a.tl-img-box { width: 96px; height: 96px; }
+
+  /* Overlay fits the 96px box: hide description, tighten padding and title size */
+  .tl-img-overlay { padding: 0.35rem 0.45rem; justify-content: center; }
+  .tl-overlay__title { font-size: 0.6rem; margin-bottom: 0; }
+  .tl-overlay__desc { display: none; }
   .tl-compact { text-align: left !important; }
   .tl-entry__inner { width: 100%; }
   .tl-cell--left .tl-entry__inner { flex-direction: row; }
