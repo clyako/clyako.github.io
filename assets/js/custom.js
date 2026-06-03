@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   /* ============================================
      Publications heading: align with text column
      ============================================ */
-  window.addEventListener('load', function () {
+  document.fonts.ready.then(function () {
     var firstContent = document.querySelector('.pub-content');
     var title = document.querySelector('.pub-page-title');
     if (firstContent && title) {
@@ -184,8 +184,9 @@ document.addEventListener("DOMContentLoaded", function () {
     layoutTimeline();
     observeEntries();
 
-    // After load: fix capped compacts, then lay out with correct widths
-    window.addEventListener('load', () => {
+    // After fonts load: fix capped compacts and re-layout.
+    // Using fonts.ready instead of window.load avoids waiting for images.
+    document.fonts.ready.then(() => {
       fitCappedCompacts();
       layoutTimeline();
       observeEntries();
