@@ -17,6 +17,91 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   /* ============================================
+     Diagonal dot wave background
+     ============================================ */
+  const hoverSources = []; // populated by timeline hover section below
+
+  {
+    const cv = document.createElement('canvas');
+    cv.id = 'bg-dots';
+    cv.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:-1;';
+    document.body.prepend(cv);
+    const cx = cv.getContext('2d');
+    const GRID = 15, R_MIN = 1.0, R_MAX = 2.0;
+    const SPEED = 0.00168, FREQ = 0.0135;
+
+    const resizeDots = () => {
+      cv.width  = window.innerWidth;
+      cv.height = window.innerHeight;
+    };
+    resizeDots();
+    window.addEventListener('resize', resizeDots, { passive: true });
+
+    const drawDots = (ts) => {
+      // Prune fully decayed pulse sources (lifetime ~5 s)
+      for (let i = hoverSources.length - 1; i >= 0; i--) {
+        if (ts - hoverSources[i].t > 5000) hoverSources.splice(i, 1);
+      }
+
+      const W = cv.width, H = cv.height;
+
+      // Three virtual sources drifting on smooth independent paths
+      const srcs = [
+        { x: W * (0.5 + 0.38 * Math.sin(ts * 0.000087)),       y: H * (0.5 + 0.38 * Math.cos(ts * 0.000113)) },
+        { x: W * (0.5 + 0.38 * Math.sin(ts * 0.000097 + 2.1)), y: H * (0.5 + 0.38 * Math.cos(ts * 0.000073 + 1.3)) },
+        { x: W * (0.5 + 0.38 * Math.sin(ts * 0.000063 + 4.2)), y: H * (0.5 + 0.38 * Math.cos(ts * 0.000103 + 0.7)) },
+      ];
+
+      cx.clearRect(0, 0, W, H);
+      const cols = Math.ceil(W / GRID) + 1;
+      const rows = Math.ceil(H / GRID) + 1;
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const x = c * GRID, y = r * GRID;
+
+          let wave = 0;
+          for (const s of srcs) {
+            wave += Math.sin(Math.sqrt((x - s.x) ** 2 + (y - s.y) ** 2) * FREQ - ts * SPEED);
+          }
+
+          // Hover-triggered single expanding pulse rings (Gaussian envelope)
+          for (const s of hoverSources) {
+            const age  = ts - s.t;
+            const dist = Math.sqrt((x - s.x) ** 2 + (y - s.y) ** 2);
+            const diff = dist - age * 0.25;        // ring expands at 250 px/s
+            wave += 2.5 * Math.exp(-(diff * diff) / 9800)  // ring width σ≈70 px
+                        * Math.exp(-age * 0.0005);          // global fade over ~2 s
+          }
+
+          // tanh squash → amp in [0, 1]; minimum kept high so trough dots stay visible
+          const amp = 0.5 + 0.5 * Math.tanh(wave * 0.5);
+          cx.beginPath();
+          cx.arc(x, y, R_MIN + (R_MAX - R_MIN) * amp, 0, 6.283);
+          cx.fillStyle = `rgba(89,83,73,${(0.05 + 0.08 * amp).toFixed(3)})`;
+          cx.fill();
+        }
+      }
+      requestAnimationFrame(drawDots);
+    };
+    requestAnimationFrame(drawDots);
+  }
+
+  /* ============================================
+     Frosted masthead on scroll
+     ============================================ */
+  const masthead = document.querySelector('.masthead');
+  if (masthead) {
+    const updateMasthead = () => {
+      const y = window.scrollY ?? document.documentElement.scrollTop ?? 0;
+      masthead.classList.toggle('masthead--scrolled', y > 10);
+    };
+    window.addEventListener('scroll',   updateMasthead, { passive: true });
+    document.addEventListener('scroll', updateMasthead, { passive: true });
+    updateMasthead(); // apply correct state on page load
+  }
+
+  /* ============================================
      Masthead dropdown: highlight active project
      ============================================ */
   const path = window.location.pathname;
@@ -70,7 +155,8 @@ document.addEventListener("DOMContentLoaded", function () {
       '.page__content > .notice, .page__content > .notice--info, ' +
       '.page__content > .notice--warning, .page__content > .notice--danger, ' +
       '.page__content > figure, .page__content > img, ' +
-      '.page__content > .physics-widget, .page__content > .project-details'
+      '.page__content > .physics-widget, .page__content > .project-details, ' +
+      '.page__content > .pub-entry, .page__content > .pub-page-header'
     );
 
     const observer = new IntersectionObserver((entries) => {
@@ -202,6 +288,43 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 150);
     });
   }
+
+  /* ============================================
+     Dot pulse on entry hover — uses a real child
+     element so void offsetWidth reliably restarts
+     the animation (doesn't work on ::after)
+     ============================================ */
+  document.querySelectorAll('.tl-entry').forEach(entry => {
+    const dot = entry.querySelector('.tl-dot');
+    if (!dot) return;
+
+    const ring = document.createElement('span');
+    ring.className = 'tl-dot-ring';
+    dot.appendChild(ring);
+
+    entry.querySelectorAll(
+      '.tl-cell--left:not(.tl-cell--empty), .tl-cell--right:not(.tl-cell--empty), .tl-cell--dot'
+    ).forEach(cell => {
+      cell.addEventListener('mouseenter', () => {
+        // Dot ring pulse
+        ring.classList.remove('pulsing');
+        void ring.offsetWidth;
+        ring.classList.add('pulsing');
+
+        // Single expanding background pulse — fires once per hover
+        const rect = dot.getBoundingClientRect();
+        hoverSources.push({
+          x: rect.left + rect.width  / 2,
+          y: rect.top  + rect.height / 2,
+          t: performance.now(),
+        });
+      });
+      cell.addEventListener('mouseleave', () => {
+        ring.classList.remove('pulsing');
+        // pulse fades on its own — no action needed
+      });
+    });
+  });
 
   /* ============================================
      Fix only compacts that are capped at max-width

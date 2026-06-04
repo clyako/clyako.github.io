@@ -15,7 +15,7 @@ classes: publications-page
 <div class="pub-buttons">
   <a href="https://arxiv.org/pdf/2605.30780" class="pub-link link-paper"><i class="fa-regular fa-file-lines"></i></a>
   <a href="https://youtu.be/8nA_QskC6nQ" class="pub-link link-video"><i class="fa-solid fa-play"></i></a>
-  <a href="https://www.connoryako.com/projects/2-dof-vibrational-manipulation/" class="pub-link link-web"><i class="fas fa-globe"></i></a>
+  <a href="{{ site.url }}{{ site.baseurl }}/projects/vibrating-parallel-gripper/" class="pub-link link-web"><i class="fas fa-globe"></i></a>
   <a href="https://github.com/clyako/2-DoF-vibrational-transport" class="pub-link link-github"><i class="fa-brands fa-square-github"></i></a>
   <div class="citation-container">
     <button class="bib-btn" onclick="toggleCite(event, this)">BibTeX</button>
@@ -92,7 +92,7 @@ Yuan, S., Wang, S., Patel, R., Tippur, M., **Yako, C. L.**, Cutkosky, M. R., Ade
 <div class="pub-buttons">
   <a href="https://ieeexplore.ieee.org/document/10610769" class="pub-link link-paper"><i class="fa-regular fa-file-lines"></i></a>
   <a href="https://youtu.be/LyaEyWYwD4U" class="pub-link link-video"><i class="fa-solid fa-play"></i></a>
-  <a href="https://www.connoryako.com/projects/vertical-vibratory-transport/" class="pub-link link-web"><i class="fas fa-globe"></i></a>
+  <a href="{{ site.url }}{{ site.baseurl }}/projects/vertical-vibratory-transport/" class="pub-link link-web"><i class="fas fa-globe"></i></a>
   <a href="https://github.com/clyako/vertical-vibratory-transport-of-grasped-parts-using-impacts" class="pub-link link-github"><i class="fa-brands fa-square-github"></i></a>
   <div class="citation-container">
     <button class="bib-btn" onclick="toggleCite(event, this)">BibTeX</button>

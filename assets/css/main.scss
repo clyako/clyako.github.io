@@ -60,8 +60,8 @@ code, pre, .highlight {
    ============================================ */
 
 .masthead {
-  background: #E4DDD4 !important;
-  border-bottom: 1px solid #C9C2BA !important;
+  background: rgba(228, 221, 212, 0.55) !important;
+  border-bottom: 1px solid rgba(201, 194, 186, 0.4) !important;
 }
 
 .masthead__inner-wrap {
@@ -82,7 +82,7 @@ code, pre, .highlight {
 }
 
 .greedy-nav {
-  background: #E4DDD4 !important;
+  background: transparent !important;
 }
 
 /* Allow dropdown to escape the nav bar */
@@ -1317,3 +1317,66 @@ a.tl-img-box:hover .tl-img-overlay { opacity: 1; }
 .pagination--pager { display: none !important; }
 
 #gallery-image { pointer-events: none; }
+
+/* ============================================
+   TIMELINE DOT PULSE
+   ============================================ */
+.tl-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #3f5a36;
+  transform: translate(-50%, -50%) scale(1.5);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tl-entry.tl-visible .tl-dot::after {
+  animation: dot-pulse 1.6s ease-out 0.4s forwards;
+}
+
+.tl-dot-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background: #3f5a36;
+  transform: translate(-50%, -50%) scale(1.5);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tl-dot-ring.pulsing {
+  animation: dot-pulse 1.2s ease-out forwards;
+}
+
+@keyframes dot-pulse {
+  0%   { transform: translate(-50%, -50%) scale(1.5); opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(6);   opacity: 0; }
+}
+
+/* ============================================
+   DIAGONAL DOT WAVE — canvas injected by JS
+   ============================================ */
+html { background: #ECE8E1; }
+body { background: transparent !important; }
+
+/* ============================================
+   FROSTED MASTHEAD ON SCROLL
+   ============================================ */
+.masthead {
+  transition: background 0.35s ease, backdrop-filter 0.35s ease,
+              -webkit-backdrop-filter 0.35s ease, box-shadow 0.35s ease;
+}
+
+.masthead.masthead--scrolled {
+  background: rgba(228, 221, 212, 0.75) !important;
+  backdrop-filter: blur(16px) saturate(1.5) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.5) !important;
+  box-shadow: 0 2px 24px rgba(46, 42, 38, 0.14) !important;
+  border-bottom-color: rgba(201, 194, 186, 0.6) !important;
+}
