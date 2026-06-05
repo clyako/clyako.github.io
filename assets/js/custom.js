@@ -19,7 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
   /* ============================================
      Diagonal dot wave background
      ============================================ */
-  const hoverSources = []; // populated by timeline hover section below
+  // Shared state for 3-D dot wave ↔ hover pulse integration
+  const hoverSources = [];
+  const BG_S_MIN = 0.35;          // perspective scale at horizon
+  let bgFloorY = 0, bgHorizonY = 0, bgWD = 0;
 
   {
     const cv = document.createElement('canvas');
@@ -27,58 +30,77 @@ document.addEventListener("DOMContentLoaded", function () {
     cv.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:-1;';
     document.body.prepend(cv);
     const cx = cv.getContext('2d');
-    const GRID = 15, R_MIN = 1.0, R_MAX = 2.0;
-    const SPEED = 0.00168, FREQ = 0.0135;
 
-    const resizeDots = () => {
-      cv.width  = window.innerWidth;
-      cv.height = window.innerHeight;
+    const COLS = 144, ROWS = 42;
+    const SPEED = 0.00168, FREQ = 0.012;
+
+    let W, H, CELL, W_W, W_D;
+
+    const updateDims = () => {
+      W = cv.width  = window.innerWidth;
+      H = cv.height = window.innerHeight;
+      CELL       = W * 3.0 / (COLS - 1);   // 3.0 × 0.35 > 1 → back row fills corners
+      bgFloorY   = H * 1.0;               // reach screen bottom
+      bgHorizonY = H * 0.01;              // horizon at very top edge
+      W_W        = (COLS - 1) * CELL;
+      bgWD = W_D = (ROWS - 1) * CELL;
     };
-    resizeDots();
-    window.addEventListener('resize', resizeDots, { passive: true });
+    updateDims();
+    window.addEventListener('resize', updateDims, { passive: true });
 
     const drawDots = (ts) => {
-      // Prune fully decayed pulse sources (lifetime ~5 s)
+      // Prune fully decayed pulse sources
       for (let i = hoverSources.length - 1; i >= 0; i--) {
         if (ts - hoverSources[i].t > 5000) hoverSources.splice(i, 1);
       }
 
-      const W = cv.width, H = cv.height;
-
-      // Three virtual sources drifting on smooth independent paths
-      const srcs = [
-        { x: W * (0.5 + 0.38 * Math.sin(ts * 0.000087)),       y: H * (0.5 + 0.38 * Math.cos(ts * 0.000113)) },
-        { x: W * (0.5 + 0.38 * Math.sin(ts * 0.000097 + 2.1)), y: H * (0.5 + 0.38 * Math.cos(ts * 0.000073 + 1.3)) },
-        { x: W * (0.5 + 0.38 * Math.sin(ts * 0.000063 + 4.2)), y: H * (0.5 + 0.38 * Math.cos(ts * 0.000103 + 0.7)) },
-      ];
+      // Four traveling plane waves in distinct directions.
+      // Each wave has flat wavefronts perpendicular to its direction vector,
+      // creating horizontal, depth (vertical), and two diagonal patterns.
+      // Incommensurable speeds ensure the pattern never fully repeats.
+      const K  = FREQ, Kd = FREQ * 0.71;
+      const ph0 = ts * SPEED * 1.00,   // → horizontal
+            ph1 = ts * SPEED * 0.83,   // ↓ depth (vertical on screen)
+            ph2 = ts * SPEED * 1.09,   // ↘ diagonal
+            ph3 = ts * SPEED * 0.91;   // ↙ diagonal
 
       cx.clearRect(0, 0, W, H);
-      const cols = Math.ceil(W / GRID) + 1;
-      const rows = Math.ceil(H / GRID) + 1;
 
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const x = c * GRID, y = r * GRID;
+      // Render back-to-front (row 0 = horizon/back, row ROWS-1 = near/front)
+      // rowC: non-linear Y so row spacing ∝ scale — grid looks square at every depth
+      const rowC = 2 * (bgFloorY - bgHorizonY) / ((ROWS - 1) * (1 + BG_S_MIN));
+      for (let row = 0; row < ROWS; row++) {
+        const t      = row / (ROWS - 1);
+        const scale  = BG_S_MIN + t * (1 - BG_S_MIN);
+        const baseY  = bgHorizonY + rowC * (row * BG_S_MIN + (1 - BG_S_MIN) * row * row / (2 * (ROWS - 1)));
+        const worldZ = (1 - t) * W_D;
 
-          let wave = 0;
-          for (const s of srcs) {
-            wave += Math.sin(Math.sqrt((x - s.x) ** 2 + (y - s.y) ** 2) * FREQ - ts * SPEED);
-          }
+        for (let col = 0; col < COLS; col++) {
+          const worldX = (col - (COLS - 1) / 2) * CELL;
 
-          // Hover-triggered single expanding pulse rings (Gaussian envelope)
+          let wave   = Math.sin( worldX * K              - ph0 + 0.0)   // →
+                     + Math.sin( worldZ * K              - ph1 + 2.1)   // ↓
+                     + Math.sin( worldX * Kd + worldZ * Kd - ph2 + 4.2) // ↘
+                     + Math.sin(-worldX * Kd + worldZ * Kd - ph3 + 1.5);// ↙
+
+          // Hover pulse rings expanding in world space
           for (const s of hoverSources) {
             const age  = ts - s.t;
-            const dist = Math.sqrt((x - s.x) ** 2 + (y - s.y) ** 2);
-            const diff = dist - age * 0.25;        // ring expands at 250 px/s
-            wave += 2.5 * Math.exp(-(diff * diff) / 9800)  // ring width σ≈70 px
-                        * Math.exp(-age * 0.0005);          // global fade over ~2 s
+            const d    = Math.sqrt((worldX - s.wx) ** 2 + (worldZ - s.wz) ** 2);
+            const diff = d - age * 0.24;
+            wave += 2.5 * Math.exp(-(diff * diff) / (8 * CELL * CELL))
+                        * Math.exp(-age * 0.0005);
           }
 
-          // tanh squash → amp in [0, 1]; minimum kept high so trough dots stay visible
-          const amp = 0.5 + 0.5 * Math.tanh(wave * 0.5);
+          const amp     = 0.5 + 0.5 * Math.tanh(wave * 0.5);
+          const screenX = W / 2 + worldX * scale;
+          const screenY = baseY - amp * 60 * scale;          // wave height = 3-D bump
+          const dotR  = 0.8 + (0.1 + 2.1 * amp) * scale; // size = depth cue
+          const alpha = 0.09 + 0.15 * amp;             // flat floor — dots always visible
+
           cx.beginPath();
-          cx.arc(x, y, R_MIN + (R_MAX - R_MIN) * amp, 0, 6.283);
-          cx.fillStyle = `rgba(89,83,73,${(0.05 + 0.08 * amp).toFixed(3)})`;
+          cx.arc(screenX, screenY, dotR, 0, 6.283);
+          cx.fillStyle = `rgba(89,83,73,${alpha.toFixed(3)})`;
           cx.fill();
         }
       }
@@ -306,23 +328,23 @@ document.addEventListener("DOMContentLoaded", function () {
       '.tl-cell--left:not(.tl-cell--empty), .tl-cell--right:not(.tl-cell--empty), .tl-cell--dot'
     ).forEach(cell => {
       cell.addEventListener('mouseenter', () => {
-        // Dot ring pulse
         ring.classList.remove('pulsing');
         void ring.offsetWidth;
         ring.classList.add('pulsing');
 
-        // Single expanding background pulse — fires once per hover
+        // Convert dot's viewport position → world space for the 3-D pulse
         const rect = dot.getBoundingClientRect();
+        const sx  = rect.left + rect.width  / 2;
+        const sy  = rect.top  + rect.height / 2;
+        const tS  = Math.max(0, Math.min(1, (sy - bgHorizonY) / (bgFloorY - bgHorizonY)));
+        const sS  = Math.max(0.01, BG_S_MIN + tS * (1 - BG_S_MIN));
         hoverSources.push({
-          x: rect.left + rect.width  / 2,
-          y: rect.top  + rect.height / 2,
-          t: performance.now(),
+          wx: (sx - window.innerWidth / 2) / sS,
+          wz: (1 - tS) * bgWD,
+          t:  performance.now(),
         });
       });
-      cell.addEventListener('mouseleave', () => {
-        ring.classList.remove('pulsing');
-        // pulse fades on its own — no action needed
-      });
+      cell.addEventListener('mouseleave', () => ring.classList.remove('pulsing'));
     });
   });
 
