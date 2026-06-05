@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const hoverSources = [];
   const BG_S_MIN = 0.35;          // perspective scale at horizon
   let bgFloorY = 0, bgHorizonY = 0, bgWD = 0;
+  let screenToWorld = null;        // set by canvas block once dims are known
 
   {
     const cv = document.createElement('canvas');
@@ -31,19 +32,49 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.prepend(cv);
     const cx = cv.getContext('2d');
 
-    const COLS = 144, ROWS = 42;
     const SPEED = 0.00168, FREQ = 0.012;
+    const TARGET_SPACING = 13;  // target pixel spacing for dots (~144×42 on 1920×1080)
 
-    let W, H, CELL, W_W, W_D;
+    let W, H, COLS, ROWS, CELL, W_W, W_D;
 
     const updateDims = () => {
       W = cv.width  = window.innerWidth;
       H = cv.height = window.innerHeight;
-      CELL       = W * 3.0 / (COLS - 1);   // 3.0 × 0.35 > 1 → back row fills corners
-      bgFloorY   = H * 1.0;               // reach screen bottom
-      bgHorizonY = H * 0.01;              // horizon at very top edge
+      // Derive grid from target spacing, maintaining square aspect ratio
+      // Add extra rows to account for 60px wave displacement upward
+      COLS = Math.ceil(W / TARGET_SPACING) + 1;
+      ROWS = Math.ceil((H + 60) / TARGET_SPACING) + 1;
+      CELL = W / (COLS - 1);
+      bgFloorY   = H + 60;  // extended down to account for wave peaks reaching bottom
+      bgHorizonY = H * 0.01;
       W_W        = (COLS - 1) * CELL;
       bgWD = W_D = (ROWS - 1) * CELL;
+
+      // Expose inverse projection: screen (sx,sy) → wave world coords (wx,wz)
+      // Canvas dots are drawn at baseY - amp*60*scale (displaced upward from baseY).
+      // Average amp ≈ 0.5, so we offset sy downward by 30*scale before row lookup
+      // so the wave origin aligns with the visible dot position.
+      const _ROWS = ROWS, _CELL = CELL, _W = W, _W_D = W_D;
+      const _rowC = 2 * (bgFloorY - bgHorizonY) / ((_ROWS - 1) * (1 + BG_S_MIN));
+      screenToWorld = (sx, sy) => {
+        // Estimate scale at sy using a linear approximation, then correct targetY
+        const tApprox = Math.max(0, Math.min(1, (sy - bgHorizonY) / (bgFloorY - bgHorizonY)));
+        const scaleApprox = BG_S_MIN + tApprox * (1 - BG_S_MIN);
+        const targetY = sy + 30 * scaleApprox; // shift down by avg wave displacement
+
+        let bestRow = 0, bestDist = Infinity;
+        for (let row = 0; row < _ROWS; row++) {
+          const baseY = bgHorizonY + _rowC * (row * BG_S_MIN + (1 - BG_S_MIN) * row * row / (2 * (_ROWS - 1)));
+          const dist = Math.abs(baseY - targetY);
+          if (dist < bestDist) { bestDist = dist; bestRow = row; }
+        }
+        const t     = bestRow / (_ROWS - 1);
+        const scale = BG_S_MIN + t * (1 - BG_S_MIN);
+        return {
+          wx: (sx - _W / 2) / scale,
+          wz: (1 - t) * _W_D / scale,
+        };
+      };
     };
     updateDims();
     window.addEventListener('resize', updateDims, { passive: true });
@@ -54,15 +85,18 @@ document.addEventListener("DOMContentLoaded", function () {
         if (ts - hoverSources[i].t > 5000) hoverSources.splice(i, 1);
       }
 
-      // Four traveling plane waves in distinct directions.
-      // Each wave has flat wavefronts perpendicular to its direction vector,
-      // creating horizontal, depth (vertical), and two diagonal patterns.
-      // Incommensurable speeds ensure the pattern never fully repeats.
+      // Four traveling plane waves with slow amplitude modulation.
+      // This creates organic morphing without repeating patterns.
       const K  = FREQ, Kd = FREQ * 0.71;
       const ph0 = ts * SPEED * 1.00,   // → horizontal
             ph1 = ts * SPEED * 0.83,   // ↓ depth (vertical on screen)
             ph2 = ts * SPEED * 1.09,   // ↘ diagonal
             ph3 = ts * SPEED * 0.91;   // ↙ diagonal
+      // Slow modulation (period ~30-60 s) so each wave's strength fades & returns
+      const a0 = 0.5 + 0.5 * Math.sin(ts * 0.000011);
+      const a1 = 0.5 + 0.5 * Math.sin(ts * 0.000013 + 1.5);
+      const a2 = 0.5 + 0.5 * Math.sin(ts * 0.000009 + 3.0);
+      const a3 = 0.5 + 0.5 * Math.sin(ts * 0.000015 + 4.5);
 
       cx.clearRect(0, 0, W, H);
 
@@ -73,15 +107,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const t      = row / (ROWS - 1);
         const scale  = BG_S_MIN + t * (1 - BG_S_MIN);
         const baseY  = bgHorizonY + rowC * (row * BG_S_MIN + (1 - BG_S_MIN) * row * row / (2 * (ROWS - 1)));
-        const worldZ = (1 - t) * W_D;
+        const worldZ = (1 - t) * W_D / scale;
 
         for (let col = 0; col < COLS; col++) {
-          const worldX = (col - (COLS - 1) / 2) * CELL;
+          const worldX = (col - (COLS - 1) / 2) * CELL / scale;
 
-          let wave   = Math.sin( worldX * K              - ph0 + 0.0)   // →
-                     + Math.sin( worldZ * K              - ph1 + 2.1)   // ↓
-                     + Math.sin( worldX * Kd + worldZ * Kd - ph2 + 4.2) // ↘
-                     + Math.sin(-worldX * Kd + worldZ * Kd - ph3 + 1.5);// ↙
+          let wave   = a0 * Math.sin( worldX * K              - ph0 + 0.0)   // →
+                     + a1 * Math.sin( worldZ * K              - ph1 + 2.1)   // ↓
+                     + a2 * Math.sin( worldX * Kd + worldZ * Kd - ph2 + 4.2) // ↘
+                     + a3 * Math.sin(-worldX * Kd + worldZ * Kd - ph3 + 1.5);// ↙
 
           // Hover pulse rings expanding in world space
           for (const s of hoverSources) {
@@ -96,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const screenX = W / 2 + worldX * scale;
           const screenY = baseY - amp * 60 * scale;          // wave height = 3-D bump
           const dotR  = 0.8 + (0.1 + 2.1 * amp) * scale; // size = depth cue
-          const alpha = 0.09 + 0.15 * amp;             // flat floor — dots always visible
+          const alpha = 0.05 + 0.09 * amp;             // flat floor — dots always visible
 
           cx.beginPath();
           cx.arc(screenX, screenY, dotR, 0, 6.283);
@@ -324,28 +358,20 @@ document.addEventListener("DOMContentLoaded", function () {
     ring.className = 'tl-dot-ring';
     dot.appendChild(ring);
 
-    entry.querySelectorAll(
-      '.tl-cell--left:not(.tl-cell--empty), .tl-cell--right:not(.tl-cell--empty), .tl-cell--dot'
-    ).forEach(cell => {
-      cell.addEventListener('mouseenter', () => {
-        ring.classList.remove('pulsing');
-        void ring.offsetWidth;
-        ring.classList.add('pulsing');
+    dot.addEventListener('mouseenter', () => {
+      ring.classList.remove('pulsing');
+      void ring.offsetWidth;
+      ring.classList.add('pulsing');
 
-        // Convert dot's viewport position → world space for the 3-D pulse
+      if (screenToWorld) {
         const rect = dot.getBoundingClientRect();
-        const sx  = rect.left + rect.width  / 2;
-        const sy  = rect.top  + rect.height / 2;
-        const tS  = Math.max(0, Math.min(1, (sy - bgHorizonY) / (bgFloorY - bgHorizonY)));
-        const sS  = Math.max(0.01, BG_S_MIN + tS * (1 - BG_S_MIN));
-        hoverSources.push({
-          wx: (sx - window.innerWidth / 2) / sS,
-          wz: (1 - tS) * bgWD,
-          t:  performance.now(),
-        });
-      });
-      cell.addEventListener('mouseleave', () => ring.classList.remove('pulsing'));
+        const sx = rect.left + rect.width  / 2;
+        const sy = rect.top  + rect.height / 2;
+        const wc = screenToWorld(sx, sy);
+        hoverSources.push({ wx: wc.wx, wz: wc.wz, t: performance.now() });
+      }
     });
+    dot.addEventListener('mouseleave', () => ring.classList.remove('pulsing'));
   });
 
   /* ============================================
